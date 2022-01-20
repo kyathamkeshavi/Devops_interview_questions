@@ -1,5 +1,5 @@
 - Mock interview video - https://youtu.be/IrIF9IjOwgs
-- Mock interview Answers - 
+- Mock interview Answers - https://www.youtube.com/watch?v=RtYw7f0KyV0&ab_channel=DeekshithSN
 
 
 GIT
@@ -42,7 +42,8 @@ grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}" logfile | sort | uniq -c | sort -nr
 
 Jenkins 
 --------------------------------------------------------------------------------------------------------
-14. How to Downgrade plugins in Jenkins?--->manage jenkins-->available-->got to plugin and on left side goto archive and download on local computer. then again to go manage jenkins-->advanced-->upload ->submit
+14. How to Downgrade plugins in Jenkins?
+    manage jenkins-->available-->got to plugin and on left side goto archive and download on local computer. then again to go manage jenkins-->advanced-->upload ->submit
 15. Have you worked on Jenkinsfile? Can we use different nodes for each stage?
 16. Can you list few ways by which we can trigger our build in Jenkins? What is the difference between Build Periodically and Poll SCM? 
 
@@ -62,7 +63,8 @@ Ansible
 25. What is the best method to make your ansible YAML files reusable?
   roles
 26. What is ansible vault and ansible tower?
-  to protect data we use ansibel-valut, to run a playbook at particular time we use ansible tower
+  to protect data we use ansibel-valut
+    to run a playbook at particular time we use ansible tower
 27. Lets say I have playbook need to be run with Root user how would you do this?
   become: yes
 28. Difference between copy and fetch module?
@@ -72,9 +74,13 @@ Ansible
 Docker
 ------------------------------------------------------------------------------------------------------------------------------
 29. Lets say I have 1 GB file that has to be sent to docker daemon, as its 1GB it will take muchtime and network too. By which option while building dockerfile we can send the fileIn better manner?
+    docker build --compress
 30. What is the difference between ADD and COPY docker instructions in Dockerfile?
+    ADD-->downloads data from internet as well
+    COPY--> it only copies internal files
 31. Command to remove to stopped and running Containers?
 32. Inside the container I did many changes like  Creating, modifying and deleting file but I Wanted to check which files has been changed And what action has been taken what is the  Command we need to use ?
+    docker diff keshavi
 
 
 Kubernetes
