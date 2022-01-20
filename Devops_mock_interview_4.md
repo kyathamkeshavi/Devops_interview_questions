@@ -1,9 +1,13 @@
 GIT
 ---------------
-1. What is git reset ? Types of reset ?
+1. What is git reset ? Types of reset ?hard, soft and mixed
 2. How to delete local branch  and remote branch in git ? 
-3. Difference between git diff and git status ?
-4. What are hooks in git? 
+  git push origin -d kesh --->to dlete remote branch
+  git branch -d kesh -->to delete local branch
+4. Difference between git diff and git status ?
+5. What are hooks in git? 
+  hooks are ordinary scripts this will execute when a event occur in repository
+  webhooks are for web applications. it will trigger when ever there are any changes in code. same like hooks but these are for web apps.
 
 MAVEN
 --------
@@ -32,16 +36,16 @@ ANSIBLE
 ------------
 18. Why ansible ? What makes ansible powerful than other tools like chef and puppet?
 19. 5 modules that you have worked on? Can we create custom module ?
-20. What is dynamic inventory in ansible?
+20. What is dynamic inventory in ansible?---> it is inventory control managemt system to provide inventory control and manages features
 21. Lets say I have both Ubuntu and centos machines as nodes I want install application tree using same playbook, how would you approach this scenario? 
 22. How to handle prompts with ansible playbook?
 
 DOCKER
 ----------
-23. What does ONBUILD instruction do in Dockerfile?
-24. What is the use of .dockerignore file?
-25. I have dockerfile that accepts arguments, if I supply value as “1” then it should use maven 2.x version for base image and if I supply “2” then it should take maven latest as base image 
-26. What are docker compose and docker swarm?
+23. What does ONBUILD instruction do in Dockerfile?--> it will add instruction to image like a special instuction to build on later time
+25. What is the use of .dockerignore file?--> to ignore files when you try to build a docker image
+27. I have dockerfile that accepts arguments, if I supply value as “1” then it should use maven 2.x version for base image and if I supply “2” then it should take maven latest as base image 
+28. What are docker compose and docker swarm?---> docker compose will run multiple containers on same host but docker swarm is container orchestration which runs multiple containers on diff hosts
 
 KUBERNETES
 ---------
