@@ -5,10 +5,14 @@
 GIT
 ---------------------------------------------------------------------------------------------------------------------------------
 1. What is git-cherry-pick? why we use it?
-2. Let’s say you’re working on new feature in some branch, now your manager says stop working on that and change few other things on old code. Here after changing the old code, I need to work on new code, so I need to place my new changes some place How would handle this scenario? 
-3. What is a conflict in git?
-4. command to list all branches in a repo?
-
+    git cherry-pick <id>
+3. Let’s say you’re working on new feature in some branch, now your manager says stop working on that and change few other things on old code. Here after changing the old code, I need to work on new code, so I need to place my new changes some place How would handle this scenario? ----> git statsh
+4. What is a conflict in git?
+5. command to list all branches in a repo?
+  git branch--> to see local branch list
+  git branch -a -->to see local and remote branch of a repo
+  git branch -r-->to see remote branch
+  git show-branch--> to see branch along with their commit
 
 Maven
 --------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +42,7 @@ grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}" logfile | sort | uniq -c | sort -nr
 
 Jenkins 
 --------------------------------------------------------------------------------------------------------
-14. How to Downgrade plugins in Jenkins?
+14. How to Downgrade plugins in Jenkins?--->manage jenkins-->available-->got to plugin and on left side goto archive and download on local computer. then again to go manage jenkins-->advanced-->upload ->submit
 15. Have you worked on Jenkinsfile? Can we use different nodes for each stage?
 16. Can you list few ways by which we can trigger our build in Jenkins? What is the difference between Build Periodically and Poll SCM? 
 
@@ -56,9 +60,14 @@ AWS
 Ansible
 -----------------------------------------------------------------------------------------------------------------------
 25. What is the best method to make your ansible YAML files reusable?
+  roles
 26. What is ansible vault and ansible tower?
+  to protect data we use ansibel-valut, to run a playbook at particular time we use ansible tower
 27. Lets say I have playbook need to be run with Root user how would you do this?
+  become: yes
 28. Difference between copy and fetch module?
+  copy- master to node
+  fetch- node to master
 
 Docker
 ------------------------------------------------------------------------------------------------------------------------------
