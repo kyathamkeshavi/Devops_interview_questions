@@ -1,9 +1,9 @@
 Git
 ------
-1. what is the importance .git directory?
-2. what are the branches, diff between remote and local branches?
-3. what Branching strategy that you are familier with? 
-4. What PR (Pull request) is? whats the importance of PR?
+1. what is the importance .git directory?---->contains info of commits, remote repo ip address and all other info related to version control
+3. what are the branches, diff between remote and local branches?
+4. what Branching strategy that you are familier with? 
+5. What PR (Pull request) is? whats the importance of PR?
 
 Unix & Shell scripting 
 -----------
