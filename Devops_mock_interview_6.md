@@ -4,11 +4,11 @@ General questions
 
 Git
 ---
-2. Which version of git you have used? 
+2. Which version of git you have used? ---> 2.32.0
 3. Difference between git merge and git rebase? 
-4. What is git squash? 
+4. What is git squash? -->git rebase -i HEAD~3 and after this replace pick with squash from next 2 lines and save
 5. Branching strategy used in your project? 
-6. Command to list all commits? 
+6. Command to list all commits? git log or git log --oneline or git log --online -graph
 
 Maven 
 ---
@@ -20,7 +20,7 @@ Maven
 
 Jenkins
 ---
-12. What are types jobs you have worked on?? 
+12. What are types jobs you have worked on?? freestyle, maven, pipeline
 13. Can we have job for pr and once merge is done the source branch should be deleted? 
 14. How do you take Jenkins backup? 
 15. Can you tell me importance of post block?? 
@@ -32,7 +32,7 @@ Docker
 18. What is the importance of  .dockerigonre file, can name docker file with any other name? 
 19. I need to delete all stopped containers and unused images command for that? 
 20. How do you monitor docker in production 
-21. Is it good to use docker compose in production 
+21. Is it good to use docker compose in production ---> it is ok to use if we have only 1 host.
 
 Aws 
 ---
