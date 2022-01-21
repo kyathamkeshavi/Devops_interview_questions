@@ -1,8 +1,10 @@
 Git & Github 
 ---
-1. Branching strategy? 
-2. Need a script which identify inactive branches ( no commits since 2 months )?
-3. How to set configs globally in git?
+1. Branching strategy?  
+3. Need a script which identify inactive branches ( no commits since 2 months )?
+    git prune for deleting local repo unused branches.
+    git remote prune origin for deleting remote unused branches
+5. How to set configs globally in git?
 
 Maven
 ---
