@@ -7,6 +7,7 @@ GIT
 2. Let's say i have maven repo cloned on to my local, did some changes and i have build the code now target folder will be generated. So now when i do git operations like git add, git commit or any other git operations target folder should not be considered, how would you achieve the same?
 3. difference between git pull and git fetch?
 4. How to clone specific branch in git?
+  git clone -b kesh URL
 
 Maven
 --------------------------------------------------------------------------------------------------------------------------
