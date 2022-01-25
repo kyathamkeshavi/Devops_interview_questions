@@ -36,3 +36,19 @@ if i want to execute one particular command in dockerfile then how will you do t
 how you got into devops role and want is your interest
 what does stryker do
 ---------------------------------------------------------------
+grep use in linux
+can we use grep for finding processes
+git squash
+how to go inside containers
+why we use /bin/bash in containers---------> to run the containers in interactive mode
+if my container got crashed then how can we get them back--->volumes
+docker networks
+why we use security groups
+why we use autoscaling
+how to block users in aws
+which jobs you have worked on in jenkins
+are you using maven as backup only?
+what is git rebase
+have you worked on disaster recovery modes-->master and slave in jenkins
+example i have to create list of users in morning and want to delete them at night. for this what is your approach in ansible
+how to install a service in ansible. what are the methods
