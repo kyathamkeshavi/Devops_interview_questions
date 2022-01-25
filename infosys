@@ -22,6 +22,9 @@ issues you faced when deploying ci/cd pipeline
 what you will do when containers are stopped
 what is the storage you used in aws
 how to create jenkins job
+what is the storage you have worked on in aws
+what is the port range you have worked in aws
+what is instance have you worked in aws
 ---------------------------------------------------------------
 what is issue we faced before ci and we did overcome after ci 
 what is cd
