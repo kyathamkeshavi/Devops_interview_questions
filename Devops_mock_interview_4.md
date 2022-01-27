@@ -17,11 +17,11 @@ MAVEN
 
 JENKINS
 ----------
-8. How to set Jenkins build to fail based specific word in console output ?
+8. How to set Jenkins build to fail based specific word in console output ?--------------use grep command in scripted pipeline stage and steps
 9. What are active and reactive parameters (Dynamic parameterization) in Jenkins ?
 10. How to customize the build number display to something else in Jenkins job page?
 11. What are multi branch pipeline?
-12. What is shared library in Jenkins ?
+12. What is shared library in Jenkins ?-----------collection of independent groovy scripts which can be stored in git repo and can be used in pulling the code into jenkinsfile in runtime
 
 
 UNIX & SHELL SCRIPTING
