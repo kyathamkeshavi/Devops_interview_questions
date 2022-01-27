@@ -24,11 +24,10 @@ Unix and Shell Scripting
 Ansible
 ---------------------------------------------------------------------------------------------------------------------
 11. Why we need ad-hoc ansible commands, scenario where you have used ansible ad-hoc command?
-12. When i need detailed logs on executing ansible playbook what option i need to use?
-    ansible-playbook kesh.yml -vvv
+12. When i need detailed logs on executing ansible playbook what option i need to use?----------ansible-playbook kesh.yml -vvv
 14. what is ansible.cfg file?
-15. what are the modules have you worked on? which module will you use for getting the file from node to master? fetch
-16. Lets say i have a playbook which has 5 tasks in playbook, first 2 tasks should run on local machine and other 3 tasks should run on node? by using condition statements or roles
+15. what are the modules have you worked on? which module will you use for getting the file from node to master?------ fetch
+16. Lets say i have a playbook which has 5 tasks in playbook, first 2 tasks should run on local machine and other 3 tasks should run on node? -------------by using condition statements or roles
 
 Jenkins
 -----------------------------------------------------------------------------------------------------------------------
