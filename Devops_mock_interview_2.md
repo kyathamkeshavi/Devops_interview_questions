@@ -4,10 +4,10 @@
 
 GIT
 ---------------------------------------------------------------------------------------------------------------------------------
-1. Lets say your organization has github and bitbucket to store code, you have cloned a repo onto your local and changed directory name. after some days one of your team members asks you to share clone link, how would you provide the same?
-2. I have shell script to delete particular dependency ( repo is maven project ). before running the script i need to clone repo to my local, here point to note i should only clone master branch and only last commit ( last commit has all the code ) how would you do this?
+1. Lets say your organization has github and bitbucket to store code, you have cloned a repo onto your local and changed directory name. after some days one of your team members asks you to share clone link, how would you provide the same?-----git remote -v
+2. I have shell script to delete particular dependency ( repo is maven project ). before running the script i need to clone repo to my local, here point to note i should only clone master branch and only last commit ( last commit has all the code ) how would you do this?------------git clone -b kesh --single-branch --depth 1 URL
 3. what is submodule and why we need submodule?
-4. Lets say you have changed 5 files a,b,c,d and e in a repo and you did git add ., now all the files are in staging area, now i decided not to commit file d. how would delete it from staging area?
+4. Lets say you have changed 5 files a,b,c,d and e in a repo and you did git add ., now all the files are in staging area, now i decided not to commit file d. how would delete it from staging area?--------git rm --cached kesh
 
 Maven
 --------------------------------------------------------------------------------------------------------------------------
@@ -16,8 +16,8 @@ Maven
 
 Jenkins 
 --------------------------------------------------------------------------------------------------------
-7. Have you worked on commit based job in jenkins? what settings you need to do in jenkins and github to setup commit based job?
-8. you want to create 50 freestyle jobs with same configurations, but only change is job name. how would you achieve the same?
+7. Have you worked on commit based job in jenkins? what settings you need to do in jenkins and github to setup commit based job?------webhooks
+8. you want to create 50 freestyle jobs with same configurations, but only change is job name. how would you achieve the same?--------groovy script
 9. How can you copy job from your local jenkins instance to other local jenkins instance?
 
 Unix and Shell scripting 
@@ -32,13 +32,13 @@ Ansible
 14. Lets say i have 4 machines consider 1 as ansible master other 3 as nodes, what are the basic setup you need to do for ansible cluster?
 15. what are ansible roles? why we need ansible roles? have you worked on ansible galaxy?
 16. What are ansible facts?
-17. Can we have windows machine as ansible master? as node?have you worked on any windows modules? can you list few?any extra configuration do we need to do?
+17. Can we have windows machine as ansible master? as node?have you worked on any windows modules? can you list few?any extra configuration do we need to do?------no
 
 Docker
 ------------------------------------------------------------------------------------------------------------------------------
-18. Have you worked on multi-stage dockerfile and why we need that?
-19. Lets say i have container which is attached with a volume, if container crashes what happens to volume?
-20. can you copy a file form local to run container?
+18. Have you worked on multi-stage dockerfile and why we need that?---------2 froms
+19. Lets say i have container which is attached with a volume, if container crashes what happens to volume?--------nothing
+20. can you copy a file form local to run container?---yes
 
 
 Kubernetes
