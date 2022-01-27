@@ -25,26 +25,28 @@ Ansible
 ---------------------------------------------------------------------------------------------------------------------
 11. Why we need ad-hoc ansible commands, scenario where you have used ansible ad-hoc command?
 12. When i need detailed logs on executing ansible playbook what option i need to use?
-13. what is ansible.cfg file?
-14. what are the modules have you worked on? which module will you use for getting the file from node to master?
-15. Lets say i have a playbook which has 5 tasks in playbook, first 2 tasks should run on local machine and other 3 tasks should run on node?
+    ansible-playbook kesh.yml -vvv
+14. what is ansible.cfg file?
+15. what are the modules have you worked on? which module will you use for getting the file from node to master? fetch
+16. Lets say i have a playbook which has 5 tasks in playbook, first 2 tasks should run on local machine and other 3 tasks should run on node? by using condition statements or roles
 
 Jenkins
 -----------------------------------------------------------------------------------------------------------------------
-16. How to save only last 5 builds of jenkins job?
+16. How to save only last 5 builds of jenkins job? ---------------discard old build option below description
 17. Have you worked on Jenknsfile? can we use docker container as a node in Jenkinsfile? Who will handle docker container creation and deletion? If i am building a maven project always docker container is fresh instance it will try to download dependency from repository, what measures you will take to reduce build time?
-18. Why we need multi branch pipeline?
-19. If you forget Jenkins password, how would you login back?
+18. Why we need multi branch pipeline? ------------when we want to execute diff branches build in same repo 
+19. If you forget Jenkins password, how would you login back?------------got to config.xml file in jenkins home and change userscript from true to false and restart the server.
+and again login to jenkins as it wont ask you the password. now change password by going to people and configure section
 
 Docker
 ------------------------------------------------------------------------------------------------------------------------------
-20. Any 3 best practices of docker?
-21. Difference between docker stop and docker kill?
-22. Command to list conatiners which state is exited?
-23. command to clean-up docker host ( deleting stopped conatiners, dangling images and unused networks)?
+20. Any 3 best practices of docker? ----------less size file to dw, dowload on fresh folder, dw from official website
+21. Difference between docker stop and docker kill? stop waits for 10-15 sec to kill process, but kill wont
+22. Command to list conatiners which state is exited? docker show state=exited
+23. command to clean-up docker host ( deleting stopped conatiners, dangling images and unused networks)? docker system prune
 24. What version of docker you have used? Specific reason to use that particular version?
-25. Can we have multiple CMD in Dockerfile?
-26. Have you worked on docker swarm and docker compose?
+25. Can we have multiple CMD in Dockerfile? yes
+26. Have you worked on docker swarm and docker compose? no
 
 Kubernetes
 --------------------------------------------------------------------------------------------------------------------------------------
