@@ -55,3 +55,24 @@ what is git rebase
 have you worked on disaster recovery modes-->master and slave in jenkins
 example i have to create list of users in morning and want to delete them at night. for this what is your approach in ansible
 how to install a service in ansible. what are the methods
+---------------------------------------------------------------------
+how master and slave nodes are connected
+how to go to new branch
+for example i have 1 frd and we want to work on same project using same repo. how to do that
+what does pull do in git
+what are modules
+what module you will use when you want to run the playbook on local machine?-----------script
+have you created any ci/cd pipelines
+how to delete docker image
+how to get into existing container
+what is the diff between autoscaling and load balancer and when we use it
+where is inventory path in ansible?-----------/etc/ansible/hosts
+i have 5 nodes and want to execute some commands. so do i have to write 5 diff playbooks for that?----------you can create a grp and in playbook write hosts: grpname
+have you worked on roles, if yes what are roles and what is the thing you have worked on it
+as ansible is agentless tool how it will communicate with nodes?---------by using ssh. we have to establish ss-keygen and ssh-copy-id kesh@ip
+how to execute commands in linux?---------by using chmod
+what is command for changing owner of file in linux
+command to use free space in linux
+command to know about cpu usage in linux
+what things you take care when launching ec2-instances
+can we change ansible.cfg path? -------yes
