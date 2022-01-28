@@ -56,7 +56,7 @@ have you worked on disaster recovery modes-->master and slave in jenkins
 example i have to create list of users in morning and want to delete them at night. for this what is your approach in ansible
 how to install a service in ansible. what are the methods
 ---------------------------------------------------------------------
-how master and slave nodes are connected
+how master and slave nodes are connected? how they communicate? -------------TCP/IP protocol
 how to go to new branch
 for example i have 1 frd and we want to work on same project using same repo. how to do that
 what does pull do in git
@@ -75,4 +75,13 @@ what is command for changing owner of file in linux
 command to use free space in linux
 command to know about cpu usage in linux
 what things you take care when launching ec2-instances
-can we change ansible.cfg path? -------yes
+can we change ansible.cfg path? -------yes..better to change it in current working directory. if not there it checks in users home dir. 
+if not there also it goes to /etc/ansible/ansible.cfg file
+what is vpc?------------virtual private cloud. it enables you to launch aws resources into virtual nkt that you have defined
+difference btwen private and public subnet?---------private means it is not accesible through internet but only through vpc. public means accessible through internet.
+what is cloud formation?-----------its an aws service it will let you build entire app from strach
+difference between load balancer and auto scaling in aws?----------scaleup and down ec2 instnaces whenevr needed. load balancer distributes incomming data accros multiple ec2 
+or containers 
+what are elastic ip's?-----------means in normal public ips when ever you start or stop the services public ip gets changed(dynamic). but in elastic ip is fixed(static) and
+can be attached to instances.
+what is s3 bucket?-------------object storage service which stores data as objects in buckets. object contains file and metadata about the files
