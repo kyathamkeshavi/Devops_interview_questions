@@ -1,3 +1,4 @@
+INFOSYS:
 tell me about yourself
 what is docker, why we use them
 why you used github
@@ -26,6 +27,7 @@ what is the storage you have worked on in aws
 what is the port range you have worked in aws
 what is instance have you worked in aws
 ---------------------------------------------------------------
+RELIANCE:
 what is issue we faced before ci and we did overcome after ci 
 what is cd
 for example lets say that 2 dev are writing code and changing same file in 2 diff branches. how will you resolve this issue. ----->git conflict
@@ -39,6 +41,7 @@ if i want to execute one particular command in dockerfile then how will you do t
 how you got into devops role and want is your interest
 what does stryker do
 ---------------------------------------------------------------
+YESDE:
 grep use in linux
 can we use grep for finding processes
 git squash
@@ -56,6 +59,7 @@ have you worked on disaster recovery modes-->master and slave in jenkins
 example i have to create list of users in morning and want to delete them at night. for this what is your approach in ansible
 how to install a service in ansible. what are the methods
 ---------------------------------------------------------------------
+CLOUDFRONT:
 how master and slave nodes are connected? how they communicate? -------------TCP/IP protocol
 how to go to new branch
 for example i have 1 frd and we want to work on same project using same repo. how to do that
@@ -88,3 +92,39 @@ what is s3 bucket?-------------object simple storage service which stores data a
 what is ec2 in aws?-------ec2 is an iaas service. it is a virtual machine which is hosted on cloud.we can run any kind of instances
 difference between cloudtrial and cloud watch?---------watch gives you the visibility of performance and healthcheck of resources and applications. 
 while trial is an API cal recording and log monitoring web service 
+-----------------------------------------------------------------------------
+TEKION:
+how to restrict other users in security group
+have you created any instances in VPC
+do you know how to install and configure jenkins 
+how to run chef cookbook
+command to run only single recipe in node after bootstrap
+diff between copy add and CMD and entrypoint
+what application do you run on docker
+have you used docker swarm
+what is the monitoring tool you have used
+how to check logs in docker
+what are all the tasks you have done using ansible playbook
+what commands do you use in linux
+how many ways are there to build jobs in jenkins
+have you created backup in jenkins
+have you installed any maual plugins in jenkins or used the available ones
+what are all the plugins have you used
+---------------------------------------------------------------------
+CAPGEIMI:
+in git if my user is not configured then how do you do that
+what is fork in git
+how to check list of volumes in docker
+how to check if there is an eror in jenkins output
+how to check jenkins eror logs
+where do you want to be in next 5 years
+how to encrpyt the playbook in ansible
+how to automate passwords in ansible
+what are the branching strategies you use
+if we have any issue in production branch then how do you solve it
+what are the things you do in quality checks in git
+why do you want to change the job
+why do we use cherry pick in git
+for eg if my image is crashed then how do you get that back in docker
+------------------------------------------------------------------------------------
+CLOUDTECHNER:
