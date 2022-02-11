@@ -40,6 +40,12 @@ i have one job and have some files in github. in that i dont want 1 file to get 
 if i want to execute one particular command in dockerfile then how will you do that and build it
 how you got into devops role and want is your interest
 what does stryker do
+how to create a job in jenkins
+how to trigger jobs in jenkins
+phases in maven
+do we need internet to download dependencies in maven
+diff between fetch and pull
+
 ---------------------------------------------------------------
 YESDE:
 grep use in linux
@@ -128,3 +134,13 @@ why do we use cherry pick in git
 for eg if my image is crashed then how do you get that back in docker
 ------------------------------------------------------------------------------------
 CLOUDTECHNER:
+things you know about aws
+what are the daily tasks you do
+have you worked on pipelines
+have you created any ci/cd pipelines. if yes explain
+have you written any dockerfile
+best practices you follow when creating docker container
+diff between add and copy
+diff between roles and playbook
+how do you protect ansible playbook
+
