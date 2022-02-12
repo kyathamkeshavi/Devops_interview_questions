@@ -143,4 +143,27 @@ best practices you follow when creating docker container
 diff between add and copy
 diff between roles and playbook
 how do you protect ansible playbook
+-----------------------------------------------------------------------------------
+EY:
+diff between merge and rebase
+diff between freestyle and declarative pipeline
+code for declarative pipeline
+diff between modules and tasks in ansible
+write a simple playbook in ansible
+what are the types of volumes in docker
+what is the default volume in docker
+what is 2/2 check in aws
+how you are using ci in your project
+code for finding any file path in linux
+how do you change some particular spelling in ansible
+what is i in sed 'i/old/new' keshavi in linux
+what is idempotency
+what are the diff types of indexes in sql
+what are the performance chcks in sql
+diff between ADD and copy in docker
+how to download image from dockerhub and run it
+how to rename container in docker
+what is prune in docker
+why we use handlers
+can we use diff handlers in same playbook
 
