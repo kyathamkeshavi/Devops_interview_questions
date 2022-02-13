@@ -155,7 +155,7 @@ what is the default volume in docker
 what is 2/2 check in aws
 how you are using ci in your project
 code for finding any file path in linux
-how do you change some particular spelling in ansible
+how do you change some particular spelling in linux
 what is i in sed 'i/old/new' keshavi in linux
 what is idempotency
 what are the diff types of indexes in sql
@@ -166,4 +166,7 @@ how to rename container in docker
 what is prune in docker
 why we use handlers
 can we use diff handlers in same playbook
+how to kill docker container
+different types of inventories in ansible
+what is cross join
 
