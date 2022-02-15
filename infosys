@@ -110,12 +110,12 @@ what application do you run on docker
 have you used docker swarm
 what is the monitoring tool you have used
 how to check logs in docker
-what are all the tasks you have done using ansible playbook
+what are all the tasks you have done using ansible playbook-->creating handlers, loops, conditions, 
 what commands do you use in linux
 how many ways are there to build jobs in jenkins
 have you created backup in jenkins
 have you installed any maual plugins in jenkins or used the available ones
-what are all the plugins have you used
+what are all the plugins have you used --> git, thinbackp, backup, publsih over ssh, maven integration, pipeline,extended email notfication
 ---------------------------------------------------------------------
 CAPGEIMI:
 in git if my user is not configured then how do you do that
@@ -152,7 +152,7 @@ diff between modules and tasks in ansible
 write a simple playbook in ansible
 what are the types of volumes in docker
 what is the default volume in docker
-what is 2/2 check in aws
+what is 2/2 check in aws---> checks whether the instance is healthy or not
 how you are using ci in your project
 code for finding any file path in linux
 how do you change some particular spelling in linux
