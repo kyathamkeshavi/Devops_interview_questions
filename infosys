@@ -132,6 +132,37 @@ what are the things you do in quality checks in git
 why do you want to change the job
 why do we use cherry pick in git
 for eg if my image is crashed then how do you get that back in docker
+what is upstream and downstream in jenkins
+where passwords are stored in jenkins
+how to stop jenkins job when it is executing
+how do you build a job
+how to upload manual plugins
+how do you check if there is any failure in jenkins job
+how do you restart jenkins
+diff betn ci/cd
+why we need ci
+what is pipeline
+what is replay and rebuild
+types of jenkins file
+ways to create docker image in docker
+code to write dockerfile
+how to build an image using dockerfile
+write a 2 stage declarative pipeline in jenkins and write the codes in it
+how to get the diff ben staging area and local area
+what is git status
+complete statemnets for git to get the clean the clean working directory
+what is diff between git add all and git add .
+command to commit a message in git
+how to download docker image from docker hub
+what is docker deamon
+what is docker engine
+what is docker host responsible and what is docker deamon responsible
+diff between copy and add
+command to convert code to tar and unzip a file
+what is prune in docker
+diff between CMD and entrypoint
+how to expose a port in docker
+how to know docker exited container
 ------------------------------------------------------------------------------------
 CLOUDTECHNER:
 things you know about aws
@@ -169,4 +200,44 @@ can we use diff handlers in same playbook
 how to kill docker container
 different types of inventories in ansible
 what is cross join
+daily activities
+do you know how to write a pipeline
+branching strategies in your project
+diff between virtualization and docker
+write a dockerfile
+where are our passwords saved in jenkins
+what are used for monitoring and for testing
+what is blue green deployment
+what are the performanace tuning you do in SQL
+what is load balancer in AWS
+do you need any certificate to block anything in aws security groups
+git fetch and merge
+have you faced any issues during ci/cd pipelines
+how to store the images in docker
+diff between maven and graddle
+can we upload plugins manually
+---------------------------------------------------------------------------
+Tetrasoft:
+what is bare repository in git
+what is conflict and git checkout
+how do you revert the changes that is already commited
+git fetch and git pull
+what is staging area
+different between docker and kubernetes
+different between scipted pipeline and declarative pipeline
+diff between virtualization and dcoker
+what are docker images
+docker architecture
+what is docker compose
+docker namespace
+lifecycle of image
+how to know docker version
+how to check the containers in  docker
+how to get image from docker hub
+what is dynamic and other inventory in ansible
+what are adhoc commads in ansible
+different types of modules
+diff between aws and azure
+differnce between chef and ansible
+in which language ansible and chef wre written
 
