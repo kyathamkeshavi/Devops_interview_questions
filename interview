@@ -55,8 +55,8 @@ how to go inside containers
 why we use /bin/bash in containers---------> to run the containers in interactive mode
 if my container got crashed then how can we get them back--->volumes
 docker networks
-why we use security groups
-why we use autoscaling
+why we use security groups---->acts as a virtual firewall, controlling the traffic that is allowed to reach and leave the resources that it is associated with.
+why we use autoscaling---->we use this when you want to increase the vm's when the resource utilizatio exceeds the point 
 how to block users in aws
 which jobs you have worked on in jenkins
 are you using maven as backup only?
@@ -75,7 +75,7 @@ what module you will use when you want to run the playbook on local machine?----
 have you created any ci/cd pipelines
 how to delete docker image
 how to get into existing container
-what is the diff between autoscaling and load balancer and when we use it
+what is the diff between autoscaling and load balancer and when we use it------>A load balancer distributes incoming application traffic across multiple EC2 instances in multiple Availability Zones.   
 where is inventory path in ansible?-----------/etc/ansible/hosts
 i have 5 nodes and want to execute some commands. so do i have to write 5 diff playbooks for that?----------you can create a grp and in playbook write hosts: grpname
 have you worked on roles, if yes what are roles and what is the thing you have worked on it
@@ -100,7 +100,7 @@ difference between cloudtrial and cloud watch?---------watch gives you the visib
 while trial is an API cal recording and log monitoring web service 
 -----------------------------------------------------------------------------
 TEKION:
-how to restrict other users in security group
+how to restrict other users in security group------------>edit inbound rules and choose my ip or custom ip.
 have you created any instances in VPC
 do you know how to install and configure jenkins 
 how to run chef cookbook
@@ -133,7 +133,7 @@ why do you want to change the job
 why do we use cherry pick in git
 for eg if my image is crashed then how do you get that back in docker
 what is upstream and downstream in jenkins
-where passwords are stored in jenkins
+where passwords are stored in jenkins------>$JENKINS_HOME/secrets/initialAdminPassword.
 how to stop jenkins job when it is executing
 how do you build a job
 how to upload manual plugins
@@ -181,12 +181,12 @@ diff between freestyle and declarative pipeline
 code for declarative pipeline
 diff between modules and tasks in ansible
 write a simple playbook in ansible
-what are the types of volumes in docker
-what is the default volume in docker
+what are the types of volumes in docker----->host,named,anonymous
+what is the default volume in docker---->host
 what is 2/2 check in aws---> checks whether the instance is healthy or not
 how you are using ci in your project
 code for finding any file path in linux
-how do you change some particular spelling in linux
+how do you change some particular spelling in linux----->sed
 what is i in sed 'i/old/new' keshavi in linux
 what is idempotency
 what are the diff types of indexes in sql
