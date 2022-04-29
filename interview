@@ -240,4 +240,36 @@ different types of modules
 diff between aws and azure
 differnce between chef and ansible
 in which language ansible and chef wre written
+---------------------------------------------------------------
+SREETECH:
+why are you looking for other job, if you already have an offer letter
+what playbooks have you written in ansible
+why we use handler
+why we use loops in ansible
+and what are required when writing loops
+how do you know how much memory is there in linux
+what is the default number of file in linux
+how to login into the ansible server for user
+what is diff between chec and ansible
+how did the chef know about the updates
+if there are different recipes and they needs to be run on diff nodes in chef. how do we do it
+what is the umas value of file
+where will we check logs in linux
+which flavours you have worked in linux
+what projects have you used in jenkins
+what are the jobs you have created in jenkins
+how to write dockerfile
+---------------------------------------------------------------------
+ACS:
+tell me about your projects and roles and resposnsibles in your project
+what language is used in your project
+how many pipelines are there in jenkins in your peoject
+why do you use ansible in your project and what is the use even though we can run docker images directly
+what is difference between chef and ansible
+what is command to check syntax of ansible playbook
+how to copy files in ansible for different nodes in single playbook
+why we use roles in ansible
+what is ansible galaxy
+what are types of projects you created in jenkins
+how do you execute different scripts on different servers by using jenkins freestyle projects
 
