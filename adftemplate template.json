@@ -1,0 +1,25 @@
+{
+    "name": "dataplat-pp-dr-adf-dev",
+    "id": "/subscriptions/0791eb48-01d3-447b-bc36-7a34e17bff20/resourceGroups/dataplat-pp-rg-dev/providers/Microsoft.DataFactory/factories/dataplat-pp-dr-adf-dev",
+    "type": "Microsoft.DataFactory/factories",
+    "properties": {
+        "provisioningState": "Succeeded",
+        "createTime": "2023-02-07T22:05:15.045698Z",
+        "version": "2018-06-01",
+        "factoryStatistics": {
+            "totalResourceCount": 0,
+            "maxAllowedResourceCount": 0,
+            "factorySizeInGbUnits": 0,
+            "maxAllowedFactorySizeInGbUnits": 0
+        },
+        "publicNetworkAccess": "Enabled"
+    },
+    "eTag": "\"2700c6fc-0000-0800-0000-63e2cb1b0000\"",
+    "location": "westus2",
+    "identity": {
+        "type": "SystemAssigned",
+        "principalId": "31f0f727-37e1-4c50-b2ad-1586c0e6c022",
+        "tenantId": "0a54704d-bba9-4e27-878e-fe460a591835"
+    },
+    "tags": {}
+}

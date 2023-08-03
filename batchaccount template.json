@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "batchAccounts_dataplatppdrbadev_name": {
+            "defaultValue": "dataplatppdrbadev",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Batch/batchAccounts",
+            "apiVersion": "2022-10-01",
+            "name": "[parameters('batchAccounts_dataplatppdrbadev_name')]",
+            "location": "westus2",
+            "identity": {
+                "type": "None"
+            },
+            "properties": {
+                "poolAllocationMode": "BatchService",
+                "publicNetworkAccess": "Enabled",
+                "networkProfile": {
+                    "accountAccess": {
+                        "defaultAction": "Allow"
+                    }
+                },
+                "encryption": {
+                    "keySource": "Microsoft.Batch"
+                },
+                "allowedAuthenticationModes": [
+                    "SharedKey",
+                    "AAD",
+                    "TaskAuthenticationToken"
+                ]
+            }
+        }
+    ]
+}

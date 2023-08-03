@@ -1,0 +1,857 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionID": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "apiResourceGroup": {
+            "type": "string"
+        },
+        "infraResourceGroup": {
+            "type": "string"
+        },
+        "runtimeAPI": {
+            "type": "string"
+        },
+        "AppName-contact": {
+            "type": "string"
+        },
+        "loganalytics-infra": {
+            "type": "string"
+        },
+        "storageAccountType": {
+            "type": "string"
+        },
+        "keyvaultname-infra": {
+            "type": "string"
+        },
+        "serviceBusQueueName-infra": {
+            "type": "string"
+        },
+        "partnerAPIResourceGroup": {
+            "type": "string"
+        },
+        "AppServicePlanName-partner": {
+            "type": "string"
+        },
+        "AppServicePlanSkuName": {
+            "type": "string"
+        },
+        "appserviceName-partner": {
+            "type": "string"
+        },
+        "appInsightsName-partner": {
+            "type": "string"
+        },
+        "kind": {
+            "type": "string"
+        },
+        "appInsightsType": {
+            "type": "string"
+        },
+        "language": {
+            "type": "string",
+            "defaultValue": ".net",
+            "allowedValues": [
+                ".net",
+                "php",
+                "node",
+                "html"
+            ],
+            "metadata": {
+                "description": "The language stack of the app."
+            }
+        },
+        "appInsightsSource": {
+            "type": "string"
+        },
+        "keyvaultname-partner": {
+            "type": "string"
+        },
+        "funcAppName-contact": {
+            "type": "string"
+        },
+        "appServicePlanName-contact": {
+            "type": "string"
+        },
+        "storageAccName-contact": {
+            "type": "string"
+        },
+        "serviceBusName-contact": {
+            "type": "string"
+        },
+        "serviceBusQueueName-contact": {
+            "type": "string"
+        },
+        "appInsightsName-contact": {
+            "type": "string"
+        },
+        "keyvault-contact": {
+            "type": "string"
+        },
+        "contactfinderResourceGroup": {
+            "type": "string"
+        },
+        "armTemplateRepoUrl": {
+            "type": "string"
+        },
+        "sasToken": {
+            "type": "string"
+        },
+        "Environment": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "appConfigName-api": {
+            "defaultValue": "recruit-runtime-appconfig-dev",
+            "type": "String"
+        },
+        "appConfigpeName-api": {
+            "defaultValue": "recruit-runtime-appconfig-dev",
+            "type": "String"
+        },
+        "servicebussku": {
+            "type": "string",
+            "defaultValue": "standard"
+        },
+        "serviceBusPubName-infra": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the Service Bus namespace"
+            }
+        },
+        "serviceBuspartnerName-infra": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the Queue"
+            }
+        },
+        "cosmosAccountName-infra": {
+            "type": "string",
+            "defaultValue": "[format('cosmos-{0}', uniqueString(resourceGroup().id))]",
+            "metadata": {
+                "description": "Cosmos DB account name"
+            }
+        },
+        "cosmosDBName-infra": {
+            "type": "string",
+            "metadata": {
+                "description": "The name for the SQL API database"
+            }
+        },
+        "storageacc-infra": {
+            "type": "string"
+        },
+        "storageacccfs-infra": {
+            "type": "string"
+        },
+        "storageaccpartner-infra": {
+            "type": "string"
+        },
+        "appInsightsName-app": {
+            "type": "string"
+        },
+        "LoadBalanceName": {
+            "type": "string"
+        },
+        "funcappRuntime": {
+            "type": "string",
+            "defaultValue": "node",
+            "allowedValues": [
+                "node",
+                "dotnet",
+                "java"
+            ],
+            "metadata": {
+                "description": "The language worker runtime to load in the function app."
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "infraNestedTemplate",
+            "resourceGroup": "[parameters('infraResourceGroup')]",
+            "subscriptionId": "[parameters('subscriptionID')]",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "variables": {},
+                    "resources": [
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "appConfigDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'appConfig.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "appConfigName": {
+                                        "value": "[concat(parameters('appConfigName-api'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "sku": {
+                                        "value": "[parameters('servicebussku')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "appPEConfigDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'appConfig.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "appConfigName": {
+                                        "value": "[concat(parameters('appConfigpeName-api'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    }   
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "ServiceBuspubDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'servicebus.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "serviceBusNamespaceName": {
+                                        "value": "[concat(parameters('serviceBusPubName-infra'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "serviceBusQueueName": {
+                                        "value": "[parameters('serviceBusQueueName-infra')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "loganalyticsDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'loganalyticsworkspace.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "serviceBusNamespaceName": {
+                                        "value": "[concat(parameters('loganalytics-infra'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "ServiceBuspartnerDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'servicebus.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "serviceBusNamespaceName": {
+                                        "value": "[concat(parameters('serviceBuspartnerName-infra'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "serviceBusQueueName": {
+                                        "value": "[parameters('serviceBusQueueName-infra')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "CosmosDBDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'cosmosdb.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "accountName": {
+                                        "value": "[concat(parameters('cosmosDBName-infra'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "databaseName": {
+                                        "value": "[parameters('cosmosDBName-infra')]"
+                                    },
+                                    "containerName": {
+                                        "value": "[concat(parameters('cosmosDBName-infra'),'-container')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "CosmosDataBaseDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'cosmosdb.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "accountName": {
+                                        "value": "[concat(parameters('cosmosAccountName-infra'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "databaseName": {
+                                        "value": "[parameters('cosmosDBName-infra')]"
+                                    },
+                                    "containerName": {
+                                        "value": "[concat(parameters('cosmosAccountName-infra'),'-container')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "StorageAccountDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'storageAccountTemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "staName": {
+                                        "value": "[concat(parameters('storageacc-infra'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "storageAccountType": {
+                                        "value": "[parameters('storageAccountType')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "StorageAccountpartnerDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'storageAccountTemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "staName": {
+                                        "value": "[concat(parameters('storageacccfs-infra'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "storageAccountType": {
+                                        "value": "[parameters('storageAccountType')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "StorageAccountapiDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'storageAccountTemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "staName": {
+                                        "value": "[concat(parameters('storageaccpartner-infra'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "storageAccountType": {
+                                        "value": "[parameters('storageAccountType')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "keyvaultDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'KeyVault.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "staName": {
+                                        "value": "[concat(parameters('keyvaultname-infra'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "outputs": {}
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "partnerNestedTemplate",
+            "resourceGroup": "[parameters('partnerAPIResourceGroup')]",
+            "subscriptionId": "[parameters('subscriptionID')]",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "variables": {},
+                    "resources": [
+                        /*{
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "AppServicePlanDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'appserviceplantemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "appServicePlanName": {
+                                        "value": "[concat(parameters('AppServicePlanName-partner'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "appServicePlanSkuName": {
+                                        "value": "[parameters('AppServicePlanSkuName')]"
+                                    },
+                                    "kind": {
+                                        "value": "[parameters('kind')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "apiAppServiceDeployment",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.Resources/deployments', 'AppServicePlanDeployment')]"
+                            ],
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'appServiceTemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "webAppName": {
+                                        "value": "[concat(parameters('appserviceName-partner'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "language": {
+                                        "value": "[parameters('language')]"
+                                    },
+                                    "appServicePlanName": {
+                                        "value": "[concat(parameters('AppServicePlanName-partner'),'-',parameters('Environment'))]"
+                                    }
+                                }
+                            }
+                        },*/
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "appInsightsServiceDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'ApplicationInsights.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "appInsightsName": {
+                                        "value": "[concat(parameters('appInsightsName-partner'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "type": {
+                                        "value": "[parameters('appInsightsType')]"
+                                    },
+                                    "requestSource": {
+                                        "value": "[parameters('appInsightsSource')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "keyvaultDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'KeyVault.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "staName": {
+                                        "value": "[concat(parameters('keyvaultname-partner'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "outputs": {}
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "contactNestedTemplate",
+            "resourceGroup": "[parameters('contactfinderResourceGroup')]",
+            "subscriptionId": "[parameters('subscriptionID')]",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "variables": {},
+                    "resources": [
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "StorageAccountDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'storageAccountTemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "staName": {
+                                        "value": "[concat(parameters('storageAccName-contact'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "storageAccountType": {
+                                        "value": "[parameters('storageAccountType')]"
+                                    }
+                                }
+                            }
+                        },
+                        /*{
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "AppServicePlanDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'appserviceplantemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "appServicePlanName": {
+                                        "value": "[concat(parameters('appServicePlanName-contact'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "appServicePlanSkuName": {
+                                        "value": "[parameters('AppServicePlanSkuName')]"
+                                    },
+                                    "kind": {
+                                        "value": "[parameters('kind')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "funcAppServiceDeployment",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.Resources/deployments','AppServicePlanDeployment')]",
+                                "[resourceId('Microsoft.Resources/deployments', 'StorageAccountDeployment')]"
+                            ],
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'functionapptemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "appName": {
+                                        "value": "[concat(parameters('funcAppName-contact'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "runtime": {
+                                        "value": "[parameters('funcappRuntime')]"
+                                    },
+                                    "appServicePlanName": {
+                                        "value": "[concat(parameters('appServicePlanName-contact'),'-',parameters('Environment'))]"
+                                    },
+                                    "staName": {
+                                        "value": "[concat(parameters('storageAccName-contact'),parameters('Environment'))]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "AppServiceDeployment",
+                            "dependsOn": [
+                                "[resourceId('Microsoft.Resources/deployments', 'AppServicePlanDeployment')]"
+                            ],
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'appServiceTemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "webAppName": {
+                                        "value": "[concat(parameters('AppName-contact'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "language": {
+                                        "value": "[parameters('language')]"
+                                    },
+                                    "appServicePlanName": {
+                                        "value": "[concat(parameters('appServicePlanName-contact'),'-',parameters('Environment'))]"
+                                    }
+                                }
+                            }
+                        },*/
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "ServiceBuspubDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'servicebus.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "serviceBusNamespaceName": {
+                                        "value": "[concat(parameters('serviceBusName-contact'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "serviceBusQueueName": {
+                                        "value": "[parameters('serviceBusQueueName-contact')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "appInsightsServiceDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'ApplicationInsights.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "appInsightsName": {
+                                        "value": "[concat(parameters('appInsightsName-contact'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "type": {
+                                        "value": "[parameters('appInsightsType')]"
+                                    },
+                                    "requestSource": {
+                                        "value": "[parameters('appInsightsSource')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "keyvaultDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'KeyVault.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "staName": {
+                                        "value": "[concat(parameters('keyvault-contact'),parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "outputs": {}
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "apiNestedTemplate",
+            "resourceGroup": "[parameters('apiResourceGroup')]",
+            "subscriptionId": "[parameters('subscriptionID')]",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "variables": {},
+                    "resources": [
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "appInsightsServiceDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'ApplicationInsights.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "appInsightsName": {
+                                        "value": "[concat(parameters('appInsightsName-app'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "type": {
+                                        "value": "[parameters('appInsightsType')]"
+                                    },
+                                    "requestSource": {
+                                        "value": "[parameters('appInsightsSource')]"
+                                    }
+                                }
+                            }
+                        },
+                        {                  
+                               "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "loadbalancerDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'Loadbalancer.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "LoadBalanceName": {
+                                        "value": "[parameters('LoadBalanceName')]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    },
+                                    "type": {
+                                        "value": "[parameters('appInsightsType')]"
+                                    },
+                                    "requestSource": {
+                                        "value": "[parameters('appInsightsSource')]"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "RunTimeAPIDeployment",
+                            "properties": {
+                                "mode": "Incremental",
+                                "templateLink": {
+                                    "uri": "[concat(parameters('armTemplateRepoUrl'),'runtimeapitemplate.json?',parameters('sasToken'))]",
+                                    "contentVersion": "1.0.0.0"
+                                },
+                                "parameters": {
+                                    "RunTimeName": {
+                                        "value": "[concat(parameters('runtimeAPI'),'-',parameters('Environment'))]"
+                                    },
+                                    "location": {
+                                        "value": "[parameters('location')]"
+                                    }
+                                }
+                            }
+                        }
+
+                    ],
+                    "outputs": {}
+                }
+            }
+        }
+    ]
+}
