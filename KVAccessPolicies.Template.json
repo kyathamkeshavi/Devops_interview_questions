@@ -1,0 +1,86 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "Specifies the keyvault name."
+            }
+        },
+        "operation": {
+            "type": "string",
+            "metadata": {
+                "description": "Specifies access policy operation to perform."
+            }
+        },
+        "msiPolicies": {
+			"type": "array",
+			"metadata": {
+				"description": "Specifies the MSIs to be granted permissions."
+			},
+			"defaultValue": []
+		},
+		"principalPolicies": {
+			"type": "array",
+			"metadata": {
+				"description": "Specifies the principals to be granted permissions."
+			},
+			"defaultValue": []
+		},
+		"compoundPolicies": {
+			"type": "array",
+			"metadata": {
+				"description": "Specifies the compound identities to be granted permissions."
+			},
+			"defaultValue": []
+		}
+    },
+    "variables": {
+		"copy": [
+			{
+				"name": "msiPoliciesOutput",
+				"count": "[length(parameters('msiPolicies'))]",
+				"input": {
+					"identity": {
+						"principalId": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].identity.principalId]",
+						"applicationId": null,
+						"tenantId": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].identity.tenantId]"
+					},
+					"certificatePermissions": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].certificatePermissions]",
+					"keyPermissions": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].keyPermissions]",
+					"secretPermissions": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].secretPermissions]",
+					"storagePermissions": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].storagePermissions]"
+				}
+			}
+		],
+		"policies": "[union(parameters('principalPolicies'), parameters('compoundPolicies'), variables('msiPoliciesOutput'))]"
+	},
+    "resources": [
+        {
+            "type": "Microsoft.KeyVault/vaults/accessPolicies",
+            "name": "[concat(parameters('keyVaultName'), '/', parameters('operation'))]",
+            "apiVersion": "2019-09-01",
+            "properties": {
+                "copy": [
+                    {
+                        "name": "accessPolicies",
+                        "count": "[length(variables('policies'))]",
+                        "mode": "parallel",
+                        "input": {
+                            "tenantId": "[variables('policies')[copyIndex('accessPolicies')].identity.tenantId]",
+                            "objectId": "[variables('policies')[copyIndex('accessPolicies')].identity.principalId]",
+                            "applicationId": "[variables('policies')[copyIndex('accessPolicies')].identity.applicationId]",
+                            "permissions": {
+                                "certificates": "[variables('policies')[copyIndex('accessPolicies')].certificatePermissions]",
+                                "keys": "[variables('policies')[copyIndex('accessPolicies')].keyPermissions]",
+                                "secrets": "[variables('policies')[copyIndex('accessPolicies')].secretPermissions]",
+                                "storage": "[variables('policies')[copyIndex('accessPolicies')].storagePermissions]"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

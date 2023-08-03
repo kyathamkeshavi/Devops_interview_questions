@@ -1,0 +1,91 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"keyVaultName": {
+			"type": "string",
+			"metadata": {
+				"description": "Specifies the keyvault name."
+			}
+		},
+		"msiPolicies": {
+			"type": "array",
+			"metadata": {
+				"description": "Specifies the MSIs to be granted permissions."
+			},
+			"defaultValue": []
+		},
+		"principalPolicies": {
+			"type": "array",
+			"metadata": {
+				"description": "Specifies the principals to be granted permissions."
+			},
+			"defaultValue": []
+		},
+		"compoundPolicies": {
+			"type": "array",
+			"metadata": {
+				"description": "Specifies the compound identities to be granted permissions."
+			},
+			"defaultValue": []
+		}
+	},
+	"variables": {
+		"tenantId": "[subscription().tenantId]",
+		"location": "[resourceGroup().location]",
+		"copy": [
+			{
+				"name": "msiPoliciesOutput",
+				"count": "[length(parameters('msiPolicies'))]",
+				"input": {
+					"identity": {
+						"principalId": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].identity.principalId]",
+						"applicationId": null,
+						"tenantId": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].identity.tenantId]"
+					},
+					"certificatePermissions": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].certificatePermissions]",
+					"keyPermissions": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].keyPermissions]",
+					"secretPermissions": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].secretPermissions]",
+					"storagePermissions": "[parameters('msiPolicies')[copyIndex('msiPoliciesOutput')].storagePermissions]"
+				}
+			}
+		],
+		"policies": "[union(parameters('principalPolicies'), parameters('compoundPolicies'), variables('msiPoliciesOutput'))]"
+	},
+	"resources": [
+		{
+			"name": "[parameters('keyVaultName')]",
+			"type": "Microsoft.KeyVault/vaults",
+			"apiVersion": "2019-09-01",
+			"location": "[variables('location')]",
+			"properties": {
+				"enabledForDeployment": true,
+				"enabledForTemplateDeployment": true,
+				"enabledForVolumeEncryption": false,
+				"copy": [
+					{
+						"name": "accessPolicies",
+						"count": "[length(variables('policies'))]",
+						"mode": "parallel",
+						"input": {
+							"tenantId": "[variables('policies')[copyIndex('accessPolicies')].identity.tenantId]",
+							"applicationId": "[variables('policies')[copyIndex('accessPolicies')].identity.applicationId]",
+							"objectId": "[variables('policies')[copyIndex('accessPolicies')].identity.principalId]",
+							"permissions": {
+								"certificates": "[variables('policies')[copyIndex('accessPolicies')].certificatePermissions]",
+								"keys": "[variables('policies')[copyIndex('accessPolicies')].keyPermissions]",
+								"secrets": "[variables('policies')[copyIndex('accessPolicies')].secretPermissions]",
+								"storage": "[variables('policies')[copyIndex('accessPolicies')].storagePermissions]"
+							}
+						}
+					}
+				],
+				"tenantId": "[variables('tenantId')]",
+				"sku": {
+					"name": "Standard",
+					"family": "A"
+				}
+			}
+		}
+	]
+}
