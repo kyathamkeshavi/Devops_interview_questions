@@ -272,4 +272,16 @@ why we use roles in ansible
 what is ansible galaxy
 what are types of projects you created in jenkins
 how do you execute different scripts on different servers by using jenkins freestyle projects
+------------------------------------------------------------------------------------
+INFOSYS PROJECT INTERVIEWS:
+
+there is a logic app and we are changing them from portal. i need to maintain the versions of changes in azure how?
+there is a fucntionapp and azure api. i want to access the fucntionapp using azure api but not from functionapp url how?
+what are access policies?
+what are the things need to deploy fucntionapp
+do we need storage account to deploy fctn app
+do you have any idea on bicep
+how can we make a ctcn between 2 resouces like keyvault and storage account or fucntionapp
+if we deploy 5 fcuntionapp do we need 5 keys?
+things to know about azure api
 
