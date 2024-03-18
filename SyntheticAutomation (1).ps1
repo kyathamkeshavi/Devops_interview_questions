@@ -2,12 +2,7 @@
 $root = "$PSScriptRoot"
 # Read configuration json which has the env to region mappings 
 $config = (Get-Content "$root\configNew.json" | Out-String | ConvertFrom-Json)
-
-
 $emailconfig = (Get-Content "$root\EmailConfig.json" | Out-String | ConvertFrom-Json)
-
-
-
 # append capacityunit and geo specific parameters appsetting files and saves a new geo and CU file.
 $originalJSONdata = Get-Content $root\prod.public.config.json -Raw | ConvertFrom-Json
 #Write-Output $originalJSONdata
@@ -25,28 +20,22 @@ function Replace-Env {
            $geoName = $geography.geoName.ToLower();
            foreach($capacityunit in $geography.capacityUnits){
               $unit = $capacityunit.unit;
-
               if($config.cloudType -eq "public"){
                 foreach($syntheticemail in $emailconfig.public | Get-Random){
                   $syntheticEmailAddress = $syntheticemail.syntheticEmailAddress;
-                  $syntheticEmailKeyVaultSecretId = $syntheticemail.syntheticEmailKeyVaultSecretId;
-                  
+                  $syntheticEmailKeyVaultSecretId = $syntheticemail.syntheticEmailKeyVaultSecretId;                  
                 }
-
               }elseif($config.cloudType -eq "fairfax"){
                  foreach($syntheticemail in $emailconfig.ff | Get-Random){
                   $syntheticEmailAddress = $syntheticemail.syntheticEmailAddress;
                   $syntheticEmailKeyVaultSecretId = $syntheticemail.syntheticEmailKeyVaultSecretId;
-                }
-              
+                }              
               }else{
                 foreach($syntheticemail in $emailconfig.mooncake | Get-Random){
                   $syntheticEmailAddress = $syntheticemail.syntheticEmailAddress;
                   $syntheticEmailKeyVaultSecretId = $syntheticemail.syntheticEmailKeyVaultSecretId;
                 }
-
-              }
-              
+              }              
                 $V2BatchEmailCuAddJson =   (Get-Content $V2BatchEmailCutargetFile) | Foreach-Object {
                 $_ -replace $geoNameStr, $geoName `
                    -replace $apiURLendPointSuffixStr, $apiURLendPointSuffix `
@@ -55,18 +44,14 @@ function Replace-Env {
                    -replace $syntheticEmailKeyVaultSecretIdStr, $syntheticEmailKeyVaultSecretId `
                    -replace $unitstr, $unit
             } | Out-String | ConvertFrom-Json
-
-
            $i =0
            $originalJSONdata.SyntheticJobGroup.SyntheticJobs | Foreach-object {
              if ( $_.JobName -eq "v2BatchEmail" ) {
                 Write-Output "Found v2BatchEmail!!!"
                 $_[$i].SyntheticJobInstances += $V2BatchEmailCuAddJson
-                $i++
-                
+                $i++               
             }
-          }
-         
+          }       
           }
         }
         $V2HealthPingCutargetFile = "$root\$path\syntheticV2HealthPingCuTemplate.json";    
@@ -78,8 +63,7 @@ function Replace-Env {
              $V2HealthPingCuAddJson =    (Get-Content $V2HealthPingCutargetFile) | Foreach-Object {
                 $_ -replace $geoNameStr, $geoName `
                     -replace $apiURLendPointSuffixStr, $apiURLendPointSuffix `
-                    -replace $unitstr, $unit
-                    
+                    -replace $unitstr, $unit                 
               } | Out-String | ConvertFrom-Json
               $i =0
                $originalJSONdata.SyntheticJobGroup.SyntheticJobs | Foreach-object {
@@ -87,12 +71,10 @@ function Replace-Env {
                   Write-Output "Found V2HealthPing!!!"
                     $_[$i].SyntheticJobInstances += $V2HealthPingCuAddJson
                   $i++
-                 }
-                 
+                 }                 
                }
            }
          }
-
 $originalJSONdata | ConvertTo-Json -Depth 50 | %{
         [Regex]::Replace($_, 
             "\\u(?<Value>[a-zA-Z0-9]{4})", {
@@ -114,7 +96,6 @@ function Format-Json([Parameter(Mandatory, ValueFromPipeline)][String] $json) {
         $line
     }) -Join "`n"
 }
-
 # Parameters in the Ev2 files
 $geoNameStr = "{geoName}";
 $endPointEnvStr = "{endPointEnv}";
