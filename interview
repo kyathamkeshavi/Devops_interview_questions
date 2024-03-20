@@ -1,15 +1,30 @@
 INFOSYS:
 tell me about yourself
-what is docker, why we use them
-why you used github
-how to create dockerfile and components
-how to write playbook for loops
-what was there before docker
+what is docker, why we use them------------->docker is a open source contanarization tool which creates advanced level of virtualization. it is designed to facilitate the application developemt inside software contaniners. we use docker as it is lightweight,less cost,we can resue resources and we can send the images to any other teams so that their application will run efficiently. it has only 1 os which runs contianers, we can easily build and run the containers
+why you used github----------------->github is used to store the data where different teams collaborate with each other and developed diifreent versions of code. we used this because various developers can easily identify the changed code and run them in their local machines and test them.
+how to create dockerfile and components-------------->dockerfile is a file which contains a set of instructions that are used to create the docker image, there are various components of docker file such as from, cmd, label, run, entrypoint, copy, add etc
+how to write playbook for loops-------->playbooks are uually written in yaml file. below is the playbooks for loop 
+- hosts: keshavi
+  become: yes
+  user: kyatham
+  connection: ssh
+  tasks: 
+  - name: "add users"
+    user:
+      name: {{items.username}}
+      state: present
+      groups: sudo
+      append: yes
+      password: "{{items.password}}"
+      with_items:
+        - { username: 'keshavi', password: 'keshavi' }
+        - { username: 'keshavi1', password: 'keshavi1' }
+what was there before docker ---------------> we have vmware before docker. its a virtualization technology where many operating systems runs on single physical machine. but docker is more lightweight.
 anything you have done on your own
 why you have installed tomcat
 what are maven dependencies
-jenkins architecture
-2 types of pipelines
+jenkins architecture ----------> we have 3 components. jenkins master/server, jenkins agent nodes/clouds, jenkins webinterface. on master we have all the configurations such as scheduling job,plugins,users and monitoring etc. on jenkins agent nodes(linux,windows) clouds(docker,k8) this tells us on which the pipeline should run. web intrace gives us the visual representation of pipelines.
+2 types of pipelines---------------->declarative & scripted pipeline. declarative stress on what to do rather than how to do. declarative is easy to read.
 have you done any automation using chef cookbooks
 write code for declarative
 types of aws ec2-instance
@@ -20,7 +35,7 @@ automation have you done
 jenkins job creation
 issues you faced when deploying ci/cd pipeline
 --------------------------------------------------------------
-what you will do when containers are stopped
+what you will do when containers are stopped-------->id check if it was stopped manualy, and then start the containers using docker start contnername command to start them, notify the administrators about stopped container. ill check if there is any major impact due to this
 what is the storage you used in aws
 how to create jenkins job
 what is the storage you have worked on in aws
@@ -32,58 +47,58 @@ what is issue we faced before ci and we did overcome after ci
 what is cd
 for example lets say that 2 dev are writing code and changing same file in 2 diff branches. how will you resolve this issue. ----->git conflict
 can we resolve the conflict without taking help of other developer------------->no, we just have to connect with other dev and ask what needs to be changed
-git workflow
+git workflow--------->workspace, staging area and local repo
 maven build lifecycle
 maven goals
 what you meant by human intevention in continous deployment and how does it work
-i have one job and have some files in github. in that i dont want 1 file to get executed when my jenkins jobs run. how will you solve this issue
-if i want to execute one particular command in dockerfile then how will you do that and build it
+i have one job and have some files in github. in that i dont want 1 file to get executed when my jenkins jobs run. how will you solve this issue--------->by using .gitignore or using conditional statemnt in jenkinsfile
+if i want to execute one particular command in dockerfile then how will you do that and build it------->RUN command
 how you got into devops role and want is your interest
 what does stryker do
 how to create a job in jenkins
-how to trigger jobs in jenkins
+how to trigger jobs in jenkins------->manualy, using grovvy when building pipe, using cron job
 phases in maven
 do we need internet to download dependencies in maven
-diff between fetch and pull
+diff between fetch and pull---------->in fetch file is not changed in local repo but in pul file is changed in local repo
 
 ---------------------------------------------------------------
 YESDE:
-grep use in linux
-can we use grep for finding processes
-git squash
-how to go inside containers
+grep use in linux -----------> same like filter in windows
+can we use grep for finding processes ------> yes, ps -ef | grep <pid>
+git squash------>combining multiple commit to single commit. git merge --squash
+how to go inside containers-------> docker attach kesh
 why we use /bin/bash in containers---------> to run the containers in interactive mode
 if my container got crashed then how can we get them back--->volumes
-docker networks
+docker networks-------->when we want to link multiple contianer we use this. 
 why we use security groups---->acts as a virtual firewall, controlling the traffic that is allowed to reach and leave the resources that it is associated with.
 why we use autoscaling---->we use this when you want to increase the vm's when the resource utilizatio exceeds the point 
 how to block users in aws
 which jobs you have worked on in jenkins
 are you using maven as backup only?
-what is git rebase
+what is git rebase--------->when we want to transfer the old branch to completly new branch
 have you worked on disaster recovery modes-->master and slave in jenkins
-example i have to create list of users in morning and want to delete them at night. for this what is your approach in ansible
+example i have to create list of users in morning and want to delete them at night. for this what is your approach in ansible---------->it is not ideal method using anisble but we can do it using playbooks. state would be present in morning and absent in eveng
 how to install a service in ansible. what are the methods
 ---------------------------------------------------------------------
 CLOUDFRONT:
 how master and slave nodes are connected? how they communicate? -------------TCP/IP protocol
-how to go to new branch
-for example i have 1 frd and we want to work on same project using same repo. how to do that
+how to go to new branch----->git checkout kesh
+for example i have 1 frd and we want to work on same project using same repo. how to do that------>create branches
 what does pull do in git
 what are modules
 what module you will use when you want to run the playbook on local machine?-----------script
 have you created any ci/cd pipelines
-how to delete docker image
-how to get into existing container
+how to delete docker image------------>docker rmi kesh
+how to get into existing container---------->docker exec -it kesh /bin/bash or docker attach kesh
 what is the diff between autoscaling and load balancer and when we use it------>A load balancer distributes incoming application traffic across multiple EC2 instances in multiple Availability Zones.   
 where is inventory path in ansible?-----------/etc/ansible/hosts
 i have 5 nodes and want to execute some commands. so do i have to write 5 diff playbooks for that?----------you can create a grp and in playbook write hosts: grpname
 have you worked on roles, if yes what are roles and what is the thing you have worked on it
 as ansible is agentless tool how it will communicate with nodes?---------by using ssh. we have to establish ss-keygen and ssh-copy-id kesh@ip
 how to execute commands in linux?---------by using chmod
-what is command for changing owner of file in linux
-command to use free space in linux
-command to know about cpu usage in linux
+what is command for changing owner of file in linux------------>chown 644 keshavi
+command to use free space in linux---------->free -m, df, du
+command to know about cpu usage in linux---------->top, htop, vmstat
 what things you take care when launching ec2-instances
 can we change ansible.cfg path? -------yes..better to change it in current working directory. if not there it checks in users home dir. 
 if not there also it goes to /etc/ansible/ansible.cfg file
@@ -109,19 +124,19 @@ diff between copy add and CMD and entrypoint
 what application do you run on docker
 have you used docker swarm
 what is the monitoring tool you have used
-how to check logs in docker
+how to check logs in docker--------->docker logs kesh
 what are all the tasks you have done using ansible playbook-->creating handlers, loops, conditions, 
 what commands do you use in linux
-how many ways are there to build jobs in jenkins
+how many ways are there to build jobs in jenkins---------->scripted & declarative
 have you created backup in jenkins
 have you installed any maual plugins in jenkins or used the available ones
 what are all the plugins have you used --> git, thinbackp, backup, publsih over ssh, maven integration, pipeline,extended email notfication
 ---------------------------------------------------------------------
 CAPGEIMI:
-in git if my user is not configured then how do you do that
-what is fork in git
-how to check list of volumes in docker
-how to check if there is an eror in jenkins output
+in git if my user is not configured then how do you do that-------->git config --global user.name "kesh"
+what is fork in git --------> when we want to copy other persons repo to yours
+how to check list of volumes in docker ----------> docker volume ls
+how to check if there is an eror in jenkins output----------->in console op
 how to check jenkins eror logs
 where do you want to be in next 5 years
 how to encrpyt the playbook in ansible
@@ -130,8 +145,8 @@ what are the branching strategies you use
 if we have any issue in production branch then how do you solve it
 what are the things you do in quality checks in git
 why do you want to change the job
-why do we use cherry pick in git
-for eg if my image is crashed then how do you get that back in docker
+why do we use cherry pick in git-------> to want only 1 particular commit in your branch. git cherry-pick <id>
+for eg if my image is crashed then how do you get that back in docker----------> volume
 what is upstream and downstream in jenkins
 where passwords are stored in jenkins------>$JENKINS_HOME/secrets/initialAdminPassword.
 how to stop jenkins job when it is executing
@@ -218,12 +233,12 @@ diff between maven and graddle
 can we upload plugins manually
 ---------------------------------------------------------------------------
 Tetrasoft:
-what is bare repository in git
+what is bare repository in git----------->where it has no wrkng drctry and it is used to store git metadata for version tracking
 what is conflict and git checkout
 how do you revert the changes that is already commited
 git fetch and git pull
 what is staging area
-different between docker and kubernetes
+different between docker and kubernetes---------->docker used for building, deploying container. k8 is used for managing the deployed clustered containers, we use both to simplify the app.
 different between scipted pipeline and declarative pipeline
 diff between virtualization and dcoker
 what are docker images
@@ -232,29 +247,29 @@ what is docker compose
 docker namespace
 lifecycle of image
 how to know docker version
-how to check the containers in  docker
-how to get image from docker hub
-what is dynamic and other inventory in ansible
-what are adhoc commads in ansible
-different types of modules
+how to check the containers in  docker------>docker ps
+how to get image from docker hub-------->docker images, docker pull keshavi@gmail.com/ubuntu
+what is dynamic and other inventory in ansible---------->inventory is like the config file for ansibe server
+what are adhoc commads in ansible----->temporary commands used to perform task without using playbook. these are not idempotent
+different types of modules----------->yum, user, copy, service
 diff between aws and azure
-differnce between chef and ansible
-in which language ansible and chef wre written
+differnce between chef and ansible-------->chef is agent one while ansible is agentless
+in which language ansible and chef wre written-------->ansbile is python, chef in ruby
 ---------------------------------------------------------------
 SREETECH:
 why are you looking for other job, if you already have an offer letter
 what playbooks have you written in ansible
-why we use handler
+why we use handler----------->we use this if to notify other ther services to start
 why we use loops in ansible
-and what are required when writing loops
-how do you know how much memory is there in linux
-what is the default number of file in linux
-how to login into the ansible server for user
+and what are required when writing loops---------->host,user,connection
+how do you know how much memory is there in linux-------->free-m, top, vtop,vmstat
+what is the default number of file in linux--------->644
+how to login into the ansible server for user----------->make chnages in visudo file. kesh ALL=(ALL) NOPASSWS=ALL
 what is diff between chec and ansible
 how did the chef know about the updates
 if there are different recipes and they needs to be run on diff nodes in chef. how do we do it
-what is the umas value of file
-where will we check logs in linux
+what is the umask value of file---->022
+where will we check logs in linux--------->var/log
 which flavours you have worked in linux
 what projects have you used in jenkins
 what are the jobs you have created in jenkins
@@ -266,22 +281,32 @@ what language is used in your project
 how many pipelines are there in jenkins in your peoject
 why do you use ansible in your project and what is the use even though we can run docker images directly
 what is difference between chef and ansible
-what is command to check syntax of ansible playbook
-how to copy files in ansible for different nodes in single playbook
-why we use roles in ansible
-what is ansible galaxy
+what is command to check syntax of ansible playbook------->ansible-playboon kesh.yml --check
+how to copy files in ansible for different nodes in single playbook--------->ansible kesh -b -m copy "src= ,dest="
+why we use roles in ansible-------------->when we need to use set of task repeatedly
+what is ansible galaxy-------->its an gui
 what are types of projects you created in jenkins
 how do you execute different scripts on different servers by using jenkins freestyle projects
 ------------------------------------------------------------------------------------
 INFOSYS PROJECT INTERVIEWS:
 
-there is a logic app and we are changing them from portal. i need to maintain the versions of changes in azure how?
+there is a logic app and we are changing them from portal. i need to maintain the versions of changes in azure how?Open your logic app in the Azure portal.In the left-hand menu, under Development Tools, click Versions.
 there is a fucntionapp and azure api. i want to access the fucntionapp using azure api but not from functionapp url how?
-what are access policies?
+what are access policies?----------->where we define the criteria to grant permisssion for various apps,
 what are the things need to deploy fucntionapp
 do we need storage account to deploy fctn app
 do you have any idea on bicep
 how can we make a ctcn between 2 resouces like keyvault and storage account or fucntionapp
 if we deploy 5 fcuntionapp do we need 5 keys?
 things to know about azure api
+----------------------------------------------------------------------------------------
+ACCENTURE:
 
+how to create a build pipeline if you dont have any yaml code and what are the steps included in build pipeline
+can we do testing in build piepline------>yes we can
+which is better to deploy web app  is it vm or app service?-------->app service as it is cheap and robust but if you want full control of your application then go for vm
+which is better to deploy web app  is it container or app service?---------->If you want more control over the underlying infrastructure, then Azure Container Apps is a better choice. If you want to focus on developing your application and not worry about the underlying infrastructure, then Azure App Service is a better choice.
+what is the difference between variable grp and pipleine varble------>piplne vars are used for specific pipleins but variable grp are like centralized which will be used accros the project i.e., diff pipelines
+what are the azure policies?---------------->Think of code review as ensuring the quality and functionality of the recipe (code) itself. Azure Policy acts like a health inspector during deployment, verifying if the prepared dish (deployed resource) meets safety and hygiene standards (policy rules).
+lets say if developers write the code and wants to raise a pr. it should got through reviwers adn merge it. where do we declare the azure policy?------------------>You can define Azure Policy definitions that specify rules and conditions for your Azure resources.During deployment, the pipeline checks if the newly deployed resources comply with these policies.
+If any policy violation occurs (e.g., resource missing a required tag, security misconfiguration), the deployment might be blocked, or remediation actions might be taken depending on the policy configuration.
