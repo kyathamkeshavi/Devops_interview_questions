@@ -310,3 +310,59 @@ what is the difference between variable grp and pipleine varble------>piplne var
 what are the azure policies?---------------->Think of code review as ensuring the quality and functionality of the recipe (code) itself. Azure Policy acts like a health inspector during deployment, verifying if the prepared dish (deployed resource) meets safety and hygiene standards (policy rules).
 lets say if developers write the code and wants to raise a pr. it should got through reviwers adn merge it. where do we declare the azure policy?------------------>You can define Azure Policy definitions that specify rules and conditions for your Azure resources.During deployment, the pipeline checks if the newly deployed resources comply with these policies.
 If any policy violation occurs (e.g., resource missing a required tag, security misconfiguration), the deployment might be blocked, or remediation actions might be taken depending on the policy configuration.
+---------------------------------------------------------------------------------------------------------------
+ZENSAR:
+
+tell me about yourslef
+tell me end to end implementation in your project and what are the complex things you faced
+how you used to deploy the resources. is it directly on prod or non prod?
+what are testing you used to do before deploying the services.
+what are the branching startegies you used in your project?
+how do you integrate git with azure devops
+what do you mean by system integration
+have you worked on terraform if yes how did you implement it
+what kind of work have you done in terraform
+what are terraform provisoners
+on which environment did you tested the terraform
+what do you mean by remote state in terraform
+what are the security implementation you have done in your projects
+you have mentioned the efficiency is increased by 30% in your resume. can you describe about it
+have you worked on azure monitoring tools?
+how do you recommend the service for the client
+are you able to work in night shift
+did you do any certifications
+why you are looking for job change?
+do you have any questions
+-----------------------------------------------------------------------------------------------------------------
+BPMLINKS:
+
+tell me about yourself
+in your resume you have mentioned you are working on ansible docker. can you explain what you have done
+what are the specific services you implemented in your project
+what are the projects you worked in tcs
+how did you deploy the services in azure
+what is the experience you have in arm template and what services you deployed using them
+for dot net applications what is the azure service you will use
+how many projects you have worked from start
+roles and responsibilties 
+what are the repeated activities in your project
+have you worked on any paas service
+what are the 3 services that are there in azure
+example of each service and have you worked on any things
+did you maintain the servcies once it is deployed?
+how much do you rate in powershell, azure and devops
+how does devops helps in the industry
+core prospects or fucntionalities in devops
+what is the pull request
+what is service connection
+what are the tyoes of pipelines in azure devops and explain them
+in your projects which pipeline you used
+if you are using the yaml pipeline then what will be the task type for dot net application
+how do you test and deploy the services
+when you want to add new service in the existing pipeline how do you do it
+what is the difference between complte mode and incremental mode in arm template
+what are build and release task you are using. give me the task names in yaml file
+which powershell command do you use for deploying arm template
+using terraform how to deploy the infrastructure
+what is the state file
+
