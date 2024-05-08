@@ -366,3 +366,13 @@ which powershell command do you use for deploying arm template
 using terraform how to deploy the infrastructure
 what is the state file
 
+-----------------------------------------------------------------------------------------------------------------
+TECH M:
+tell me about yourslef
+tell me the build and release pieline in your project
+have you worked on dynamic application
+how do you store secrets and certs in keyvault
+where are your artifacts stored
+can we change the storage path when we are generating the artifact. means i want to store my artifact in custom path how to do it
+
+
