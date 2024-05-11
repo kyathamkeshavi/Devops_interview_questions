@@ -380,7 +380,21 @@ how you will approve the task in azure devops and what are the steps
 Globant:
 
 tell me about yourself
-explain the over viwe of arm template
+explain the syntax of arm template
+What are the things you have done in your project
+Day to day activities
+What is the difference between China cloud and other clouds in your project
+Which Stack you used in your build pipeline
+What is the package management in don't you are using
+Have you worked on kubernetes
+What is Docker file and how you create it
+Why we are starting with from in Docker file. Why we are using it
+What are the resources you worked on till now
+Why we are using traffic manager
+How many types of load balanacers in azure
+Different layers in traffic manager In aure
+Why we are using 7 layer What is the use of it
+Add a key vault using powershell
 
 
 
