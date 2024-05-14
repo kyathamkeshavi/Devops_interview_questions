@@ -395,6 +395,17 @@ How many types of load balanacers in azure
 Different layers in traffic manager In aure
 Why we are using 7 layer What is the use of it
 Add a key vault using powershell
+syntax of yaml file:
+trigger
+parameter
+resources
+stages
+  stage
+  jobs
+    job
+    steps
+      task
+      
 
 
 
