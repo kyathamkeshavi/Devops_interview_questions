@@ -405,7 +405,24 @@ stages
     job
     steps
       task
-      
+
+--------------------------------------------------------------------------------------------------------------------------
+LTC:
+
+what is devops and why we use it
+you have written pull and push configuration in version control. explain about this
+how did you integrate git to azure
+how do you list the processor in linux ----------->top, vtop, ps -ef|grep name
+how to give sudo permission to user in ansible
+what is the path of inventory in ansible
+i need a pipeline where it has to run every morning and it should delete by eveng
+i have a sql image, run the sql image and create the container and set the use password for it in docker
+write a dockerfile which create the subnet and deploy it
+syntax for yaml file
+how to establish a connection between 2 nodes in ansible
+write a playbook which installs the sql server
+
+have you worked on front door
 
 
 
