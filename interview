@@ -1,6 +1,7 @@
 INFOSYS:
 
-tell me about yourself
+tell me about yourself ----------------->Hello, I’m keshavi, and I am from hyd. I completed my bachelor's degree in 2018 from bvrith. i have 6 years of exp, in intial stages of my career i worked as a sql dba and from past 3 years im working as a devops engineer. my first compnay is tcs and now im working in infosys. With three years of experience as a DevOps engineer, I have developed a strong expertise in various technologies such as Git, GitHub, Azure,jenkins,ansible and Terraform. 
+In my role, I drive collaboration between development and operations teams, ensuring efficiency and effectiveness in our workflows. I specialize in automating processes, managing infrastructure, and successfully deploying applications. I am committed to delivering high-quality results and enhancing operational performance.
 what is docker, why we use them ------------->docker is a open source contanarization tool which creates advanced level of virtualization that is containerization. it is designed to facilitate the application developemt inside software contaniners. we use docker as it is lightweight,less cost,we can resue resources and we can send the images to any other teams so that their application will run efficiently. it has only 1 os which runs contianers, we can easily build and run the containers
 why you used github----------------->github is used to store the data where different teams collaborate with each other and developed diifreent versions of code. we used this because various developers can easily identify the changed code and run them in their local machines and test them.
 how to create dockerfile and components-------------->dockerfile is a file which contains a set of instructions that are used to create the docker image, there are various components of docker file such as from, cmd, label, run, entrypoint, copy, add etc
@@ -240,7 +241,7 @@ can we upload plugins manually
 Tetrasoft:
 what is bare repository in git----------->where it has no wrkng drctry and it is used to store git metadata for version tracking
 what is conflict and git checkout
-how do you revert the changes that is already commited
+how do you revert the changes that is already commited------------------>by using git revert <comitid>
 git fetch and git pull
 what is staging area
 different between docker and kubernetes---------->docker used for building, deploying container. k8 is used for managing the deployed clustered containers, we use both to simplify the app.
@@ -251,12 +252,12 @@ docker architecture
 what is docker compose
 docker namespace
 lifecycle of image
-how to know docker version
+how to know docker version------------>docker --version
 how to check the containers in  docker------>docker ps
 how to get image from docker hub-------->docker images, docker pull keshavi@gmail.com/ubuntu
 what is dynamic and other inventory in ansible---------->inventory is like the config file for ansibe server
 what are adhoc commads in ansible----->temporary commands used to perform task without using playbook. these are not idempotent
-different types of modules----------->yum, user, copy, service
+different types of modules----------->yum, user, copy, service, win
 diff between aws and azure
 differnce between chef and ansible-------->chef is agent one while ansible is agentless
 in which language ansible and chef wre written-------->ansbile is python, chef in ruby
@@ -265,33 +266,33 @@ SREETECH:
 why are you looking for other job, if you already have an offer letter
 what playbooks have you written in ansible
 why we use handler----------->we use this if to notify other ther services to start
-why we use loops in ansible
-and what are required when writing loops---------->host,user,connection
+why we use loops in ansible--------------> when we want to execute same thing n number of times then we use loops. for eg if we want to create few users then instead of writing diff playbooks we can mention in 1 playbook about the users and execute it. by this the users will be created
+and what are required when writing loops---------->host,user details,connection, task
 how do you know how much memory is there in linux-------->free-m, top, vtop,vmstat
 what is the default number of file in linux--------->644
-how to login into the ansible server for user----------->make chnages in visudo file. kesh ALL=(ALL) NOPASSWS=ALL
-what is diff between chec and ansible
+how to login into the ansible server for user----------->make chnages in visudo file. and add the user name like this and save it. kesh ALL=(ALL) NOPASSWS=ALL
+what is diff between chef and ansible-------------->both are configuration management tools
 how did the chef know about the updates
 if there are different recipes and they needs to be run on diff nodes in chef. how do we do it
 what is the umask value of file---->022
 where will we check logs in linux--------->var/log
-which flavours you have worked in linux
-what projects have you used in jenkins
+which flavours you have worked in linux--------->ubuntu
+what projects have you used in jenkins------------->pipeline projects
 what are the jobs you have created in jenkins
-how to write dockerfile
+how to write dockerfile---------------->it consists of set of instructions. 
 ---------------------------------------------------------------------
 ACS:
 tell me about your projects and roles and resposnsibles in your project
 what language is used in your project------------------------>.net
-how many pipelines are there in jenkins in your peoject------------->many pipelines according to environment
-why do you use ansible in your project and what is the use even though we can run docker images directly
-what is difference between chef and ansible
+how many pipelines are there in jenkins in your peoject------------->many pipelines according to environment. declarative and scipted pipleine
+why do you use ansible in your project and what is the use even though we can run docker images directly------------------>in our project docker is used to deply the containers and store the image. but ansible is used to install the necessary package, manages the configuration even before the container is deployed. it ensures that the configuration is consistant accros all the environment
+what is difference between chef and ansible----------->both are configuration management tools but ansible uses pull machanism but chef uses push mechanism
 what is command to check syntax of ansible playbook------->ansible-playboon kesh.yml --check
 how to copy files in ansible for different nodes in single playbook--------->ansible kesh -b -m copy "src= ,dest="
-why we use roles in ansible-------------->when we need to use set of task repeatedly
-what is ansible galaxy-------->its an gui
-what are types of projects you created in jenkins
-how do you execute different scripts on different servers by using jenkins freestyle projects
+why we use roles in ansible-------------->when we need to use set of task repeatedly. by using roles we can breakdown our playbook into smaller components and resuse them. if we organize the tasks into roles it would be easy to read and maintain them. diff teams can create diff roles without interfering in each others work
+what is ansible galaxy-------->its an gui. it is like a repo which has vast collection of ansible roles and collections. it allows users to share their own roles and collections. we can share and download whatever it is needed.
+what are types of projects you created in jenkins------------------->pipeline projects
+;how do you execute different scripts on different servers by using jenkins freestyle projects
 ------------------------------------------------------------------------------------
 INFOSYS PROJECT INTERVIEWS:
 
@@ -479,8 +480,34 @@ what is state file in terraform
 for what steps you will send an alert according to you
 any questions for me
 
--------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
 Infosys internal:
+
+what is swap memory------>it is like a virtual memory where the data is store temporaly. like when we want to run a program and at present the ram is full then it will move the least used prgrams to swap so that the new programs will be able to run. when we need the inactive data again them it is swapped from swap memory to ram.
+how do we get the active ports in linux----->netstat -tulpn or ss -tulpn
+t=tcp ports
+u-udp ports
+l= all ports
+n=ip address
+p=proceesid and name of program
+UMASK default value for file= 022
+how to zip file in linux
+master and slave in jenkins
+i have a resource in azure portal now i want to manage that in terraform how?----------->terraform import command
+terraform import azurerm_virtual_machine.kesh <vmid>.  however this will only update the stat file but not main.tf file. you ahve add the block in main.tf and do terraform apply.
+what is load balancer and round robin method
+is devops an agile methodolgy--------->agile works on dev side while devops works on dev and it operations side. agile focus on efficiency while devops focus on automation. devops is devoped to for better collaboration betn dev and it operayions team
+why use 2 ports in container---------->1 is for host port where we want to run our service and other is container port where our service is listening
+write a dockerfile to deploy war file
+FROM tomcat:8.5-jre8-openjdk
+WORKDIR /usr/local/tomcat/webapps/your-application-name
+COPY your-application.war .
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+how to display particular content of a file in some location in linux---->by using grep, head, tail, sed.  grep "kesh" <path>
+what are azure board and why we use that instead of jira--------->this is a visualization tool where we check the workflow.it helps the team to plan, track and dsicuss the work efficiently. we are using this because it has built-in git repositiries eliminating the need for integration with other tools
+diff betn classic and yaml pipelines---------->classic is gui based where u drag and drop task and changes are not stored in version control. but in yaml piplines we use yaml file where we define stages, jobs, tasks and others. here changes are stored in git and we can reuse them.
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 what is swap memory------>it is like a virtual memory where the data is store temporaly. like when we want to run a program and at present the ram is full then it will move the least used prgrams to swap so that the new programs will be able to run. when we need the inactive data again them it is swapped from swap memory to ram.
 how do we get the active ports in linux----->netstat -tulpn or ss -tulpn
