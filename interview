@@ -507,29 +507,3 @@ CMD ["catalina.sh", "run"]
 how to display particular content of a file in some location in linux---->by using grep, head, tail, sed.  grep "kesh" <path>
 what are azure board and why we use that instead of jira--------->this is a visualization tool where we check the workflow.it helps the team to plan, track and dsicuss the work efficiently. we are using this because it has built-in git repositiries eliminating the need for integration with other tools
 diff betn classic and yaml pipelines---------->classic is gui based where u drag and drop task and changes are not stored in version control. but in yaml piplines we use yaml file where we define stages, jobs, tasks and others. here changes are stored in git and we can reuse them.
--------------------------------------------------------------------------------------------------------------------------------------------
-
-what is swap memory------>it is like a virtual memory where the data is store temporaly. like when we want to run a program and at present the ram is full then it will move the least used prgrams to swap so that the new programs will be able to run. when we need the inactive data again them it is swapped from swap memory to ram.
-how do we get the active ports in linux----->netstat -tulpn or ss -tulpn
-t=tcp ports
-u-udp ports
-l= all ports
-n=ip address
-p=proceesid and name of program
-UMASK default value for file= 022
-how to zip file in linux
-master and slave in jenkins
-i have a resource in azure portal now i want to manage that in terraform how?----------->terraform import command
-terraform import azurerm_virtual_machine.kesh <vmid>.  however this will only update the stat file but not main.tf file. you ahve add the block in main.tf and do terraform apply.
-what is load balancer and round robin method
-is devops an agile methodolgy--------->agile works on dev side while devops works on dev and it operations side. agile focus on efficiency while devops focus on automation. devops is devoped to for better collaboration betn dev and it operayions team
-why use 2 ports in container---------->1 is for host port where we want to run our service and other is container port where our service is listening
-write a dockerfile to deploy war file
-FROM tomcat:8.5-jre8-openjdk
-WORKDIR /usr/local/tomcat/webapps/your-application-name
-COPY your-application.war .
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
-how to display particular content of a file in some location in linux---->by using grep, head, tail, sed.  grep "kesh" <path>
-what are azure board and why we use that instead of jira--------->this is a visualization tool where we check the workflow.it helps the team to plan, track and dsicuss the work efficiently. we are using this because it has built-in git repositiries eliminating the need for integration with other tools
-diff betn classic and yaml pipelines---------->classic is gui based where u drag and drop task and changes are not stored in version control. but in yaml piplines we use yaml file where we define stages, jobs, tasks and others. here changes are stored in git and we can reuse them.
