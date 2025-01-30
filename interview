@@ -251,9 +251,9 @@ what are docker images
 docker architecture
 what is docker compose
 docker namespace
-lifecycle of image
+lifecycle of image----------->create, run, start, stop, remove
 how to know docker version------------>docker --version
-how to check the containers in  docker------>docker ps
+how to check the containers in  docker------>docker ps and docker ps-a for non runnig containers
 how to get image from docker hub-------->docker images, docker pull keshavi@gmail.com/ubuntu
 what is dynamic and other inventory in ansible---------->inventory is like the config file for ansibe server
 what are adhoc commads in ansible----->temporary commands used to perform task without using playbook. these are not idempotent
@@ -304,7 +304,7 @@ do we need storage account to deploy fctn app----->yes
 do you have any idea on bicep
 how can we make a ctcn between 2 resouces like keyvault and storage account or fucntionapp-------->to securely store and retrieve secrets, such as connection strings, API keys, or certificates
 if we deploy 5 fcuntionapp do we need 5 keys?-------------------->, you can manage access to your functions using a combination of these keys without needing a separate key for each Function App. If you want to simplify management, you can use host keys or even a master key, depending on your security requirements.
-things to know about azure api
+things to know about azure api--------------->Azure API Management is a comprehensive service that helps you manage, secure, and monitor APIs.
 ----------------------------------------------------------------------------------------
 ACCENTURE:
 
@@ -314,8 +314,7 @@ which is better to deploy web app  is it vm or app service?-------->app service 
 which is better to deploy web app  is it container or app service?---------->If you want more control over the underlying infrastructure, then Azure Container Apps is a better choice. If you want to focus on developing your application and not worry about the underlying infrastructure, then Azure App Service is a better choice.
 what is the difference between variable grp and pipleine varble------>piplne vars are used for specific pipleins but variable grp are like centralized which will be used accros the project i.e., diff pipelines
 what are the azure policies?----------------> Azure Policy acts like a health inspector during deployment, verifying if the deployed resource meets safety standards (policy rules).
-lets say if developers write the code and wants to raise a pr. it should got through reviwers adn merge it. where do we declare the azure policy?------------------>You can define Azure Policy definitions that specify rules and conditions for your Azure resources.During deployment, the pipeline checks if the newly deployed resources comply with these policies.
-If any policy violation occurs (e.g., resource missing a required tag, security misconfiguration), the deployment might be blocked, or remediation actions might be taken depending on the policy configuration.
+lets say if developers write the code and wants to raise a pr. it should got through reviwers adn merge it. where do we declare the azure policy?------------------>you can do it in branch policy. go to repos-->branches-->branch policy-->slect required revwers, resolution for comment,status check, link work item whatever that is needed and save the changes
 ---------------------------------------------------------------------------------------------------------------
 ZENSAR:
 
@@ -352,15 +351,15 @@ what is the experience you have in arm template and what services you deployed u
 for dot net applications what is the azure service you will use-------------------->Azure App Service is a popular choice for hosting .NET applications on Azure. It provides a fully managed platform for building, deploying, and scaling web apps, mobile backends, and APIs.
 how many projects you have worked from start
 roles and responsibilties 
-what are the repeated activities in your project
-have you worked on any paas service--------------------------->Use Case: Deployed web applications and APIs.
+what are the repeated activities in your project----------------->a) creating azure resources- b) createing rbac and access control. c)triggering the build when we push the chnages d)creating the pr
+have you worked on any paas service--------------------------->Use Case: Deployed web applications and APIs. azure app service.
 Implementation: Created and configured App Service plans, deployed applications using CI/CD pipelines from Azure DevOps, and managed scaling and monitoring through the Azure portal.
 what are the 3 services that are there in azure------------->iaas, paas, saas
 example of each service and have you worked on any things----------->vm for iaas, app service as paas, microsoft 365 as saas
 did you maintain the servcies once it is deployed?
 how much do you rate in powershell, azure and devops
 how does devops helps in the industry
-core prospects or fucntionalities in devops
+core prospects or fucntionalities in devops----------->plan,build,test.ci,cd,monitoring
 what is the pull request------------>pull request is nothing but combining the code that is there in our branch with the other branch. usualy we create pr when we want to merge our code to main/master in the remote barnch.
 what is service connection--------------->it is used to make a connection between azure services, or external services like docker, github etc with azure pipelines.
 what are the tyoes of pipelines in azure devops and explain them------------>classic and yaml pipeline
@@ -368,7 +367,7 @@ in your projects which pipeline you used--------> we used yaml for build pipelin
 if you are using the yaml pipeline then what will be the task type for dot net application----------->UseDotNet@2
 how do you test and deploy the services------------->first of all we will write the code and then push it to remote repository. once our code is there in remote repo we will trigger the pipelines and check if everything is successful or not in the logs
 when you want to add new service in the existing pipeline how do you do it------------>in classic pipeline we can add a new stage or create a new task in the existing stage
-what is the difference between complte mode and incremental mode in arm template----------->complete mode: If your resource group initially contains Resource A, Resource B, and Resource C, and your template specifies only Resource A and Resource B, Resource C will be deleted after deployment. incremental mode: If your resource group initially contains Resource A, Resource B, and Resource C, and your template specifies Resource A, Resource B, and Resource D, after deployment, the resource group will contain Resource A, Resource B, Resource C, and Resource D
+what is the difference between complte mode and incremental mode in arm template----------->complete mode: If your resource group initially contains Resource A, Resource B, and Resource C, and your template specifies only Resource A and Resource B, then Resource C will be deleted after deployment. incremental mode: If your resource group initially contains Resource A, Resource B, and Resource C, and your template specifies Resource A, Resource B, and Resource D, after deployment, the resource group will contain Resource A, Resource B, Resource C, and Resource D
 what are build and release task you are using. give me the task names in yaml file
 which powershell command do you use for deploying arm template---------------->New-AzResourceGroupDeployment -ResourceGroupName "ExampleResourceGroup" -TemplateFile "C:\MyTemplates\azuredeploy.json" -TemplateParameterFile "C:\MyTemplates\azuredeploy.parameters.json"
 using terraform how to deploy the infrastructure
@@ -379,8 +378,8 @@ TECH M:
 tell me about yourslef
 tell me the build and release pieline in your project
 have you worked on dynamic application
-how do you store secrets and certs in keyvault------------------>
-where are your artifacts stored----------------->y default, pipeline artifacts are stored in the $(Pipeline.Workspace) directory.
+how do you store secrets and certs in keyvault------------------>we already have a service connection where it was created using msi. and this msi we are using in keyvault and add it in accesspolicies and give whatever the permissions that are needed to fetch the secrets&certs. and we use a task(UseAzureKeyVault@1) in pipeline to fetch the secrets using service connection
+where are your artifacts stored----------------->y default, pipeline artifacts are stored in the $(Pipeline.Workspace) directory. Artifacts are stored in Azure Artifacts feeds, which are repositories for your packages
 can we change the storage path when we are generating the artifact. means i want to store my artifact in custom path how to do it---------->You can specify the custom path in your pipeline YAML file using the publish keyword or the PublishPipelineArtifact task.
 - task: PublishPipelineArtifact@1
   inputs:
@@ -423,13 +422,41 @@ LTC:
 
 what is devops and why we use it-----------> DevOps is a set of practice that aim to unify software development (Dev) and IT operations (Ops). It focuses on automating and integrating the processes between software development and IT teams, enabling them to build, test, and release software faster and more reliably
 you have written pull and push configuration in version control. explain about this
+name: CI/CD Pipeline
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Set up PowerShell
+      uses: actions/setup-powershell@v2
+    - name: Pull latest changes
+      run: |
+        pwsh -command "git pull origin main"
+      shell: pwsh
+    - name: Make changes
+      run: |
+        # Your script to make changes goes here
+        pwsh -command "echo 'Making changes to the repository'"
+      shell: pwsh
+    - name: Commit and push changes
+      run: |
+        pwsh -command "git add ."
+        pwsh -command "git commit -m 'Automated commit message'"
+        pwsh -command "git push origin main"
+      shell: pwsh
 how did you integrate git to azure
 how do you list the processor in linux ----------->top, vtop, ps -ef|grep name
 how to give sudo permission to user in ansible--------------------->- name: "username ALL=(ALL) NOPASSWD:ALL" | lineinfile path=/etc/sudoers state=present regexp='^username ALL=' validate='visudo -cf %s'
 what is the path of inventory in ansible---------------> /etc/ansible/hosts
 i need a pipeline where it has to run every morning and it should delete by eveng---------------->use cron in yaml file
-i have a sql image, run the sql image and create the container and set the use password for it in docker--------------->docker pull image, docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=your_strong_password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest. here in this -d is detached mode. 
-write a dockerfile which create the subnet and deploy it
+i have a sql image, run the sql image and create the container and set the use password for it in docker--------------->docker pull imagename(sql), docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=your_strong_password" -p 1433:1433 --name keshavi -d mcr.microsoft.com/mssql/server:latest. here in this -d is detached mode. 
+write a dockerfile which create the subnet and deploy it----------------->we usually create subnet using iac tools. we can also do it thorugh dockerfile but we need python or some code to create steps and run the docker image
 syntax for yaml file-------------->trigger: Specifies which branches will trigger the pipeline.
 pool: Defines the agent pool to use.
 variables: Sets variables for the pipeline.
@@ -445,10 +472,10 @@ write a playbook which installs the sql server------------->- name: Install SQL 
   become: yes
   tasks:
       - name: Install SQL Server
-      apt:
-        name: mssql-server
-        state: present
-have you worked on front door------------------------->Azure Front Door is a powerful service designed to enhance the performance, scalability, and security of your web applications. It acts as a global content delivery network (CDN) and load balancer, Distributes traffic across multiple regions to ensure high availability and reliability.
+        apt:
+          name: mssql-server
+          state: present
+have you worked on front door-------->Azure Front Door is a powerful service designed to enhance the performance, scalability, and security of your web applications. It acts as a global content delivery network (CDN) and load balancer, Distributes traffic across multiple regions to ensure high availability and reliability.
 
 ---------------------------------------------------------------------------------------------------------------------
 canada life:
