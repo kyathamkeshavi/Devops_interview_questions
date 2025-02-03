@@ -452,7 +452,7 @@ jobs:
       shell: pwsh
 how did you integrate git to azure
 how do you list the processor in linux ----------->top, vtop, ps -ef|grep name
-how to give sudo permission to user in ansible--------------------->- name: "username ALL=(ALL) NOPASSWD:ALL" | lineinfile path=/etc/sudoers state=present regexp='^username ALL=' validate='visudo -cf %s'
+how to give sudo permission to user in ansible--------------------->go inside visudo file. name "username ALL=(ALL) NOPASSWD:ALL" | lineinfile path=/etc/sudoers state=present regexp='^username ALL=' validate='visudo -cf %s'
 what is the path of inventory in ansible---------------> /etc/ansible/hosts
 i need a pipeline where it has to run every morning and it should delete by eveng---------------->use cron in yaml file
 i have a sql image, run the sql image and create the container and set the use password for it in docker--------------->docker pull imagename(sql), docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=your_strong_password" -p 1433:1433 --name keshavi -d mcr.microsoft.com/mssql/server:latest. here in this -d is detached mode. 
@@ -497,7 +497,7 @@ pexip:------------------------->https://copilot.cloud.microsoft/?fromcode=cmc&re
 tell me about yourself
 do you support rollback
 what will be the good day according to you as a devops engineer
-what will be the high level steps if you want to deploy any application
+what will be the high level steps if you want to deploy any application---->requirement, plan, code, build, test, release, deploy, operate, monitor
 tell me about your ci/cd pipeline
 how you monitor the microservices frontend
 have you worked on sla's
@@ -518,12 +518,12 @@ l= all ports
 n=ip address
 p=proceesid and name of program
 UMASK default value for file= 022
-how to zip file in linux
+how to zip file in linux------->tar -cvf <dir>.tar <dir>, gzip <dir>.tar
 master and slave in jenkins
 i have a resource in azure portal now i want to manage that in terraform how?----------->terraform import command
-terraform import azurerm_virtual_machine.kesh <vmid>.  however this will only update the stat file but not main.tf file. you ahve add the block in main.tf and do terraform apply.
+terraform import <azurerm_virtual_machine>.<kesh> <vmid>.  however this will only update the stat file but not main.tf file. you ahve add the block in main.tf and do terraform apply.
 what is load balancer and round robin method
-is devops an agile methodolgy--------->agile works on dev side while devops works on dev and it operations side. agile focus on efficiency while devops focus on automation. devops is devoped to for better collaboration betn dev and it operayions team
+is devops an agile methodolgy--------->agile works on dev side while devops works on dev and it operations side. agile focus on efficiency while devops focus on automation. devops is devoped to for better collaboration betn dev and it operations team
 why use 2 ports in container---------->1 is for host port where we want to run our service and other is container port where our service is listening
 write a dockerfile to deploy war file
 FROM tomcat:8.5-jre8-openjdk
@@ -534,3 +534,159 @@ CMD ["catalina.sh", "run"]
 how to display particular content of a file in some location in linux---->by using grep, head, tail, sed.  grep "kesh" <path>
 what are azure board and why we use that instead of jira--------->this is a visualization tool where we check the workflow.it helps the team to plan, track and dsicuss the work efficiently. we are using this because it has built-in git repositiries eliminating the need for integration with other tools
 diff betn classic and yaml pipelines---------->classic is gui based where u drag and drop task and changes are not stored in version control. but in yaml piplines we use yaml file where we define stages, jobs, tasks and others. here changes are stored in git and we can reuse them.
+--------------------------------------------------------------------------------------------------------------------------
+CAPGEIMI: L1 interview(2025)
+
+tell me about yourself
+i have 40 commits but i want only 3 specific commits and merge them into master. how to do it?--------> git cherry-pick <commit1> <commit2> <commit3>
+i have 40 commits but now i want to merge them into 3. how can we do it?------------->You can squash your 40 commits into 3 using interactive rebase.  git rebase -i HEAD~40. once we get the window modify the pick to sqaush and then commit it. by this we can do 40 comits to 3
+i have some code but it is not there in the stage to commit. i want to save in working directory so that i can use it later. how to do it?--------->You can use git stash to save your uncommitted changes in the working directory and apply them later when needed. <git stash apply>
+i have some work and added using git add. but now i want to revert this change how can we achieve it?---------->git reset HEAD <file> or git reset .
+what is service connection and how we will configure?---------------> we use this when we want to connect azure resources or external resources with azure pipelines. to create SC we first have to go to project settings in ADO and look for service connection. create new SC and select the arm and after that choose the service principal or MSI and give neccesary tenant id, sub id, service key, name and click on create
+what is approvals and gates in ado?------------>Approvals are manual interventions that require someone (like a manager or developer) to approve or reject a deployment before proceeding. Gates are automated checks that ensure certain conditions are met before moving forward.
+i have a pipeline for image build and push. now i want to trigger the pipeline where if i make any changes in some particular folder then only the pipeline is triggered. give me the codition for this
+trigger:
+  branches:
+    include:
+      - main  # Adjust the branch as needed
+  paths:
+    include:
+      - path/to/your/folder/  # Only trigger when files in this folder change
+i have 3 stages dev, test, prod. but i want to skip the test stage. how to do it-----------> we can use depends on section in prod. so that test will skip and after dev it will directly go to prod
+how to configure self hosted agent in ado----->Go to Azure DevOps → Organization Settings → Agent Pools->add pool. Navigate to Project Settings → Agent Pools → Select your pool (SelfHostedPool).-->new agent(select linunx/win). run commands on system. check if the agent is online or not. we need personal access token
+i have main.tf, and if i do terraform apply, how it will interact with ado and azure----------->Authenticate with Azure (via az login or service principal).
+Read main.tf and apply changes.Store Updated State file in storage account(to keep track of managed resources).
+i want to use 1 rg for multiple subscription. how to give this in main.tf in terraform----------> give diff sub in diff providers section
+provider "azurerm" {
+  alias           = "sub1"
+  subscription_id = "SUBSCRIPTION_ID_1"
+  features {}
+}
+provider "azurerm" {
+  alias           = "sub2"
+  subscription_id = "SUBSCRIPTION_ID_2"
+  features {}
+}
+someone has manualy updated the vm. but now when i use terraform what will happen-------->use terraform refresh command
+what is terraform refresh command---------->Syncs Terraform state with real infrastructure from portal
+i want to create vm. but vnet and subnet are already present. now i want to use them and create vm using terraform. how to do it---------->Since your VNet and Subnet already exist, you don't need to create them in Terraform. Instead, you can fetch their details using data.azurerm_virtual_network and data.azurerm_subnet
+To create a VM in Azure using Terraform, you need the following:
+✅ Resource Group – The container for all resources.
+✅ Virtual Network & Subnet – To enable network communication.
+✅ Public IP (Optional) – To access the VM externally.
+✅ Network Security Group (NSG) – To control traffic.
+✅ Network Interface Card (NIC) – Connects the VM to the network.
+✅ VM Configuration – OS type, size, admin credentials.
+what is datablocks in terraform------------>we use this when we want to know the details of existing resources. we use resource blk to create a new resource
+what is tfstate file and how u are storing in your current project. is it locally or remote------------>In Azure DevOps, Terraform state is typically stored remotely using Azure Storage. tf state consists of metadata. it tells us what are the resources are desired and actual resources
+what is docker volume-------->used for storing databases, logs, or application data. we use it as a backup. when we make any changes in 1 volume it will reflect in other volumes as well if we share it
+what is the difference between cmd and run in docker and in which stages these command will execute------->run is used in build time, cmd is used at container run time. cmd can be overwritten, run canot be overwrite
+suppose we have cmd arguement and entrypoint argument. which will execut first in docker----------->ENTRYPOINT executes first, and CMD acts as arguments to ENTRYPOINT
+can we override entrypoint or not------------>Yes, you can override ENTRYPOINT in Docker, but it requires the --entrypoint flag when running the container. docker run --entrypoint cat myimage /etc/os-release
+i have vm in prod. now i want to increase size without downtime. is this posssible---------->Yes, increasing the size of a virtual machine (VM) in Azure can be done without downtime, but there are some important steps and considerations to keep in mind. one of the process is below:
+If you use a Virtual Machine Scale Set (VMSS):
+Add new VMs with the desired size.
+Gradually switch traffic to the new VMs.
+Remove old VMs after migration.
+---------------------------------------------------------------------------------------------------------------------------
+KANERIKA:
+
+tell me about yourself
+can you tell me the pipeline you have configured
+brief me about the steps in ci/cd pipeline in your project
+tell me how will you integrate git with azure. how the pipeline os triggered
+do you have any experience in ansible
+how will you store the secrets in ansible------------->Ansible Vault is a tool built into Ansible for encrypting sensitive data such as passwords or keys.ansible-vault create secrets.yml
+what is dynamic inventory in ansible--------->A Dynamic Inventory in Ansible allows you to automatically pull information about the hosts from external sources, such as cloud providers, databases, or APIs, rather than manually defining all the hosts in an inventory.ini file. This is particularly useful in environments where hosts change frequently, such as cloud-based infrastructures (AWS, Azure, Google Cloud), where new instances may be created or terminated on-demand.
+do you have exp in k8
+can you tell me in docker commands. cmd and entrypoint which is overwritten------------>both can be overwrtitten. ENTRYPOINT is not overwritten unless explicitly replaced by using the --entrypoint flag when running the container. CMD can be overwritten when you pass new arguments at runtime.
+give the docker command to overwrite the entrypoint----------------->docker run --entrypoint cat myimage /etc/os-release
+can you tell me how you interact with the container. tell me the command to go inside the container----------------->docker exec -it is generally the preferred method to enter a container because it opens an interactive shell session without affecting the main process.
+docker attach is useful if you need to see output from the container’s primary process or interact with it directly (but not for opening a shell).
+where .tf state file is stored in azure? which module we can say it is stored----------->The Terraform state file is stored in Azure Storage using the azurerm backend.
+did you write the terraform code from strach 
+do you have any questions
+------------------------------------------------------------------------------------------------------------------------------
+
+PROARCH:
+
+tell me about yourslef
+which ci/cd tool you have worked on-------->azure devops
+did u get any chance to work on github actions
+where are you storing your code in your project--------->azure repos. they are asking about version control code 
+how do u establish a connection between git and azure devops----------->tell them how u integrate git with ado
+branching strategies u are following in your project--------->main,feature,develop. we develop code in develop and do test there. once it is succesful raise pr to feature and do testing in qa and once done then raise pr to main
+how you are merging feature to develop 
+were there any checks during the pr merge----------->tell them about branching policy(need aprovers, work items, resolving the comments) REPO-->branches-->...-->branch policy.
+services you worked on azure------------>kv, msi, storage, vm, 
+apart from azure have you worked on any other cloud
+i want to fetch the secrets in ado. how do you fetch the secrets from kv to ado---------->give kv secret user or officer permission on user and the use azurekeyvault@2 task in yaml pipeline.
+is it possible to restrict other users using storage account. i want only 1 person to access the storage account how to do it----------->go to access policy(IAM) in storage and remove all the access other than the person who need it. check the role assignment
+is it possible to whitelist the ip and give access to that ip--------->f you want to restrict access based on IP, go to:
+Storage Account → Networking → Firewalls and Virtual Networks
+Whitelist only the allowed IP (e.g., 192.168.1.10)
+Block all other traffic
+please tell me the difference between arm template and terraform---------->terraform multi cloud. arm, only on azure
+tell me one main diff between arm and terraform------------>arm doesnt contain state file while terraform does
+does arm template maintain statefile?--------->No, ARM templates do not maintain a state file. 
+if arm template doesnt maintain any statefile then how does it know whether it has created the resources or not------------->Azure Resource Manager (ARM) directly interacts with the Azure platform to determine the current state of resources at the time of deployment. There's no concept of a state file like in Terraform because Azure already knows the current state of resources through its internal systems.
+what is the least privilage we can give to someone to read the secrets-------->Key Vault Secrets User
+if i give u contributor access on sub. will you be able to assign role permission?-------->no. they can only manage resources
+can we create a role with contributor access--------->❌ Default Contributor Role → CANNOT assign roles  ✅ Custom Contributor Role (With Extra Permissions i.e., role assignement permission) → CAN assign roles
+3 major things when we create or assign a role. tell me about them---------->resource name, type of access, user id
+in ado can we store artifacts. can we see the artifact in ado--------->steps:
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: "my-artifact"
+in ado do u see any environments. if yes did u come accros any situation in your project------------>Environments in ADO are used for:
+Managing deployments across different stages (e.g., Dev, QA, Staging, Production).
+Applying approvals and security checks before moving to production.
+Tracking deployments and logs for auditing purposes.
+Go to Azure DevOps Portal-->Navigate to Pipelines → Environments.
+Configured approval gates in ADO Environments.
+Dev → Auto Deploy
+QA → Requires Approval
+Prod → Requires Manual Approval + Security Check
+you are creating resources through arm template. is it directly performing or through ci/cd pipeline
+is there any condition you are using in ci/cd pipeline--------->condition: succeeded(), depends on, condition: or(failed(), canceled())
+imagine a situation where we created storage account in portal. now i want to get that in terraform is that possible?----------->terraform import <resourcetype>.<name>
+have you used workspace in terraform------------>Yes! I have worked with workspaces in Terraform, and they are quite useful for managing multiple environments like dev, staging, and prod with the same Terraform configuration but with diff state file.
+what commands you have worked on terraform
+why did you use both terraform and arm template
+there is an extension in arm template in azure---------->bicep
+did u ever get the chance to work on bicep. why did microsft develop bicep even though they have arm template----------->Microsoft developed Bicep as a simplified syntax for Azure Resource Manager (ARM) templates. ARM templates have been the primary way to deploy resources in Azure, but they can be verbose and difficult to manage, especially for complex deployments. Bicep addresses these challenges while still being fully compatible with ARM. it is easy to read the syntax.
+--------------------------------------------------------------------------------------------------------------------------------------
+CAPGEMINI L2:
+
+tell me about yourself
+what are the services u worked on azure
+have u worked on app service
+tell me what u know about functional app------->serverless computing service which runs smal piece of code according to event
+Function App Triggers (How Functions Get Invoked)
+Trigger                     Type	              Description	Example Use Case
+HTTP                        Trigger	            Triggered via HTTP request	API endpoints, webhooks
+Blob Storage Trigger	      Triggered           when a file is uploaded to Azure Storage	File processing
+Queue Storage Trigger	      Triggered           when a message is added to a queue	Asynchronous processing
+Event Grid Trigger	        Triggered           by Azure events (e.g., resource updates)	Event-driven automation
+Timer                       Trigger	            Runs on a schedule (CRON)	Scheduled jobs, clean-up tasks
+give me the yaml file to deploy webapps---------->give task as azurewebapp@1 and give subid, app name, artifact path.
+how many stages are there in yaml pipeline which u have written for webapp
+i want to deploy the webapp in diff env. how to do it--------->create diff stages for diff env after build stage
+dotnet restore or dontnet test is there in your yaml. are u not using it
+without dotnetrestore is it going to work. is it going to deploy webapp------>Yes, the pipeline will still deploy the web app even without dotnet restore and dotnet test, but it is not recommended for production. if we dont use test then bugs and code validation is not done.
+what are doing with you arm template. how you are deploying it
+i have webapp and storage blob storage. now i want to access the webapp using blob. how to do it--------->give storage blob contributor in webapp IAM
+what are event driven things in functional app. how u used to trigger
+Trigger                     Type	              Description	Example Use Case
+HTTP                        Trigger	            Triggered via HTTP request	API endpoints, webhooks
+Blob Storage Trigger	      Triggered           when a file is uploaded to Azure Storage	File processing
+Queue Storage Trigger	      Triggered           when a message is added to a queue	Asynchronous processing
+Event Grid Trigger	        Triggered           by Azure events (e.g., resource updates)	Event-driven automation
+Timer                       Trigger	            Runs on a schedule (CRON)	Scheduled jobs, clean-up tasks
+what was the fucntional app doing which u deployed--------->
+Every night at midnight, a function cleans up old database records in Azure SQL. 🔹 Trigger Used: TimerTrigger
+A mobile app calls an Azure Function to get weather data from an external API and cache results in Redis. 🔹 Trigger Used: HTTPTrigger
+When a file is uploaded to Azure Blob Storage, a function processes the file (resizes an image, extracts text, etc.).  🔹 Trigger Used: BlobTrigger
+types of event driven triggers in functional app
+do u have any questions for me
