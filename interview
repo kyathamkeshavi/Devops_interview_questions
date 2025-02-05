@@ -101,16 +101,16 @@ where is inventory path in ansible?-----------/etc/ansible/hosts
 i have 5 nodes and want to execute some commands. so do i have to write 5 diff playbooks for that?----------No, you don't need to write five different playbooks to execute commands on five nodes. You can define all your nodes in a single inventory file and use one playbook to target them
 have you worked on roles, if yes what are roles and what is the thing you have worked on it
 as ansible is agentless tool how it will communicate with nodes?---------by using ssh. we have to establish ssh-keygen and ssh-copy-id kesh@ip
-how to execute commands in linux?---------by using chmod
-what is command for changing owner of file in linux------------>chown 644 keshavi
-command to use free space in linux---------->free -m, df, du
+how to execute commands in linux?---------by using chmod eg: chmod +x <file.sh>
+what is command for changing owner of file in linux------------>chown <newowner> <file>
+command to use free space in linux---------->free -m, df, du, top, htop
 command to know about cpu usage in linux---------->top, htop, vmstat
 what things you take care when launching ec2-instances
 can we change ansible.cfg path? -------yes..better to change it in current working directory. if not there it checks in users home dir. 
 if not there also it goes to /etc/ansible/ansible.cfg file
 what is vpc?------------virtual private cloud. it enables you to launch aws resources into virtual nkt that you have defined. it allows you to isolate your nkt with other nkts in cloud
 difference btwen private and public subnet?---------private means it is not accesible through internet but only through vpc. public means accessible through internet.
-what is cloud formation?-----------its an aws service it will let you build entire app from strach
+what is cloud formation?-----------its an aws service it will let you build entire app from strach. same like terraform and arm template. it acts as an IAC tool
 difference between load balancer and auto scaling in aws?----------scaleup and down ec2 instnaces whenevr needed. load balancer distributes incomming data accros multiple ec2 
 or containers 
 what are elastic ip's?-----------means in normal public ips when ever you start or stop the services public ip gets changed(dynamic). but in elastic ip is fixed(static) and
@@ -148,8 +148,8 @@ where do you want to be in next 5 years-------------------->i want to be in a po
 how to encrpyt the playbook in ansible------------------>using ansible vaults
 how to automate passwords in ansible----------------->using ssh-keygen
 what are the branching strategies you use
-if we have any issue in production branch then how do you solve it
-what are the things you do in quality checks in git
+if we have any issue in production branch then how do you solve it----------->create a hotfix barnch. develop and test the code and merge the code to prod
+what are the things you do in quality checks in git---------->branch policies
 why do you want to change the job
 why do we use cherry pick in git-------> to want only 1 particular commit in your branch. git cherry-pick <id>
 for eg if my image is crashed then how do you get that back in docker----------> volume
@@ -165,25 +165,25 @@ why we need ci
 what is pipeline
 what is replay and rebuild
 types of jenkins file
-ways to create docker image in docker
+ways to create docker image in docker----->from dockerhub, from docker file, from existing containers
 code to write dockerfile
-how to build an image using dockerfile
+how to build an image using dockerfile------>docker build -t imagename .
 write a 2 stage declarative pipeline in jenkins and write the codes in it
-how to get the diff ben staging area and local area
-what is git status
-complete statemnets for git to get the clean the clean working directory
-what is diff between git add all and git add .
+how to get the diff ben staging area and local area------->git diff head
+what is git status-------->tell us about working directory us clean or not
+complete statemnets for git to get the clean the clean working directory--------->git add., git commit -m "",git push
+what is diff between git add all and git add .---------->add . will stage the files in current directory, but add all will stage the files in all the directories
 command to commit a message in git
-how to download docker image from docker hub
-what is docker deamon
+how to download docker image from docker hub------->docker login, docker pull image,docker image
+what is docker deamon---------->converts images to cont
 what is docker engine
-what is docker host responsible and what is docker deamon responsible
+what is docker host responsible and what is docker deamon responsible----------->deamon is for managing the images, host is where our dcoker is installed
 diff between copy and add
-command to convert code to tar and unzip a file
-what is prune in docker
+command to convert code to tar and unzip a file-------->tar -cvf dir.tar dir, gzip dir.tar
+what is prune in docker---------->to remove unused containers or volume
 diff between CMD and entrypoint
 how to expose a port in docker
-how to know docker exited container
+how to know docker exited container----------->docker ps -a --filter "status=exited"
 ------------------------------------------------------------------------------------
 CLOUDTECHNER:
 things you know about aws
@@ -191,10 +191,10 @@ what are the daily tasks you do
 have you worked on pipelines
 have you created any ci/cd pipelines. if yes explain
 have you written any dockerfile
-best practices you follow when creating docker container--------------->image shuld be lgt weight, install only required dependencies
+best practices you follow when creating docker container--------------->image shuld be lgt weight, install only required dependencies, take it from officail web
 diff between add and copy
 diff between roles and playbook
-how do you protect ansible playbook ------>vaults
+how do you protect ansible playbook ------>ansible vaults
 -----------------------------------------------------------------------------------
 EY:
 diff between merge and rebase
@@ -206,20 +206,20 @@ what are the types of volumes in docker----->host,named,anonymous
 what is the default volume in docker---->host
 what is 2/2 check in aws---> checks whether the instance is healthy or not
 how you are using ci in your project
-code for finding any file path in linux
+code for finding any file path in linux---------->find /path/to/search -name "filename"
 how do you change some particular spelling in linux----->sed
-what is i in sed 'i/old/new' keshavi in linux
-what is idempotency
+what is i in sed 'i/old/new' keshavi in linux----------->case insensitive
+what is idempotency------------->deploying the same things without checking if it there or not
 what are the diff types of indexes in sql
 what are the performance chcks in sql
 diff between ADD and copy in docker
 how to download image from dockerhub and run it
-how to rename container in docker
-what is prune in docker
-why we use handlers
-can we use diff handlers in same playbook
-how to kill docker container
-different types of inventories in ansible
+how to rename container in docker---------->docker rename <old> <new>
+what is prune in docker----------->to remove unused
+why we use handlers----------->when it has to tell the other service to start once it is completed. it will notify the other user to do it task
+can we use diff handlers in same playbook----------->yes
+how to kill docker container--------->docker kill <cont>
+different types of inventories in ansible----------->static is like simple file which we create. dynamic is generated when it is added by some other scripts. both consists of host
 what is cross join
 daily activities
 do you know how to write a pipeline
@@ -234,7 +234,7 @@ what is load balancer in AWS
 do you need any certificate to block anything in aws security groups
 git fetch and merge
 have you faced any issues during ci/cd pipelines
-how to store the images in docker
+how to store the images in docker-------->in hub 
 diff between maven and graddle
 can we upload plugins manually
 ---------------------------------------------------------------------------
@@ -247,19 +247,19 @@ what is staging area
 different between docker and kubernetes---------->docker used for building, deploying container. k8 is used for managing the deployed clustered containers, we use both to simplify the app.
 different between scipted pipeline and declarative pipeline
 diff between virtualization and dcoker
-what are docker images
+what are docker images---------->like a template which are used to run cont
 docker architecture
-what is docker compose
+what is docker compose----------->used to run multi container
 docker namespace
 lifecycle of image----------->create, run, start, stop, remove
 how to know docker version------------>docker --version
 how to check the containers in  docker------>docker ps and docker ps-a for non runnig containers
 how to get image from docker hub-------->docker images, docker pull keshavi@gmail.com/ubuntu
 what is dynamic and other inventory in ansible---------->inventory is like the config file for ansibe server
-what are adhoc commads in ansible----->temporary commands used to perform task without using playbook. these are not idempotent
+what are adhoc commads in ansible----->temporary commands used to perform task without using playbook. these are not idempotent. we use this to run linux commands
 different types of modules----------->yum, user, copy, service, win
 diff between aws and azure
-differnce between chef and ansible-------->chef is agent one while ansible is agentless
+differnce between chef and ansible-------->chef is agent one while ansible is agentless. ansible uses push chef uses pull
 in which language ansible and chef wre written-------->ansbile is python, chef in ruby
 ---------------------------------------------------------------
 SREETECH:
@@ -298,12 +298,12 @@ INFOSYS PROJECT INTERVIEWS:
 
 there is a logic app and we are changing them from portal. i need to maintain the versions of changes in azure how?--------------->Open your logic app in the Azure portal.In the left-hand menu, under Development Tools, click Versions.
 there is a fucntionapp and azure api. i want to access the fucntionapp using azure api but not from functionapp url how?
-what are access policies?----------->where we define the criteria to grant permisssion for various apps,
+what are access policies?----------->where we define the criteria to grant permisssion for various resources. consists of set of rules and configurations
 what are the things need to deploy fucntionapp------------->subscription, resource grp, app servive plan, function app name config, storage acnt
 do we need storage account to deploy fctn app----->yes
 do you have any idea on bicep
-how can we make a ctcn between 2 resouces like keyvault and storage account or fucntionapp-------->to securely store and retrieve secrets, such as connection strings, API keys, or certificates
-if we deploy 5 fcuntionapp do we need 5 keys?-------------------->, you can manage access to your functions using a combination of these keys without needing a separate key for each Function App. If you want to simplify management, you can use host keys or even a master key, depending on your security requirements.
+how can we make a ctcn between 2 resouces like keyvault and storage account or fucntionapp-------->to securely store and retrieve secrets, such as connection strings, API keys, or certificates. in kv give access to msi that is being refred in storage and function app
+if we deploy 5 fcuntionapp do we need 5 keys?-------------------->yes, So, if you deploy 5 Function Apps, each will have its own set of function keys, host keys, and a master key. These keys are unique to each Function App and are not shared between them
 things to know about azure api--------------->Azure API Management is a comprehensive service that helps you manage, secure, and monitor APIs.
 ----------------------------------------------------------------------------------------
 ACCENTURE:
@@ -359,7 +359,7 @@ example of each service and have you worked on any things----------->vm for iaas
 did you maintain the servcies once it is deployed?
 how much do you rate in powershell, azure and devops
 how does devops helps in the industry
-core prospects or fucntionalities in devops----------->plan,build,test.ci,cd,monitoring
+core prospects or fucntionalities in devops----------->plan,code,build,test.ci,cd,monitoring
 what is the pull request------------>pull request is nothing but combining the code that is there in our branch with the other branch. usualy we create pr when we want to merge our code to main/master in the remote barnch.
 what is service connection--------------->it is used to make a connection between azure services, or external services like docker, github etc with azure pipelines.
 what are the tyoes of pipelines in azure devops and explain them------------>classic and yaml pipeline
@@ -396,7 +396,7 @@ What are the things you have done in your project
 Day to day activities
 What is the difference between China cloud and other clouds in your project
 Which Stack you used in your build pipeline------------->.net
-What is the package management in .net you are using--------> for .net we use sdk package. for javascript we use npm
+What is the package management in .net you are using--------> for .net we use NuGet package. for javascript we use npm
 Have you worked on kubernetes
 What is Docker file and how you create it--------------------->dockerfile is a file which contains a set of instructions that are used to create the docker image, there are various components of docker file such as from, cmd, label, run, entrypoint, copy, add etc
 Why we are starting with from in Docker file. Why we are using it------------>The FROM command initializes a new build stage and sets the base image for subsequent instructions in the Dockerfile. It essentially tells Docker which existing image to use as a starting point, which can be any valid image from Docker Hub or a custom image from a local repository
