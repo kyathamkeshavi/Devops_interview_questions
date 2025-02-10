@@ -454,7 +454,7 @@ how did you integrate git to azure
 how do you list the processor in linux ----------->top, vtop, ps -ef|grep name
 how to give sudo permission to user in ansible--------------------->go inside visudo file. name "username ALL=(ALL) NOPASSWD:ALL" | lineinfile path=/etc/sudoers state=present regexp='^username ALL=' validate='visudo -cf %s'
 what is the path of inventory in ansible---------------> /etc/ansible/hosts
-i need a pipeline where it has to run every morning and it should delete by eveng---------------->use cron in yaml file
+i need a pipeline where it has to run every morning and it should delete by eveng---------------->use cron in yaml file. 0 6 * * *----->runs everyday at 6am
 i have a sql image, run the sql image and create the container and set the use password for it in docker--------------->docker pull imagename(sql), docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=your_strong_password" -p 1433:1433 --name keshavi -d mcr.microsoft.com/mssql/server:latest. here in this -d is detached mode. 
 write a dockerfile which create the subnet and deploy it----------------->we usually create subnet using iac tools. we can also do it thorugh dockerfile but we need python or some code to create steps and run the docker image
 syntax for yaml file-------------->trigger: Specifies which branches will trigger the pipeline.
@@ -686,7 +686,66 @@ Event Grid Trigger	        Triggered           by Azure events (e.g., resource u
 Timer                       Trigger	            Runs on a schedule (CRON)	Scheduled jobs, clean-up tasks
 what was the fucntional app doing which u deployed--------->
 Every night at midnight, a function cleans up old database records in Azure SQL. 🔹 Trigger Used: TimerTrigger
-A mobile app calls an Azure Function to get weather data from an external API and cache results in Redis. 🔹 Trigger Used: HTTPTrigger
-When a file is uploaded to Azure Blob Storage, a function processes the file (resizes an image, extracts text, etc.).  🔹 Trigger Used: BlobTrigger
+A mobile app calls an Azure Function to get weather data from an external API and cache results in Redis.🔹 Trigger Used: HTTPTrigger
+When a file is uploaded to Azure Blob Storage, a function processes the file (resizes an image, extracts text, etc.).🔹 Trigger Used: BlobTrigger
 types of event driven triggers in functional app
 do u have any questions for me
+
+----------------------------------------------------------------------------------------------------------------------------------------
+NAGARRO:
+i have a terraform file and im commiting my changes. if other developer also want to deploy the same how can this be possible------->Terraform stores its state in a file (terraform.tfstate). To ensure multiple developers can safely deploy, use a remote backend like, Azure Blob Storage, or Terraform Cloud. This prevents state conflicts and allows for collaboration. 
+i dont want other developers to deploy when im deploying in terraform. how to do it----------->the most common and recommended approach is using Azure Storage Account with Blob Lease Locks. by this if one person is deploying then other person will get and lock mechanism error
+how to use older version code in the pipeline from the github. like there are 5 commit histories, but i want to use 3rd committed code.--------->The git step clones the repository. The git checkout <commitid> command checks out the 3rd commit.
+what is multi staging in docker---------->Multi-stage builds in Docker are a way to optimize your Dockerfile by using multiple FROM statements to create temporary intermediate images. This approach helps reduce the final image size by separating the build environment from the runtime environment.
+do u have exp in hasicorp vault?--------->HashiCorp Vault is a tool designed for securely accessing secrets, such as API keys, passwords, certificates, and more
+tell me about yourself
+in kubernetes which tools have u used?
+what do u know about k8?-------->master, pods, clusters, nodes. used for microservices management.
+diff between entrypoint nd cmd in docker
+what are vulneribilities scanning in ur pipeline------->iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
+have you done monitoring---------->Azure Monitor. Centralized monitoring solution for collecting, analyzing, and acting on telemetry from your cloud and on-prem environments.used for Monitoring resource performance (CPU, memory, etc.)
+Azure Application Insights: A feature of Azure Monitor designed specifically for monitoring live applications, especially useful for developers. used for Monitoring the health and performance of web apps and API
+Azure Log Analytics: Collects and queries logs from various sources (Azure resources, VMs, on-prem servers) for deep diagnostics. used for Centralized log management and querying.
+explain about your pipeline
+do u use .dotnet package---->yes
+any scanning in middle of your pipeline if yes then how?----------->iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
+code quality checks in pipeline---------->iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
+how u handle secrets
+where do u store state file and why?azure storage account
+i created manualy resource. can i again do it in terraform?----------->terraform import
+i want 3vms at a time. how can we do that in terraform--------->count
+how to do code reusability-------------->modules
+you have an app which is in vm. what steps are there to expose it on abc.com. what type of config you do
+what is load balancer--------->
+Load Balancer type				Layer		Use Case
+-------------------------------------------------------------------------------
+Azure Load Balancer				 L4			Distributing traffic to VMs (public/private)
+Azure Application Gateway		 L7			Web applications with advanced routing
+Azure Front Door				 L7			Global load balancing and site acceleration
+Azure Traffic Manager			DNS			Traffic distribution across global regions
+-----------------------------------------------------------------------------------------------------------------------------------------
+DELLOITE:
+
+tell me about yourslef
+what u know about k8
+azure monitoring services
+experience on jenkins, powershell
+explain syntax if arm template
+you worked on free or enterprise of terraform
+where did u store state file
+have you worked on modules
+if i want to execute terraform script, it should first do these steps. how to do it. any way to tell them to execute first----------->use depends_on 
+have experience in security group-------------->A Security Group in Azure is a virtual firewall used to control inbound and outbound traffic to resources within a Virtual Network (VNet). It allows or denies traffic based on rules you define. Security groups are commonly used to control access to virtual machines (VMs), network interfaces, and other resources that are part of a VNet.
+diff load balanacers in azure
+how long you will learn k8
+i dont want to login with my cred in azure. how to do it------------->use service principal or MSI
+security features when doing pipeline
+where we get service principal-------------->In the Azure Portal, navigate to Azure Active Directory.
+On the left-hand menu, click App registrations and then click New registration.
+how log insights work
+diff between log analytics and application insights
+have you worked on ADF 
+what kind of things you done on powershell
+do you have exp in multi environment in pipeline
+any exp in sonarquebe
+
