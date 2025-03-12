@@ -622,7 +622,7 @@ services you worked on azure------------>kv, msi, storage, vm,
 apart from azure have you worked on any other cloud
 i want to fetch the secrets in ado. how do you fetch the secrets from kv to ado---------->give kv secret user or officer permission on user and the use azurekeyvault@2 task in yaml pipeline.
 is it possible to restrict other users using storage account. i want only 1 person to access the storage account how to do it----------->go to access policy(IAM) in storage and remove all the access other than the person who need it. check the role assignment
-is it possible to whitelist the ip and give access to that ip--------->f you want to restrict access based on IP, go to:
+is it possible to whitelist the ip and give access to that ip--------->if you want to restrict access based on IP, go to:
 Storage Account → Networking → Firewalls and Virtual Networks
 Whitelist only the allowed IP (e.g., 192.168.1.10)
 Block all other traffic
@@ -694,13 +694,13 @@ do u have any questions for me
 ----------------------------------------------------------------------------------------------------------------------------------------
 NAGARRO:
 i have a terraform file and im commiting my changes. if other developer also want to deploy the same how can this be possible------->Terraform stores its state in a file (terraform.tfstate). To ensure multiple developers can safely deploy, use a remote backend like, Azure Blob Storage, or Terraform Cloud. This prevents state conflicts and allows for collaboration. 
-i dont want other developers to deploy when im deploying in terraform. how to do it----------->the most common and recommended approach is using Azure Storage Account with Blob Lease Locks. by this if one person is deploying then other person will get and lock mechanism error
+i dont want other developers to deploy when im deploying in terraform. how to do it----------->the most common and recommended approach is using Azure Storage Account with Blob Lease Locks. by this if one person is deploying then other person will get lock mechanism error
 how to use older version code in the pipeline from the github. like there are 5 commit histories, but i want to use 3rd committed code.--------->The git step clones the repository. The git checkout <commitid> command checks out the 3rd commit.
 what is multi staging in docker---------->Multi-stage builds in Docker are a way to optimize your Dockerfile by using multiple FROM statements to create temporary intermediate images. This approach helps reduce the final image size by separating the build environment from the runtime environment.
 do u have exp in hasicorp vault?--------->HashiCorp Vault is a tool designed for securely accessing secrets, such as API keys, passwords, certificates, and more
 tell me about yourself
 in kubernetes which tools have u used?
-what do u know about k8?-------->master, pods, clusters, nodes. used for microservices management.
+what do u know about k8?-------->master, pods, clusters, nodes. used for microservices management., helm chat for app deployment in k8 clusters
 diff between entrypoint nd cmd in docker
 what are vulneribilities scanning in ur pipeline------->iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
 have you done monitoring---------->Azure Monitor. Centralized monitoring solution for collecting, analyzing, and acting on telemetry from your cloud and on-prem environments.used for Monitoring resource performance (CPU, memory, etc.)
@@ -711,41 +711,48 @@ do u use .dotnet package---->yes
 any scanning in middle of your pipeline if yes then how?----------->iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
 code quality checks in pipeline---------->iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
 how u handle secrets
-where do u store state file and why?azure storage account
+where do u store state file and why?--------->azure storage account
 i created manualy resource. can i again do it in terraform?----------->terraform import
 i want 3vms at a time. how can we do that in terraform--------->count
 how to do code reusability-------------->modules
 you have an app which is in vm. what steps are there to expose it on abc.com. what type of config you do
 what is load balancer--------->
-Load Balancer type				Layer		Use Case
+Load Balancer type				    Layer		Use Case
 -------------------------------------------------------------------------------
-Azure Load Balancer				 L4			Distributing traffic to VMs (public/private)
-Azure Application Gateway		 L7			Web applications with advanced routing
-Azure Front Door				 L7			Global load balancing and site acceleration
-Azure Traffic Manager			DNS			Traffic distribution across global regions
+Azure Load Balancer				    L4			Distributing traffic to VMs (public/private)
+Azure Application Gateway		  L7			Web applications with advanced routing
+Azure Front Door				      L7			Global load balancing and site acceleration
+Azure Traffic Manager			    DNS			Traffic distribution across global regions
 -----------------------------------------------------------------------------------------------------------------------------------------
 DELLOITE:
 
 tell me about yourslef
 what u know about k8
-azure monitoring services
+azure monitoring services--------->azure monitor, log analytics, application insights
 experience on jenkins, powershell
-explain syntax if arm template
-you worked on free or enterprise of terraform
-where did u store state file
-have you worked on modules
+explain syntax if arm template-------->schema, parameters, variables, resouces, output
+you worked on free or enterprise of terraform----->yes worked on enterprise edition which provides remote state file
+where did u store state file-------->azure storage account
+have you worked on modules---------->modules are smallest part of code which provides reusability of code
 if i want to execute terraform script, it should first do these steps. how to do it. any way to tell them to execute first----------->use depends_on 
 have experience in security group-------------->A Security Group in Azure is a virtual firewall used to control inbound and outbound traffic to resources within a Virtual Network (VNet). It allows or denies traffic based on rules you define. Security groups are commonly used to control access to virtual machines (VMs), network interfaces, and other resources that are part of a VNet.
 diff load balanacers in azure
 how long you will learn k8
 i dont want to login with my cred in azure. how to do it------------->use service principal or MSI
-security features when doing pipeline
-where we get service principal-------------->In the Azure Portal, navigate to Azure Active Directory.
-On the left-hand menu, click App registrations and then click New registration.
-how log insights work
-diff between log analytics and application insights
+security features when doing pipeline--------->branch policies, health check, scanning of resources
+where we get service principal-------------->In the Azure Portal, navigate to Azure Active Directory or microsoft entra id--->On the left-hand menu, click App registrations and then click New registration.
+how log insights work---------->Log Insights in Azure is powered by Azure Monitor Logs and Log Analytics. It collects, stores, and analyzes logs from different Azure resources, applications, and on-premises environments. Logs are stored in an Azure Log Analytics Workspace.
+The logs can be categorized into:
+Activity Logs (Azure resource actions)
+Diagnostic Logs (VM performance, database errors, etc.)
+Custom Logs (from apps & scripts)
+diff between log analytics and application insights------------->
+✔ Use Log Analytics if you want to monitor infrastructure, security logs, VM performance, network activity.
+✔ Use Application Insights if you need deep application monitoring, request tracing, and user behavior insights.
 have you worked on ADF 
 what kind of things you done on powershell
 do you have exp in multi environment in pipeline
 any exp in sonarquebe
+------------------------------------------------------------------------------------------------------------------
+MOTIVITYLABS:
 
