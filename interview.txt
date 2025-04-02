@@ -833,4 +833,34 @@ security things for iac configuration. do you have any idea within terraform for
 ✔ Use Terraform’s sensitive = true attribute to mask sensitive outputs.
 ✔ Restrict Terraform user permissions (avoid exposing credentials).
 challenged faced with terraform and resolved it
+---------------------------------------------------------------------------------------------------------------------------
+SONATA:
+
+tell me about the ci/cd pipelines which you have deployed
+what are the build tools which you are currently using
+how do you take care of parallel build in pipeline
+for an automatic trigger what u will do for pipeline
+hows your current branching strategy
+what is local and global variable in pipeline
+i have 2 diff branches and 1 has to trigger to dev env and 1 has to trigger qa env
+what is diff between rebase and merge
+do we have history id in rebase
+diff between continous delivery and deployment. how you are using in your project give me an example
+how do you connect to ado using login
+how do you debud any pipeline
+how to create a image out of container
+diff between docker add and copy
+how do you redeploy the docker image if it is corrupted
+services you worked on azure and where we use nsg
+what is state file and lifecycle of it
+write a terraform file for auto scaling instance and vpn
+powershell script to upload file that has .csv extension
+how to check cpu usage for linux
+list all vms in stopped state in 1 rg
+for 1 resource i want to give reader permission. how to do it using powershell
+diff access control mechanisms in azure
+if i want to add new environment to a varibale how to do it using powershell for app service
+give me the example how you solved performance issue using azure monitor
+how terraform is integrated with ado
+
 
