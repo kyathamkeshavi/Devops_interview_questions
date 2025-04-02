@@ -430,26 +430,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Set up PowerShell
-      uses: actions/setup-powershell@v2
-    - name: Pull latest changes
-      run: |
-        pwsh -command "git pull origin main"
-      shell: pwsh
-    - name: Make changes
-      run: |
-        # Your script to make changes goes here
-        pwsh -command "echo 'Making changes to the repository'"
-      shell: pwsh
-    - name: Commit and push changes
-      run: |
-        pwsh -command "git add ."
-        pwsh -command "git commit -m 'Automated commit message'"
-        pwsh -command "git push origin main"
-      shell: pwsh
+  steps:
+  - checkout: self  # Pull the latest code
+  - script: |
+      git config --global user.email "devops@example.com"
+      git config --global user.name "Azure DevOps Pipeline"
+      git pull origin main
+      echo "Auto-update $(date)" >> changelog.txt
+      git add changelog.txt
+      git commit -m "Automated update"
+      git push origin main
+    displayName: 'Update and push changes'
 how did you integrate git to azure
 how do you list the processor in linux ----------->top, vtop, ps -ef|grep name
 how to give sudo permission to user in ansible--------------------->go inside visudo file. name "username ALL=(ALL) NOPASSWD:ALL" | lineinfile path=/etc/sudoers state=present regexp='^username ALL=' validate='visudo -cf %s'
@@ -556,7 +547,7 @@ i have 3 stages dev, test, prod. but i want to skip the test stage. how to do it
 how to configure self hosted agent in ado----->Go to Azure DevOps → Organization Settings → Agent Pools->add pool. Navigate to Project Settings → Agent Pools → Select your pool (SelfHostedPool).-->new agent(select linunx/win). run commands on system. check if the agent is online or not. we need personal access token
 i have main.tf, and if i do terraform apply, how it will interact with ado and azure----------->Authenticate with Azure (via az login or service principal).
 Read main.tf and apply changes.Store Updated State file in storage account(to keep track of managed resources).
-i want to use 1 rg for multiple subscription. how to give this in main.tf in terraform----------> give diff sub in diff providers section
+i want to use 1 rg for multiple subscription. how to give this in main.tf in terraform----------> give diff sub in diff providers section. we cannot use 1 rg for diff sub
 provider "azurerm" {
   alias           = "sub1"
   subscription_id = "SUBSCRIPTION_ID_1"
@@ -569,7 +560,7 @@ provider "azurerm" {
 }
 someone has manualy updated the vm. but now when i use terraform what will happen-------->use terraform refresh command
 what is terraform refresh command---------->Syncs Terraform state with real infrastructure from portal
-i want to create vm. but vnet and subnet are already present. now i want to use them and create vm using terraform. how to do it---------->Since your VNet and Subnet already exist, you don't need to create them in Terraform. Instead, you can fetch their details using data.azurerm_virtual_network and data.azurerm_subnet
+i want to create vm. but vnet and subnet are already present. now i want to use them and create vm using terraform. how to do it---------->Since your VNet and Subnet already exist, you don't need to create them in Terraform. Instead, you can fetch their details using data command data.azurerm_virtual_network and data.azurerm_subnet
 To create a VM in Azure using Terraform, you need the following:
 ✅ Resource Group – The container for all resources.
 ✅ Virtual Network & Subnet – To enable network communication.
@@ -588,6 +579,15 @@ If you use a Virtual Machine Scale Set (VMSS):
 Add new VMs with the desired size.
 Gradually switch traffic to the new VMs.
 Remove old VMs after migration.
+can we trigger another pipeline from 1 pipeline---------------> yes, we can do that Using pipeline Task.
+jobs:
+- job: Trigger_Pipeline_B
+  steps:
+  - task: AzurePipelines@1
+    inputs:
+      definition: 'Pipeline_B_Name'
+      project: 'YourProject'
+      waitForCompletion: true 
 ---------------------------------------------------------------------------------------------------------------------------
 KANERIKA:
 
@@ -616,7 +616,7 @@ did u get any chance to work on github actions
 where are you storing your code in your project--------->azure repos. they are asking about version control code 
 how do u establish a connection between git and azure devops----------->tell them how u integrate git with ado
 branching strategies u are following in your project--------->main,feature,develop. we develop code in develop and do test there. once it is succesful raise pr to feature and do testing in qa and once done then raise pr to main
-how you are merging feature to develop 
+how you are merging feature to develop
 were there any checks during the pr merge----------->tell them about branching policy(need aprovers, work items, resolving the comments) REPO-->branches-->...-->branch policy.
 services you worked on azure------------>kv, msi, storage, vm, 
 apart from azure have you worked on any other cloud
@@ -702,7 +702,7 @@ tell me about yourself
 in kubernetes which tools have u used?
 what do u know about k8?-------->master, pods, clusters, nodes. used for microservices management., helm chat for app deployment in k8 clusters
 diff between entrypoint nd cmd in docker
-what are vulneribilities scanning in ur pipeline------->iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
+what are vulneribilities scanning in ur pipeline------->we use microsoft defender for cloud to do all the security checks. iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
 have you done monitoring---------->Azure Monitor. Centralized monitoring solution for collecting, analyzing, and acting on telemetry from your cloud and on-prem environments.used for Monitoring resource performance (CPU, memory, etc.)
 Azure Application Insights: A feature of Azure Monitor designed specifically for monitoring live applications, especially useful for developers. used for Monitoring the health and performance of web apps and API
 Azure Log Analytics: Collects and queries logs from various sources (Azure resources, VMs, on-prem servers) for deep diagnostics. used for Centralized log management and querying.
@@ -740,7 +740,7 @@ diff load balanacers in azure
 how long you will learn k8
 i dont want to login with my cred in azure. how to do it------------->use service principal or MSI
 security features when doing pipeline--------->branch policies, health check, scanning of resources
-where we get service principal-------------->In the Azure Portal, navigate to Azure Active Directory or microsoft entra id--->On the left-hand menu, click App registrations and then click New registration.
+where we get service principal(app id)-------------->In the Azure Portal, navigate to Azure Active Directory or microsoft entra id--->On the left-hand menu, click App registrations and app id.
 how log insights work---------->Log Insights in Azure is powered by Azure Monitor Logs and Log Analytics. It collects, stores, and analyzes logs from different Azure resources, applications, and on-premises environments. Logs are stored in an Azure Log Analytics Workspace.
 The logs can be categorized into:
 Activity Logs (Azure resource actions)
@@ -755,4 +755,82 @@ do you have exp in multi environment in pipeline
 any exp in sonarquebe
 ------------------------------------------------------------------------------------------------------------------
 MOTIVITYLABS:
+
+tell me about yourself
+how good are you with linux operating systems
+my app is not working and got an alert at 5 am how you will troubleshoot this issue---------->What was the alert message? (e.g., high latency, service unavailable, memory leak), Is this a recurring issue or the first time?ook at logs in Application Insights, Azure Monitor, or directly on the server/container.
+Search for errors, exceptions, or unusual activity around 5 AM. Check if any deployments or updates happened before the issue. Is the app reachable?High CPU, Memory, or Disk usage at 5 AM?Check for network issues affecting outbound or inbound traffic.any storage, db or pipeline issue. Try running a test request to simulate the error. If deployment caused it, roll back to a previous stable version.
+my new version code is not there in webapp. how do you troubleshoot it---------------->check if the pipeline deployment is succesful or not. check if the github is using the latest version or not. clear and restart the webapp. verify build and runtime error. check the logs
+why git is known as distributed version control system-------->because it has both local and remote repo. even if 1 repo doesnt work we can take the code from other repo
+what is staging area in git------------>where we add the code before comit. its like saving the code in local repo
+how do you identify the folder is there under version control system---------->check the .git folder or do git status. if we doesnt get any error then it is under version control
+why we use git rebase command---------->when we want to rewrite the commit history we use rebase. by this 1 branch is completely changed to other branch along with commit history
+when we use git pull, merge and fetch----------->pull to get the changed code. fetch to check the changed code. merge to merge our code to other code
+which is best among all three -----------> depends upon the task
+diff between availablity set and Zones
+Feature	                Availability Set	                                                                  Availability Zone
+Definition	            Logical grouping of VMs across fault & update domains within a single data center.	Physically separate data centers within the same Azure region.                 Scope	Works within a single data center (same region).	                           Spans multiple data centers within a region.
+Update Domain (UD)	    Ensures VMs don’t get updated simultaneously.	                                      Updates are done per zone, reducing downtime.
+VM Placement	          VMs are placed across multiple racks in one data center.	                          VMs are placed in different physical locations (zones).
+Example Services	      VMs, SQL databases with availability groups.	                                      VM Scale Sets, Azure Kubernetes Service (AKS).
+components in availability set and zone
+pre requisite to host webapp----------->host service(vm/app service), subscription, rg, storage, code, vnet,nsg, application gateway or front door, pipeline, monitoring and security
+why we use RBAC---------->used in Azure to manage user permissions securely and efficiently. It ensures that users have only the permissions they need—nothing more.
+in vm if we want to use kv then what permissions we have to give---------->use msi in vm, and go to kv and use this msi and give permission
+why we use service principal-------------->A Service Principal (SP) is used in Azure to allow applications, scripts, or automation tools to authenticate and access Azure resources securely without using user credentials
+have you setup any point to point VPNs
+why we use NSG------------>An Azure Network Security Group (NSG) is used to control inbound and outbound traffic to Azure resources (like Virtual Machines, Subnets, or Load Balancers). It acts as a firewall that allows or denies traffic based on rules.
+i want to use 1vnet to communicate with other vnet. how to do it----------->1️⃣ VNet Peering (Best for low latency, high-speed communication)
+2️⃣ VNet-to-VNet VPN (IPsec Tunnel) (Best for cross-region or different subscriptions)
+what are the things we use in arm template to deploy the resources
+what are the components in arm template
+i kept username and password in kv. now i want to use that to connect to db------------>assign kv permission to resources and retrieve credentials
+things should be there in terraform file
+diff between import and data---------->1️⃣ import — Bringing External Resources into State 2️⃣ data — Fetching Information About Existing Resources
+diff between Version and Version control---------->vesrion refers to what version you are using in terraform. version control referes to where you are storing the terraform code(git,butbucket)
+where you are storing state file
+how can we delete resources from state file---------->f you want to remove a resource from Terraform state (without deleting the actual resource in the cloud), you can use terraform state rm
+have you setup any ci/cd pipeline. what is build n release pipeline------------->🔹 Build Pipeline → Compiles code, runs tests, and packages artifacts.
+🔹 Release Pipeline → Deploys built artifacts to environments (Dev, QA, Prod).
+by default ansible has log file-------->no
+in order to create log file in ansible what things you will do------->Modify your ansible.cfg file to enable logging permanently.
+[defaults]
+log_path = /var/log/ansible.log
+how to setup own config file in ansible----------->Create a file named ansible.cfg in your working directory and give inventory, log path, hsot evrything there
+export ANSIBLE_CONFIG=/path/to/custom/ansible.cfg----------->run this command to force use custom config File
+
+-------------------------------------------------------------------------------------------------------------------
+CAPGEMINI:
+
+how do you manage secrets?
+how do you integrate terraform with azure pipeline
+how do you store state file in terraform
+how do you deploy resources and what are the resources you have deployed using terraform
+explain 1 resource you deployed using terraform
+do you have any idea about idempotency and why we use it------------>✅ Prevents unnecessary changes → Avoids modifying configurations that are already correct.
+while preparing iac as code what are the configurations and security things you will considerations--------->version control, storing of state file, reusability of code, secret storing, giving access to authorized users, enable logging and monitoring, use pipelines
+/terraform
+   ├── main.tf         # Root module
+   ├── variables.tf    # Input variables
+   ├── outputs.tf      # Output variables
+   ├── modules/
+   │   ├── networking/
+   │   │   ├── vnet.tf
+   │   │   ├── security_groups.tf
+   │   │   ├── outputs.tf
+   │   ├── compute/
+   │   │   ├── vm.tf
+   │   │   ├── variables.tf
+
+in terms of budget what you will consider. what are budget policy-------->size, storage, unused resources, set alerts if recahes limit
+Category	                Best Practices
+Resource Sizing	          Use right-sized VMs, auto-scaling, reserved instances
+Storage Optimization  	  Use Cool/Archive storage tiers, lifecycle policies
+Budget Limits	            Set cost alerts for 80%, 90%, 100% budget consumption
+Governance	              Use Azure Policy/AWS SCP to restrict expensive resources
+Quota Management	        Enforce limits on CPU, memory, and VM counts
+security things for iac configuration. do you have any idea within terraform for security thing------------->✔ Use Azure Key Vault / AWS Secrets Manager instead of hardcoding secrets.
+✔ Use Terraform’s sensitive = true attribute to mask sensitive outputs.
+✔ Restrict Terraform user permissions (avoid exposing credentials).
+challenged faced with terraform and resolved it
 
