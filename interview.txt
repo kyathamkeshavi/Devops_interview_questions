@@ -838,28 +838,50 @@ SONATA:
 
 tell me about the ci/cd pipelines which you have deployed
 what are the build tools which you are currently using
-how do you take care of parallel build in pipeline
-for an automatic trigger what u will do for pipeline
+how do you take care of parallel build in pipeline--------------------->give multiple jobs in yaml file. they will run paralelly
+for an automatic trigger what u will do for pipeline------------------->
+Continuous Integration (CI) Trigger: Runs the pipeline whenever code changes are pushed to the repository.
+Pull Request (PR) Trigger: Runs the pipeline when a pull request is created or updated.
+Scheduled Trigger: Runs the pipeline at a specific time or interval.
+Resource Trigger: Starts the pipeline based on changes in specified resources (e.g., builds, repositories).
+Webhook Trigger: Executes the pipeline in response to external events, such as updates in a GitHub repository
 hows your current branching strategy
-what is local and global variable in pipeline
-i have 2 diff branches and 1 has to trigger to dev env and 1 has to trigger qa env
-what is diff between rebase and merge
-do we have history id in rebase
-diff between continous delivery and deployment. how you are using in your project give me an example
+what is local and global variable in pipeline------------->Local variables are defined within a specific scope, such as a job or a step.Global variables are defined at the pipeline level and can be accessed by any job or step within the pipeline.
+i have 2 diff branches and 1 has to trigger to dev env and 1 has to trigger qa env--------------->give branch details in trigger scope and give different jobs for dev and qa. use condition statement so it will trigger for specific branch: condition: eq(variables['Build.SourceBranchName'], 'dev-branch')
+what is diff between rebase and merge------------>Rebase moves or re-applies commits from one branch onto another base commit. This process rewrites the commit history, creating new commits with new SHA-1 hashes. while merge creates a commit which has code of 2 developers
+do we have history id in rebase------------->In Git, when you perform a rebase, the commit history is rewritten. This means that the original commit IDs (SHA-1 hashes) are changed because the commits are applied on top of a new base commit. However, Git does not maintain a history ID specifically for rebases.
+diff between continous delivery and deployment. how you are using in your project give me an example----------->if we use manual approver stage in yaml then it is delivery. but if we dont use that then it is deploymment
 how do you connect to ado using login
-how do you debud any pipeline
-how to create a image out of container
+how do you debud any pipeline---------->go to pipeline and check logs. check the resources utilization. if we have minitoring tools check them for logs
+how to create a image out of container--------------->docker commit container_id new_image_name
 diff between docker add and copy
 how do you redeploy the docker image if it is corrupted
-services you worked on azure and where we use nsg
-what is state file and lifecycle of it
+Stop Running Containers:  docker ps -q --filter "ancestor=my_app:latest" | xargs docker stop
+Remove the Corrupted Image:  docker rmi my_app:latest
+Pull the Image Again:  docker pull my_app:latest
+Recreate and Start Containers:  docker-compose up -d
+services you worked on azure and where we use nsg---------------->Virtual Machines (VMs):
+Inbound Traffic: Control access to VMs by allowing or denying traffic from specific IP addresses or ranges.
+Outbound Traffic: Restrict VMs from accessing certain external resources.
+what is state file and lifecycle of it------------>Initialization:
+
+When you first run terraform init, Terraform initializes the working directory and sets up the backend configuration for the state file.
+Creation: During the first terraform apply, Terraform creates the state file and records the initial state of the resources.
+Updates: Every time you run terraform apply after making changes to your configuration, Terraform updates the state file to reflect the new state of the resources.
+Storage: The state file is stored either locally or remotely, depending on your backend configuration.
+Locking: To prevent concurrent modifications, Terraform can lock the state file during operations. This is especially important in collaborative environments.
+Backup: Terraform often creates backup copies of the state file before making changes. This helps in recovering the state in case of errors.
+Migration: You can migrate the state file from one backend to another using terraform state commands. This is useful when changing storage solutions or moving to a more secure backend.
 write a terraform file for auto scaling instance and vpn
-powershell script to upload file that has .csv extension
-how to check cpu usage for linux
-list all vms in stopped state in 1 rg
-for 1 resource i want to give reader permission. how to do it using powershell
-diff access control mechanisms in azure
-if i want to add new environment to a varibale how to do it using powershell for app service
+powershell script to upload file that has .csv extension------------># Create the context for the storage account
+$context = New-AzStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
+# Upload the file to the blob container
+Set-AzStorageBlobContent -File $filePath -Container $containerName -Blob $blobName -Context $context
+how to check cpu usage for linux----------->top,htop,vmstat
+list all vms in stopped state in 1 rg-------------->az vm list --resource-group <ResourceGroupName> --query "[?powerState=='VM stopped'].{Name:name}" --output table
+for 1 resource i want to give reader permission. how to do it using powershell-------------->New-AzRoleAssignment -ObjectId $userId -RoleDefinitionName $roleDefinitionName -Scope $resourceId
+diff access control mechanisms in azure----------->msi,aad,rbac,iam
+if i want to add new environment to a varibale how to do it using powershell for app service--------------------->Set-AzWebApp -ResourceGroupName $resourceGroupName -Name $appName -AppSettings $appSettings.Properties
 give me the example how you solved performance issue using azure monitor
 how terraform is integrated with ado
 
