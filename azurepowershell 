@@ -1,0 +1,44 @@
+Connect-AzAccount # Authenticate to Azure
+# Variables
+$resourceGroup = "MyResourceGroup"
+$location = "EastUS"
+$storageAccount = "mystorage123xyz"
+$containerName = "mycontainer"
+$vmName = "myVM"
+$keyVault = "MyKeyVault"
+$webAppName = "mywebapp123"
+$appServicePlan = "MyPlan"
+$templateFile = "./azuredeploy.json"
+# Create a Resource Group
+New-AzResourceGroup -Name $resourceGroup -Location $location
+# Create a Storage Account
+New-AzStorageAccount -ResourceGroupName $resourceGroup -Name $storageAccount -Location $location -SkuName Standard_LRS -Kind StorageV2
+# Get storage account context
+$keys = Get-AzStorageAccountKey -Name $storageAccount -ResourceGroupName $resourceGroup
+$ctx = New-AzStorageContext -StorageAccountName $storageAccount -StorageAccountKey $keys[0].Value
+# Upload a file to Blob (optional - provide your own path)
+Set-AzStorageContainerAcl -Name $containerName -Permission Off -Context $ctx
+Set-AzStorageBlobContent -File "path/to/file.txt" -Container $containerName -Blob "file.txt" -Context $ctx
+# Create a Virtual Machine (basic Windows VM)
+New-AzVM -Name $vmName -ResourceGroupName $resourceGroup -Location $location -ImageName "Win2019Datacenter"
+# Start, Stop, and Restart the VM
+Start-AzVM -Name $vmName -ResourceGroupName $resourceGroup
+Stop-AzVM -Name $vmName -ResourceGroupName $resourceGroup -Force
+Restart-AzVM -Name $vmName -ResourceGroupName $resourceGroup
+# Get Public IP of the VM
+Get-AzPublicIpAddress -ResourceGroupName $resourceGroup
+# Create a Key Vault
+New-AzKeyVault -Name $keyVault -ResourceGroupName $resourceGroup -Location $location
+# Set and Get a secret in Key Vault
+Set-AzKeyVaultSecret -VaultName $keyVault -Name "DbPassword" -SecretValue (ConvertTo-SecureString "MyP@ssw0rd" -AsPlainText -Force)
+(Get-AzKeyVaultSecret -VaultName $keyVault -Name "DbPassword").SecretValueText
+# Create an App Service Plan
+New-AzAppServicePlan -Name $appServicePlan -Location $location -ResourceGroupName $resourceGroup -Tier "Standard" -NumberofWorkers 1
+# Create a Web App
+New-AzWebApp -Name $webAppName -ResourceGroupName $resourceGroup -Location $location -AppServicePlan $appServicePlan
+# Get the Web App URL
+(Get-AzWebApp -Name $webAppName -ResourceGroupName $resourceGroup).DefaultHostName
+# Deploy an ARM Template
+New-AzResourceGroupDeployment -ResourceGroupName $resourceGroup -TemplateFile $templateFile
+Remove-AzResourceGroup -Name $resourceGroup -Force  # Cleanup: Delete Resource Group (⚠️ irreversible)
+

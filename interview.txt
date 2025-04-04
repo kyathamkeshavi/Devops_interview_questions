@@ -833,19 +833,24 @@ security things for iac configuration. do you have any idea within terraform for
 ✔ Use Terraform’s sensitive = true attribute to mask sensitive outputs.
 ✔ Restrict Terraform user permissions (avoid exposing credentials).
 challenged faced with terraform and resolved it
+how to restore the deleted state file-------------->if storing remotely take the state file from deleted blobs or previos version in storage account. or check if it manualy taken backup then restore it from there. if we dont have any of these then do terraform import <resourcetype>.<name>.<resourceid>. after this do plan and apply.
+
 ---------------------------------------------------------------------------------------------------------------------------
 SONATA:
 
+for eg when there is a resource in terraform but i dont want to use this as it is damaged when i do apply. how to do it----------->we can use terraform taint for the resources. terraform taint type.name. when we use this and terraform apply the tainted resource is deleted and a new one is created.
 tell me about the ci/cd pipelines which you have deployed
-what are the build tools which you are currently using
+what are the build tools which you are currently using------->dotner CLI
 how do you take care of parallel build in pipeline--------------------->give multiple jobs in yaml file. they will run paralelly
-for an automatic trigger what u will do for pipeline------------------->
+for an automatic trigger what u will do for pipeline------------------->cron, branches, manual trigger, changes in folder
 Continuous Integration (CI) Trigger: Runs the pipeline whenever code changes are pushed to the repository.
 Pull Request (PR) Trigger: Runs the pipeline when a pull request is created or updated.
 Scheduled Trigger: Runs the pipeline at a specific time or interval.
 Resource Trigger: Starts the pipeline based on changes in specified resources (e.g., builds, repositories).
 Webhook Trigger: Executes the pipeline in response to external events, such as updates in a GitHub repository
-hows your current branching strategy
+hows your current branching strategy-------------->master: for production-ready code
+develop: where features are merged and tested before release
+feature/*: for individual development tasks
 what is local and global variable in pipeline------------->Local variables are defined within a specific scope, such as a job or a step.Global variables are defined at the pipeline level and can be accessed by any job or step within the pipeline.
 i have 2 diff branches and 1 has to trigger to dev env and 1 has to trigger qa env--------------->give branch details in trigger scope and give different jobs for dev and qa. use condition statement so it will trigger for specific branch: condition: eq(variables['Build.SourceBranchName'], 'dev-branch')
 what is diff between rebase and merge------------>Rebase moves or re-applies commits from one branch onto another base commit. This process rewrites the commit history, creating new commits with new SHA-1 hashes. while merge creates a commit which has code of 2 developers
@@ -864,7 +869,6 @@ services you worked on azure and where we use nsg---------------->Virtual Machin
 Inbound Traffic: Control access to VMs by allowing or denying traffic from specific IP addresses or ranges.
 Outbound Traffic: Restrict VMs from accessing certain external resources.
 what is state file and lifecycle of it------------>Initialization:
-
 When you first run terraform init, Terraform initializes the working directory and sets up the backend configuration for the state file.
 Creation: During the first terraform apply, Terraform creates the state file and records the initial state of the resources.
 Updates: Every time you run terraform apply after making changes to your configuration, Terraform updates the state file to reflect the new state of the resources.
@@ -884,5 +888,70 @@ diff access control mechanisms in azure----------->msi,aad,rbac,iam
 if i want to add new environment to a varibale how to do it using powershell for app service--------------------->Set-AzWebApp -ResourceGroupName $resourceGroupName -Name $appName -AppSettings $appSettings.Properties
 give me the example how you solved performance issue using azure monitor
 how terraform is integrated with ado
+
+-------------------------------------------------------------------------------------------------
+HEXAWARE:
+
+tell me about your self
+things that are there in terraform file
+i want to deploy 10 reosurces at a time. how to do it in terraform----------->use count fucntion
+i want to deploy 10 resources with diff configuration how to do it in terraform----------->use foreach()
+why we use output file in terraform-------->we use output files (or just outputs) to expose useful information about the infrastructure we've provisioned.
+what is diff between variable and tfvar file--------->variable define the inputs, their types, defaults, and descriptions while tfvar file actually give values to the variables you declared earlier
+how do you secure state file--------->store it in remote account. give limited acces to remote state file using rbac and iam control
+when there is a conflict in terraform how do you handle it---------->use blob lease lock
+there is a manual edition in cloud. how do you handle it------->use terraform refresh and plan and apply it
+when we do terraform refresh where the file will be chnaged is it state file? if it is state file then how the main.tf is changed------->use terraform refresh and plan and apply it
+give me the structure of ci/cd pipeline
+what jobs are executed in build
+what are agent pools
+where you will deploy your code
+how you provision vms. how do you deploy your code in webapp
+what are all the things that are required for docker
+architecture of k8
+how you store secrets
+diff between service principal and msi
+do you have experience in building db pipeline
+any certifcations in azure
+what are the applications you have build and deploy'
+issues faced with pipeline
+default directories in azure devops
+what is git cherrypick
+diff between merge and rebase
+how to create new branch
+deployemnt startegies you follow in your project 
+if you deployed wrong version. how do you go back to previous version
+how do you do code analysis in your project
+
+-----------------------------------------------------------------------------------------------------
+FNF:
+
+tell me about yourself
+have you ever created infra part completely using terraform
+how do you use terraform in azure pipeline
+where does statefile reside in azure
+how do you lock the terraform state file
+where we do use that in locking mechanism in azure
+within terraform how do you handle secret
+how do you retrive the serect in azure
+tell me the structure of terraform in your project
+have you used count and for each in terraform
+probelms you faced during terraform deployment
+what is create before destroy in terraform
+why we use datablock in terraform
+how do you import all the infra from cloud to terraform
+where did you use kv
+what is msi and kv
+types of networking in docker and how it works
+how to reduce image size
+i have base image as 2.5 how to reduce it in docker
+why we use cmd and ENTRYPOINT. are there any dependencies on each other
+diff types of msi. what is the difference between them
+where you are deploying your app
+types of service bus and how will be sending messages
+anything on fucntion app
+architecture of k8
+
+-------------------------------------------------------------------------------------------------------
 
 
