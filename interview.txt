@@ -904,24 +904,37 @@ there is a manual edition in cloud. how do you handle it------->use terraform re
 when we do terraform refresh where the file will be chnaged is it state file? if it is state file then how the main.tf is changed------->use terraform refresh and plan and apply it
 give me the structure of ci/cd pipeline
 what jobs are executed in build
-what are agent pools
-where you will deploy your code
-how you provision vms. how do you deploy your code in webapp
+what are agent pools-------------->An agent pool is a collection of agents used in Azure DevOps and Azure Container Registry to run tasks and pipelines.
+where you will deploy your code------------>webapp
+how you provision vms. how do you deploy your code in webapp--------------->we can deploy your application as a ZIP package to Azure App Service. This method involves creating a ZIP file of your project and uploading it to the service.
 what are all the things that are required for docker
 architecture of k8
 how you store secrets
-diff between service principal and msi
+diff between service principal and msi------------->service principal is mainly used to authentaticate the appplications. msi is used to access resources from other resource
 do you have experience in building db pipeline
 any certifcations in azure
-what are the applications you have build and deploy'
-issues faced with pipeline
-default directories in azure devops
+what are the applications you have build and deploy'----------->web applications
+issues faced with pipeline--------------->Build Failures:
+Code Errors: Syntax errors, missing dependencies, or failed tests can cause builds to fail.
+Slow Pipelines:
+Resource Bottlenecks: Limited CPU, memory, or I/O resources can slow down the pipeline.
+Deployment Failures:
+Configuration Issues: Incorrect configuration settings or missing environment variables can cause deployments to fail.
+Security Vulnerabilities:
+Exposed Secrets: Hardcoded credentials or improperly managed secrets can lead to security breaches.
+Integration Issues:
+Service Dependencies: Changes in one service affecting the functionality of another.
+default directories in azure devops----------->System.DefaultWorkingDirectory: This is the local path on the agent where your source code files are downloaded. It's essentially the root of your repository.
+Build.ArtifactStagingDirectory: This directory is used to store build artifacts before they are published. It's a temporary location for files that will be shared between build and release stages.
+Build.SourcesDirectory: This directory contains the source code that is checked out by the pipeline. It's typically a subdirectory within the System.DefaultWorkingDirectory2.
+Build.BinariesDirectory: This directory is used to store compiled binaries and other intermediate files generated during the build process2.
+Agent.TempDirectory: A temporary directory used by the agent for various tasks during the pipeline execution2.
 what is git cherrypick
 diff between merge and rebase
 how to create new branch
 deployemnt startegies you follow in your project 
-if you deployed wrong version. how do you go back to previous version
-how do you do code analysis in your project
+if you deployed wrong version. how do you go back to previous version-------------->use git revert and push the chnages again
+how do you do code analysis in your project--------->microsoft defender
 
 -----------------------------------------------------------------------------------------------------
 FNF:
@@ -931,23 +944,47 @@ have you ever created infra part completely using terraform
 how do you use terraform in azure pipeline
 where does statefile reside in azure
 how do you lock the terraform state file
-where we do use that in locking mechanism in azure
-within terraform how do you handle secret
+where we do use that in locking mechanism in azure--------------->Navigate to your storage account in the Azure Portal.
+Go to the Containers section and select the container that contains your blob.
+Locate the specific blob and check its properties. If a lease is active, you will see lease information such as the lease state and lease duration.
+within terraform how do you handle secret----------------->Store sensitive information in environment variables and reference them in your Terraform configuration. Mark input variables as sensitive to prevent them from being displayed in logs or output.
+variable "db_password" {
+  type      = string
+  sensitive = true
+}
+Use secret management tools like HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault to store and retrieve secrets securely.
 how do you retrive the serect in azure
 tell me the structure of terraform in your project
-have you used count and for each in terraform
-probelms you faced during terraform deployment
-what is create before destroy in terraform
-why we use datablock in terraform
-how do you import all the infra from cloud to terraform
+have you used count and for each in terraform------------>count for identical resource creation. for each() for various configuration of resources
+probelms you faced during terraform deployment---------->State File Conflicts, Resource Already Exists, ncorrect or missing variable values can lead to interpolation errors.The Terraform state file is out of sync with the actual infrastructure
+what is create before destroy in terraform----------->create_before_destroy
+Purpose: By default, when Terraform needs to replace a resource, it first destroys the existing resource and then creates a new one. This can cause downtime. The create_before_destroy argument changes this behavior by creating the new resource first and then destroying the old one.
+Usage: You can use the create_before_destroy argument within the lifecycle block of a resource definition.
+resource "aws_instance" "example" {
+  ami           = "ami-123456"
+  instance_type = "t2.micro"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+Benefits:Minimizes Downtime: Ensures that the new resource is ready before the old one is destroyed, reducing service interruptions1.
+Smooth Transitions: Useful for resources that need to maintain availability during updates or replacements.
+why we use datablock in terraform------------->In Terraform, the data block is used to retrieve information about existing resources that are not managed by Terraform but are needed for your configuration
+how do you import all the infra from cloud to terraform----------->we cannot import all resources at a time. we can only do 1 resource at a time
 where did you use kv
-what is msi and kv
+what is msi and kv------------>msi for access of 1 resource to other. kv to store secrets and certs
 types of networking in docker and how it works
-how to reduce image size
-i have base image as 2.5 how to reduce it in docker
-why we use cmd and ENTRYPOINT. are there any dependencies on each other
-diff types of msi. what is the difference between them
-where you are deploying your app
+how to reduce image size--------->Multi-stage builds allow you to use multiple FROM statements in your Dockerfile. Combine RUN Commands. Create a .dockerignore file to exclude unnecessary files and directories from the Docker build context. Install only the essential packages and libraries required for your application to run.
+i have base image as 2.5 how to reduce it in docker----------->Use docker history <image_name> to examine the layers of your image. This will show you the size of each layer and the commands that created them. and followe above steps
+why we use cmd and ENTRYPOINT. are there any dependencies on each other----------->they are not dependant on each other. If ENTRYPOINT is not defined, CMD specifies the executable to run.
+diff types of msi. what is the difference between them-------------->ystem-Assigned Managed Identity
+Description: This type of identity is tied directly to an Azure resource, such as a virtual machine or an App Service.
+Lifecycle: The identity is created when the resource is created and is automatically deleted when the resource is deleted.
+User-Assigned Managed Identity
+Description: This type of identity is created as a standalone Azure resource and can be assigned to one or more Azure resources.
+Lifecycle: The identity is managed independently of the resources that use it, allowing for more flexible and reusable identity management1
+where you are deploying your app---------------->webapp
 types of service bus and how will be sending messages
 anything on fucntion app
 architecture of k8
