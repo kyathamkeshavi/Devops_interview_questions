@@ -990,5 +990,20 @@ anything on fucntion app
 architecture of k8
 
 -------------------------------------------------------------------------------------------------------
+HAPPIESTMINDS:
 
+what is taint in terraform------->n Terraform, a taint is a way to manually mark a resource for destruction and recreation during the next apply. It’s useful when a resource is in a bad state or needs to be recreated without changing the configuration
+what are the types of metrics in azure monitoring-------------->CPU Usage (for VMs), Disk I/O (for VMs), Network Traffic (for VMs or load balancers), Request Count (for storage accounts),Response Time (from Application Insights), Failure Rate (from Application Insights), Server Response Time (from Azure App Services), Resource Utilization (e.g., VM memory, CPU), User Sign-ups per Hour
+what are facts in azure artifacts
+what is ingress in k8-------------->Ingress is a Kubernetes object that manages external access to services in a cluster, typically HTTP and HTTPS traffic.
+It acts as an entry point into your cluster — think of it like a reverse proxy or router that maps incoming requests to the appropriate backend services.
+what is meamory leak------------->A memory leak is when a program allocates memory but fails to release it after it's no longer needed — causing memory usage to grow over time and eventually slow down or crash the system. eg when the object is not in use but still being refered then memory will take lot of time thus degrading the performance
+why we use fork------------>when we want other persons repo to our repo then we use fork
+why we use git stash------------->We use git stash to temporarily save your uncommitted changes (both staged and unstaged) without committing them — so you can switch branches or pull updates without losing your work
+how to optimize image in docker-------->use multi stage build, combine multiple run and cmd commands, install only the reuired dependencies, use .dockerignore file to remove unnecessary files. install the image from official website
+why we use docker compose---------->We use Docker Compose to define and manage multi-container Docker applications using a simple YAML file. It’s your best friend when an app needs more than one service — like a web server, database, cache, etc.
+what are the issues that you have faced while deploying pipelines
+how do you define variables in powershell-------->$keyvault="keshavi". new-azkeyvault -Name $keyvault
+what are self hosted and microsoft hosted agents in azure-------->microsoft agents are the agents that are maintained by azure. used for simple azure pipelines, we need to wait long time inorder to run our pipeline using this. less control. whereas self hosted agent has full control as it is prepared by us. used for complex pipelines. we dont have to wait for the pipelines to be run
+-----------------------------------------------------------------------------------------------------------------
 
