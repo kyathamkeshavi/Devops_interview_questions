@@ -832,7 +832,7 @@ Quota Management	        Enforce limits on CPU, memory, and VM counts
 security things for iac configuration. do you have any idea within terraform for security thing------------->✔ Use Azure Key Vault / AWS Secrets Manager instead of hardcoding secrets.
 ✔ Use Terraform’s sensitive = true attribute to mask sensitive outputs.
 ✔ Restrict Terraform user permissions (avoid exposing credentials).
-challenged faced with terraform and resolved it
+challenged faced with terraform and resolved it------------>mismatch of infra with respect to cloud and terraform, secret storing, missing values of variables, resource already Exists
 how to restore the deleted state file-------------->if storing remotely take the state file from deleted blobs or previos version in storage account. or check if it manualy taken backup then restore it from there. if we dont have any of these then do terraform import <resourcetype>.<name>.<resourceid>. after this do plan and apply.
 
 ---------------------------------------------------------------------------------------------------------------------------
@@ -940,10 +940,10 @@ how do you do code analysis in your project--------->microsoft defender
 FNF:
 
 tell me about yourself
-have you ever created infra part completely using terraform
-how do you use terraform in azure pipeline
-where does statefile reside in azure
-how do you lock the terraform state file
+have you ever created infra part completely using terraform---------> 
+how do you use terraform in azure pipeline------------>we give working directory path in yaml. thats how it will get to know the tf files and execute them. we neeed rg, storage,container,key, service connection, working directory in task
+where does statefile reside in azure------------->storage account
+how do you lock the terraform state file-------> if we use terraform backend in files then it will automatically use blob lease lock. nothing extra needed
 where we do use that in locking mechanism in azure--------------->Navigate to your storage account in the Azure Portal.
 Go to the Containers section and select the container that contains your blob.
 Locate the specific blob and check its properties. If a lease is active, you will see lease information such as the lease state and lease duration.
@@ -978,14 +978,14 @@ types of networking in docker and how it works
 how to reduce image size--------->Multi-stage builds allow you to use multiple FROM statements in your Dockerfile. Combine RUN Commands. Create a .dockerignore file to exclude unnecessary files and directories from the Docker build context. Install only the essential packages and libraries required for your application to run.
 i have base image as 2.5 how to reduce it in docker----------->Use docker history <image_name> to examine the layers of your image. This will show you the size of each layer and the commands that created them. and followe above steps
 why we use cmd and ENTRYPOINT. are there any dependencies on each other----------->they are not dependant on each other. If ENTRYPOINT is not defined, CMD specifies the executable to run.
-diff types of msi. what is the difference between them-------------->ystem-Assigned Managed Identity
+diff types of msi. what is the difference between them-------------->system-Assigned Managed Identity
 Description: This type of identity is tied directly to an Azure resource, such as a virtual machine or an App Service.
 Lifecycle: The identity is created when the resource is created and is automatically deleted when the resource is deleted.
 User-Assigned Managed Identity
 Description: This type of identity is created as a standalone Azure resource and can be assigned to one or more Azure resources.
 Lifecycle: The identity is managed independently of the resources that use it, allowing for more flexible and reusable identity management1
 where you are deploying your app---------------->webapp
-types of service bus and how will be sending messages
+types of service bus and how will be sending messages----------->Azure Service Bus is used for reliable messaging between distributed applications
 anything on fucntion app
 architecture of k8
 
