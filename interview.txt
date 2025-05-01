@@ -840,7 +840,7 @@ SONATA:
 
 for eg when there is a resource in terraform but i dont want to use this as it is damaged when i do apply. how to do it----------->we can use terraform taint for the resources. terraform taint type.name. when we use this and terraform apply the tainted resource is deleted and a new one is created.
 tell me about the ci/cd pipelines which you have deployed
-what are the build tools which you are currently using------->dotner CLI
+what are the build tools which you are currently using------->dotnet CLI
 how do you take care of parallel build in pipeline--------------------->give multiple jobs in yaml file. they will run paralelly
 for an automatic trigger what u will do for pipeline------------------->cron, branches, manual trigger, changes in folder
 Continuous Integration (CI) Trigger: Runs the pipeline whenever code changes are pushed to the repository.
@@ -886,7 +886,7 @@ list all vms in stopped state in 1 rg-------------->az vm list --resource-group 
 for 1 resource i want to give reader permission. how to do it using powershell-------------->New-AzRoleAssignment -ObjectId $userId -RoleDefinitionName $roleDefinitionName -Scope $resourceId
 diff access control mechanisms in azure----------->msi,aad,rbac,iam
 if i want to add new environment to a varibale how to do it using powershell for app service--------------------->Set-AzWebApp -ResourceGroupName $resourceGroupName -Name $appName -AppSettings $appSettings.Properties
-give me the example how you solved performance issue using azure monitor
+give me the example how you solved performance issue using azure monitor--------->for a webapp there is high traffic during peak hr. so we adapted autoscaling of vm so when the cpu >80 then it should increase the vm
 how terraform is integrated with ado
 
 -------------------------------------------------------------------------------------------------
@@ -901,7 +901,7 @@ what is diff between variable and tfvar file--------->variable define the inputs
 how do you secure state file--------->store it in remote account. give limited acces to remote state file using rbac and iam control
 when there is a conflict in terraform how do you handle it---------->use blob lease lock
 there is a manual edition in cloud. how do you handle it------->use terraform refresh and plan and apply it
-when we do terraform refresh where the file will be chnaged is it state file? if it is state file then how the main.tf is changed------->use terraform refresh and plan and apply it
+when we do terraform refresh where the file will be chnaged is it state file? if it is state file then how the main.tf is changed------->Check the updated values in terraform show or the terraform.tfstate file. Manually copy important values into your main.tf
 give me the structure of ci/cd pipeline
 what jobs are executed in build
 what are agent pools-------------->An agent pool is a collection of agents used in Azure DevOps and Azure Container Registry to run tasks and pipelines.
@@ -910,7 +910,7 @@ how you provision vms. how do you deploy your code in webapp--------------->we c
 what are all the things that are required for docker
 architecture of k8
 how you store secrets
-diff between service principal and msi------------->service principal is mainly used to authentaticate the appplications. msi is used to access resources from other resource
+diff between service principal and msi------------->service principal is mainly used to authentaticate the appplications and it works accross multiple tenants, mainly used in ci/cd pipelines. msi is used to access resources from other resource. doesnot create secrets and can only be used in same tenants
 do you have experience in building db pipeline
 any certifcations in azure
 what are the applications you have build and deploy'----------->web applications
@@ -985,7 +985,7 @@ User-Assigned Managed Identity
 Description: This type of identity is created as a standalone Azure resource and can be assigned to one or more Azure resources.
 Lifecycle: The identity is managed independently of the resources that use it, allowing for more flexible and reusable identity management1
 where you are deploying your app---------------->webapp
-types of service bus and how will be sending messages----------->Azure Service Bus is used for reliable messaging between distributed applications
+types of service bus and how will be sending messages----------->Azure Service Bus is used for reliable messaging between distributed applications. 1. Queues (Point-to-Point). one sender one receiver. 2. 2. Topics and Subscriptions (Publish-Subscribe). one sender multiple receivers
 anything on fucntion app
 architecture of k8
 
@@ -994,16 +994,110 @@ HAPPIESTMINDS:
 
 what is taint in terraform------->n Terraform, a taint is a way to manually mark a resource for destruction and recreation during the next apply. It’s useful when a resource is in a bad state or needs to be recreated without changing the configuration
 what are the types of metrics in azure monitoring-------------->CPU Usage (for VMs), Disk I/O (for VMs), Network Traffic (for VMs or load balancers), Request Count (for storage accounts),Response Time (from Application Insights), Failure Rate (from Application Insights), Server Response Time (from Azure App Services), Resource Utilization (e.g., VM memory, CPU), User Sign-ups per Hour
-what are facts in azure artifacts
+what are feeds in azure artifacts--------->they are like a package repositiries where you can host, share, manage your packages. it also control who can access the packages. it can host various packages types like nuget, npm, maven etc. it can be organizational or project based feeds.
 what is ingress in k8-------------->Ingress is a Kubernetes object that manages external access to services in a cluster, typically HTTP and HTTPS traffic.
 It acts as an entry point into your cluster — think of it like a reverse proxy or router that maps incoming requests to the appropriate backend services.
 what is meamory leak------------->A memory leak is when a program allocates memory but fails to release it after it's no longer needed — causing memory usage to grow over time and eventually slow down or crash the system. eg when the object is not in use but still being refered then memory will take lot of time thus degrading the performance
 why we use fork------------>when we want other persons repo to our repo then we use fork
 why we use git stash------------->We use git stash to temporarily save your uncommitted changes (both staged and unstaged) without committing them — so you can switch branches or pull updates without losing your work
 how to optimize image in docker-------->use multi stage build, combine multiple run and cmd commands, install only the reuired dependencies, use .dockerignore file to remove unnecessary files. install the image from official website
-why we use docker compose---------->We use Docker Compose to define and manage multi-container Docker applications using a simple YAML file. It’s your best friend when an app needs more than one service — like a web server, database, cache, etc.
-what are the issues that you have faced while deploying pipelines
+why we use docker compose---------->We use Docker Compose to define and manage multi-container Docker applications using a simple YAML file. It’s when an app needs more than one service — like a web server, database, cache, etc.
+what are the issues that you have faced while deploying pipelines----------->service connection not working, resources already exists, permission and authentication issues, resource quota issue, incorrect file path, yaml syntax issues, secrets being exposed, dependencies not installed, approval delays, pipeline not triggered from the mentioned branch, missing variables.
 how do you define variables in powershell-------->$keyvault="keshavi". new-azkeyvault -Name $keyvault
 what are self hosted and microsoft hosted agents in azure-------->microsoft agents are the agents that are maintained by azure. used for simple azure pipelines, we need to wait long time inorder to run our pipeline using this. less control. whereas self hosted agent has full control as it is prepared by us. used for complex pipelines. we dont have to wait for the pipelines to be run
 -----------------------------------------------------------------------------------------------------------------
+Ascendion:
+
+tell me about yourself
+how you are storing your keys in k8
+what is the need of terraform
+tell me the things you have done in terraform
+tell me something about jenkins
+tell me about your pipeline
+do you have any knowledge in python
+steps in github actions
+how to create docker image
+-----------------------------------------------------------------------------------------------------------------
+smartek21:
+
+tell me about yourself
+the app is down as soon as you apply new patches. what steps you would take in such case---------->rollback to the previous version, check system logs, application logs, cpu crash, memory usage, diff between previous and new code, check any break in connection strings or secrets expired, test it again in test environment, include rollback or canary deployment, fix the issue, document the issue. if everyhting works fine then push the code to prod
+what is the reactive and proactive methods for the above situation
+what are the development startegies while deploying to production------------>ci/cd pipeline, iac code, blue-green deployment, secret management, automated test cases
+how do you manage the secrets
+i want to deploy new micro service. how do you handle this------------->plan the service, secret management, monitoring apps, deploy to lower env, document and verify
+your team is growing from 5 to 50. how do you handle pipeline
+you reduces 25% of vulnerabilities of security issues. what did u do------------->Replaced hardcoded credentials with environment variables or identity-based access, 🔐 1. Introduced Automated Security Scanning using microsoft defender for cloud, Enforced branch protection rules & PR checks for security issues, setup microsoft defender to monitor and respond to alert faster
+for eg you are working in 3 tier architecuture. how do you combine multiple container ad how does it communicate with each other in docker---------->use docker compose for multi container app, use docker network for communicating between them
+how do you achieve the performance using iac tools--------->used autoscaking property in iac tools, 
+you are asked to create multi regions architecture in k8
+where you are deploying your code
+reason for change
+---------------------------------------------------------------------------------------------------------------
+Cognizant:
+
+what are the things that are there in azure devops portal. explain each of them
+do you have any idea on module
+tell me the steps that are there in your pipeline
+where do you store your artifacts
+tell me how you optimize the docker image
+what is the need of docker
+if you have to create a vm then how do you do it through modules
+what is a pipeline
+how do you connect ado with other things
+how do you integrate terraform with ado
+how do we create a new repo in ado
+why did you use powershell
+------------------------------------------------------------------------------------------------------------------
+CARELON:
+
+tell me about yourslef
+day to day activities
+what are workspace
+terraform using enterprise or standard version
+do you maintain versions in terraform
+do you develop modules in terraform
+what is statefile and why it is important
+what if statefile is deleted and how do you recover it if you are using open source
+how do you execute terraform on some particular modules--------->terraform plan -target=module.b, terraform apply -target=module.b
+how do you store secrets and retreive it
+diff between application gateway and load balancer
+on which layer both of the things------->LB 4, Application gateway 7
+diff types of deployment strategies
+explain the ci/cd pipeline
+where do you deploy your code
+what is blob storage in azure------------>Azure Blob Storage is a highly scalable, durable, and cost-effective object storage service provided by Microsoft Azure(Binary Large Object). It is designed to store unstructured data such as:Images and videos,Documents (PDF, DOCX, etc.),Backups and logs,Big data files (CSV, JSON)
+which serverless things you used in azure
+which fucntion triggers you have created
+why we need docker
+help me how to write a docker file to install tomcat server--------->
+# Use the official Tomcat base image (includes Java)
+FROM tomcat:9.0-jdk17
+# Optional: Remove default web apps (like docs, examples, etc.)
+RUN rm -rf /usr/local/tomcat/webapps/*
+# Optional: Copy your WAR file to the webapps directory
+# COPY myapp.war /usr/local/tomcat/webapps/
+# Expose the default Tomcat port
+EXPOSE 8080
+how you expose port in docker--------->docker run -d -p <host_port>:<container_port> image_name
+what is high availability. and how do you do that
+do you work on disaster recover---------->Infrastructure (cloud/on-premise/hybrid)
+Applications (e.g., web apps, APIs, databases)
+Data (backup strategies, RTO/RPO planning)
+Cloud platforms (e.g., Azure Site Recovery, AWS Backup, GCP DR)------->Azure Site Recovery (ASR): Replicates VMs, physical servers, or other workloads to a secondary region.Azure Backup: For VM snapshots, SQL databases, file shares, etc.Zone-redundant services: Azure SQL, Storage, Kubernetes (AKS) support built-in redundancy.Geo-redundant storage (GRS): Automatically replicates to a paired region.Availability Zones & Sets: For high availability within a region.
+Business continuity (failover/failback, high availability, geo-redundancy)
+what is docker image
+what is docker container
+i cant access vm. im getting timeout exception. what is the reason for that--------->enable ssh
+what is security group
+on which port ssh run?-------->22
+commands that are there in linux
+how are you managing access to multiple subscription----------->1. Azure Active Directory (Azure AD)
+Azure AD Tenant, User & Group Management, Service Principals
+2. Role-Based Access Control (RBAC)-->Scope, roles
+have you written automation scripts
+how often you create ci/cd pipelines
+what if build pipeline is broke
+how to check if particular port is listening or not----------->netstat, curl,telnet
+
 
