@@ -1197,7 +1197,45 @@ how does the request goes to .net. how does the routing happen for any app
  do you have any idea on kql------------>kusto query lang. used to check the azure monitor logs, log analytics, app insights
  any idea on iaas
  automate iaas how do you do that
- backup and restore things in azure cloud native tools------------>Azure Backup, SQL Database Backup and Restore, Azure Blob Storage Backup, Azure Site Recovery 
+ backup and restore things in azure cloud native tools------------>Azure Backup, SQL Database Backup and Restore, Azure Blob Storage Backup, Azure Site Recovery
+
+----------------------------
+Carelon L2:
+
+where are you hosting your applications
+tell me pipeline which you have build and how you are deploying your code to vm
+are you familiar with k8
+what is diff between terraform plan and init
+how do you modify the statefile
+i have a vm. in my next plan we have to stop destroying the vm. how to do that
+how do you execute the terraform modules
+in your pipeline have to incorporated any security stages
+what is the ci cd tool you are using to build your cicd pipeline
+tell me about the deployment startegies you use in your project
+how many environments do you have
+do you have dr region as well
+what kind of issues you faced while deploying ci cd pipelines
+have you worked on sonarqueb 
+how do you run the test in ci cd pipeline
+------------------------------------
+smartek21 L2:
+
+i have 4env and all these env should be triggered from only 1pipeline
+i want to deploy on dev using only 1branch. whats the condition you use for the dev stage to trigger the code only from 1branch
+have you integrated your code with sonarcube
+you are advised to provision the db and that dv should be accesed by internal people only and app should be accessed by other users. how to do that
+my app is in other vnet and db is on other vnet. how do you make a connection between them
+i dont want my secerts and cert to be exposed in pipelne. how to do it
+did u create group rbac policies in microsoft entra id
+i have a project dependency on other company how do you link both the projects
+how do you handle tickets
+how to do track the build failure
+how do you segregate if the issue is from develpment team or operation teams
+you are doing prod deployment it got 60% completed and got failed how do you handle this situation
+i dont want all persons to access my repos or file. how do you secure your repo
+
+
+
 
 
 
