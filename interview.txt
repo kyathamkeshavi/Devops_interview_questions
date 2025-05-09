@@ -402,7 +402,7 @@ What is Docker file and how you create it--------------------->dockerfile is a f
 Why we are starting with from in Docker file. Why we are using it------------>The FROM command initializes a new build stage and sets the base image for subsequent instructions in the Dockerfile. It essentially tells Docker which existing image to use as a starting point, which can be any valid image from Docker Hub or a custom image from a local repository
 What are the resources you worked on till now--------------------->kv, storage acount, msi, app service, traffic manager
 Why we are using traffic manager--------------->we use traffic manager to distribute the tarffic accross global regions
-How many types of load balanacers in azure-------------------->5. 
+How many types of load balanacers in azure-------------------->4. 
 Different layers in traffic manager In aure--------------->it operats at dns level. dns resolution: it responds to dns query by using ip adress. traffic routing methods: 
 Why we are using 7 layer What is the use of it
 Add a key vault using powershell------------------->New-AzKeyVault -ResourceGroupName "myResourceGroup" -VaultName "myKeyVault" -Location "EastUS"
@@ -1185,14 +1185,14 @@ Assign a role like Storage Blob Data Contributor to the app's service principal.
 App must authenticate using client credentials flow (Client ID + Secret/Certificate).
 can we achieve this using service principal------------->yes
 how does the request goes to .net. how does the routing happen for any app
----------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
  Parentpay:
 
  write a powershell script where we send a email if the cpu usage is below 10
  how to make a module resuable accros systems n powershell---------->use modules. Import-Module MyModule Get-Command -Module MyModule
  adding multiple windows server in ansible to active directory domain. how to do it---------->add windows server in inventory file. use this inventory file in playbook. run the playbook
- how do we use active directory to optimize the login issues or authentication
- how to automate sql backup and  restore and main data integrity---------->use checksum and dbcc checkdb to maintain integrity when taking backups
+ how do we use active directory to optimize the login issues or authentication------->single sign on. sign in once and use all the other resources. by this loging to password is removed. use mfa so that password less is done. use mfa for security
+ how to automate sql backup and restore and main data integrity---------->use checksum and dbcc checkdb to maintain integrity when taking backups
  write terraform script to deploy vm--------->rg, vnet,subnet,nic,nsg,storage,location, vm name, size, os
  how do you do sql patches
  how to you prioratize your task--------------> Prioritizing tasks effectively typically involves balancing urgency, importance, impact, and dependencies
@@ -1207,41 +1207,40 @@ how does the request goes to .net. how does the routing happen for any app
  any idea on iaas
  automate iaas how do you do that
  backup and restore things in azure cloud native tools------------>Azure Backup, SQL Database Backup and Restore, Azure Blob Storage Backup, Azure Site Recovery
-
-----------------------------
+------------------------------------------------------------------------------------------------------------------
 Carelon L2:
 
-where are you hosting your applications
+where are you hosting your applications---------------->on webapp hosted on vm
 tell me pipeline which you have build and how you are deploying your code to vm
 are you familiar with k8
-what is diff between terraform plan and init
-how do you modify the statefile
-i have a vm. in my next plan we have to stop destroying the vm. how to do that
+what is diff between terraform plan and init-------------->Initializes a Terraform working directory, installs plugins, Sets up the backend. plan: Shows what changes Terraform would make, Compares current state with desired config in .tf files, Does not make any actual changes
+how do you modify the statefile-------------->Modifying a Terraform state file is generally not recommended because it can lead to inconsistencies and potentially break the infrastructure if not done carefully. terraform state rm to remove resource, terraform state mv to move resource, terraform state push/pull 
+i have a vm. in my next plan we have to stop destroying the vm. how to do that----------->prevent_destroy = true in lifecycle block
 how do you execute the terraform modules
-in your pipeline have to incorporated any security stages
+in your pipeline have to incorporated any security stages--------->yes we use microsoftsecuritydevops task for scanning, checking secrets exposed, dependecny scan and container scan 
 what is the ci cd tool you are using to build your cicd pipeline
-tell me about the deployment startegies you use in your project
-how many environments do you have
-do you have dr region as well
+tell me about the deployment startegies you use in your project---------->blue-green 
+how many environments do you have----->dev, staging, prod
+do you have dr region as well--------->yes, we use asr to replicate vms and also use secondary regions for app service
 what kind of issues you faced while deploying ci cd pipelines
 have you worked on sonarqueb 
-how do you run the test in ci cd pipeline
-------------------------------------
+how do you run the test in ci cd pipeline-------------->we have test task in pipeline
+----------------------------------------------------------------------------------------------------
 smartek21 L2:
 
-i have 4env and all these env should be triggered from only 1pipeline
-i want to deploy on dev using only 1branch. whats the condition you use for the dev stage to trigger the code only from 1branch
+i have 4env and all these env should be triggered from only 1pipeline----------->give diff stages and their service connections
+i want to deploy on dev using only 1branch. whats the condition you use for the dev stage to trigger the code only from 1branch----------->condition:eq(variables["build.sourcebarnchname"]. keshavi)
 have you integrated your code with sonarcube
-you are advised to provision the db and that dv should be accesed by internal people only and app should be accessed by other users. how to do that
-my app is in other vnet and db is on other vnet. how do you make a connection between them
+you are advised to provision the db and that dv should be accesed by internal people only and app should be accessed by other users. how to do that--------->use NSG. if you want adavnced features then use ASG
+my app is in other vnet and db is on other vnet. how do you make a connection between them------------>vnet Peering
 i dont want my secerts and cert to be exposed in pipelne. how to do it
 did u create group rbac policies in microsoft entra id
-i have a project dependency on other company how do you link both the projects
+i have a project dependency on other company how do you link both the projects in aad---------->invite external user from entra id and give respective roles and access.(B2B)
 how do you handle tickets
 how to do track the build failure
-how do you segregate if the issue is from develpment team or operation teams
+how do you segregate if the issue is from develpment team or operation teams--------->API,functionality, configuration, response time, app code issues means dev 
 you are doing prod deployment it got 60% completed and got failed how do you handle this situation
-i dont want all persons to access my repos or file. how do you secure your repo
+i dont want all persons to access my repos or file. how do you secure your repo-------------->we can add branch policies, or in repo settings we can restrict others to access(read,write). even the org settings we can give access to specific users
 
 
 
