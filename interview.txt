@@ -1127,11 +1127,11 @@ how to check if particular port is listening or not----------->netstat, curl,tel
 --------------------------------------------------------------------------------------------
 UHG:
 when do we use load balancer. is it required? can we replace it with application gateway----------->LB (layer 4): You are distributing non-HTTP/S traffic, such as TCP/UDP, vm,vmss and containers, cost is low compared to other. app gateway is You are dealing with HTTP/HTTPS traffic (Layer 7), Web Application Firewall
-how to restrict ip for a vm. if we have 100vm then how to do it--------->Place VMs in a subnet and apply NSG at the subnet level or If you need different rules for groups of VMs, define ASGs and use them in NSG rules
+how to restrict ip for a vm. if we have 100vm then how to do it--------->Place VMs in a subnet and apply NSG at the subnet level or If you need different rules for groups of VMs, define ASGs and use them in NSG rules. also instaed of givinf seperate ip adddress give range of ip's. we can also use azure firewall
 have you worked on multi stage build
 how to optimize the docker image
 how to maintain security in docker
-where do you store docker images
+where do you store docker images---------->ACR
 diff between docker run and docker start------------>Creates and starts a brand-new container from an image. docker start, Starts an existing, stopped container
 how do you debug the code. build fails
 what are some aws services
@@ -1148,9 +1148,9 @@ how do you resolve merge conflcits. if 100 persons made changes in same file the
 explain how git cherrypick works. will it take upto that commitid or only that commitid--------------->git cherry-pick takes exactly one commit (the one you specify) and applies it to your current branch — not up to that commit, only that one
 explain access policies in kv---------->An Access Policy is a rule that specifies: Who (a user, app, or service principal), Has access to what (secrets, keys, or certificates), And what permissions (e.g., get, list, set, delete)
 im owner of sub will i get all the keys that are there in kv-------------->Owner role at subscription/resource group level can grant you access to the Key Vault, but does not itself grant access to secrets/keys inside the Key Vault. You must have a role like: Key Vault Secrets User to read secrets, Key Vault Reader (read vault metadata), Key Vault Administrator (full access)
-what are the things we can achieve in azure active directory--------------> Register and manage enterprise applications and custom apps. Assign built-in or custom roles to users/groups to limit access. Manage and register devices. Self-service password reset. Self-service group management. Integration with Log Analytics
-diff between azure AD and windows service based directory
-things that are there to create azure service connection--------->
+what are the things we can achieve in azure active directory--------------> Register and manage enterprise applications and custom apps. Assign built-in or custom roles to users/groups to limit access. Manage and register devices. Self-service password reset. Self-service group management. Integration with Log Analytics, RBAC
+diff between azure AD and windows service based directory--------->wad is for on premises access management. aad is for cloud access control, wad manages on premise device. aad manages cloud apps 
+things that are there to create azure service connection--------->msi, service pricipal, azure resource manager, app id, tenant id, sub id, name of connection, 
 Requirement	                        Description
 Azure subscription	                Where resources will be deployed
 Role in Azure	                      Owner or User Access Admin
@@ -1169,12 +1169,21 @@ steps:
 --------------------------------------------------------------------------------
 Albertsons:
 
-explain how you use docker artifcat and deploy it in webapp in ci/cd
+explain how you use docker artifcat and deploy it in webapp in ci/cd----------->store image in acr and download that image 
+          - task: AzureWebAppContainer@1
+            displayName: 'Deploy to Web App'
+            inputs:
+              azureSubscription: '<Your Service Connection Name>'
+              appName: '<Your Web App Name>'
+              containers: |
+                $(containerRegistry)/$(imageName):$(Build.BuildId)
 tools in ci/cd you are using
 what is rg in azure
 i want to use secrets in webapp
-there is an app which is running outside. that app should get access to blob account and modify the data
-can we achieve this using service principal
+there is an app which is running outside. that app should get access to blob account and modify the data----------->The app must be registered in Azure AD.
+Assign a role like Storage Blob Data Contributor to the app's service principal.
+App must authenticate using client credentials flow (Client ID + Secret/Certificate).
+can we achieve this using service principal------------->yes
 how does the request goes to .net. how does the routing happen for any app
 ---------------------------------------------------------------------------------------
  Parentpay:
