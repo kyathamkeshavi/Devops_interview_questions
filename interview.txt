@@ -1229,7 +1229,7 @@ how do you run the test in ci cd pipeline-------------->we have test task in pip
 smartek21 L2:
 
 i have 4env and all these env should be triggered from only 1pipeline----------->give diff stages and their service connections
-i want to deploy on dev using only 1branch. whats the condition you use for the dev stage to trigger the code only from 1branch----------->condition:eq(variables["build.sourcebarnchname"]. keshavi)
+i want to deploy on dev using only 1branch. whats the condition you use for the dev stage to trigger the code only from 1branch----------->condition:eq(variables['build.sourcebarnchname']. 'keshavi')
 have you integrated your code with sonarcube
 you are advised to provision the db and that dv should be accesed by internal people only and app should be accessed by other users. how to do that--------->use NSG. if you want adavnced features then use ASG
 my app is in other vnet and db is on other vnet. how do you make a connection between them------------>vnet Peering
@@ -1241,10 +1241,69 @@ how to do track the build failure
 how do you segregate if the issue is from develpment team or operation teams--------->API,functionality, configuration, response time, app code issues means dev 
 you are doing prod deployment it got 60% completed and got failed how do you handle this situation
 i dont want all persons to access my repos or file. how do you secure your repo-------------->we can add branch policies, or in repo settings we can restrict others to access(read,write). even the org settings we can give access to specific users
+-----------------------------------------------------------------------------------------------------
+Cognizant L2:
 
+tell me about yourself and have you handled any escallations
+what are your achievements
+what are services you have worked on infra side
+few dev are wokring on github. how the changes are going to reflect in remote or main barnch. what are the steps will be done
+what is the connection between ado and github------->tell them about the git intergration with ado
+how to make service connections
+now connection has been made, now i want to create a pipeline once the changes came to main. tell me how to trigger and test cases in pipeline
+how ado interacts with azure resources
+how terraform is given in ci/cd pipeline
+give me the modules and steps for terraform infra deployment--------->use terraform task in pipeline
+if we get 401 error. how you will resolve that issue. what may be the cause of this----------->Incorrect username/password or API key,OAuth token expired or revoked, Client not authorized for the requested resource,For example, user lacks permission.Incorrect authentication method
+suppose any policy is restricting. how you will rectify it--------->give access policies for user in kv
+give me an example of fucntional app
+lets say you are working for clinet. he told to deploy resources and u have done all the coding. but when you are about to deploy the client says this is not what they have given and asked us to change the code. what will you do in that scenario.--------->compare the previous doc and op to your code
+and also when you are about to deploy client is not there. so with whom you will take the apporval and what is the process for that as you cannot postpone the deployment window
+------------------------------------------------------------------------------------------------------------
+Wipro:
 
+tell me format of yaml
+why we are using ansible for automation instead of powershell------------>Ansible uses YAML playbooks, which are easy to read and maintain, PowerShell is a full scripting language — powerful but can become complex quickly.
+why terraform not other iac Tools
+i dont want all persons to access my repos or file. how do you secure your repo------->project settings-->permissions-->reader/contributor-->user add
+If anyone make changes in any file in ado I should get notification in ado------>projct settings-->notifications-->pr changes----->subscription
+What are endpoints in azure------->An endpoint is a URL, IP address, or DNS name (possibly with a port) that exposes a service to be accessed over a network — either publicly or privately. public is available over internet. private is acceseble thorugh vnet. service end point extends vnet to azure resources like sa. Used to secure services to only be accessible from your VNet.
+--------------------------------------------------------------------------------------------------------------
+Corelogic L1:
 
-
-
-
-
+what is devops and whats the role of it
+describe how you learn new things
+if the technology is not there in google then how you learn them
+describe how you interact with dev team in your project
+when there is no documentation for the internal tools then how you learn them
+how do you maintain documentation -------------->first document the project preview, next give dependencies and links for that. give the contact person names. give them repo details, ci/cd pipeline links, example of terraform and screenshots of output, add error details and how we have resolved them. 
+explain ci/cd pipeline you have created
+what are build, release and azure artifacts--------->build artifact is produced at ci process. release artifact uses the build artifact and consumes them and deploy it. azure artifact acts as a storage system where we can store the artifacts
+if you faced any issues in prod how you resolve them------->if there are any issues in prod will create a branch called hotfix and test it locally and raise pr and merge and push to prod
+are you interested only code deployment or also interested in infra deployment
+when it comes to automation, have you got any chace to work on bash or python
+tell me the braching strategy. if something goes wrong in prod how you rectify them. and you will merge them---------->if there are any issues in prod will create a branch called hotfix and test it locally and raise pr and merge and push to prod
+how you will know when to merge the code-------->Code is complete and meets the acceptance criteria, All unit/integration tests pass, Pull Request (PR) is approved by reviewers
+did you write terrafrom code from scratch
+what your thoughts to rewrite the code in terraform------->use modules, tfvars file, varibale.tf file
+diff ways to pass variables in terraform--------->use variables.tf files, use dev.tfvars file, use it at applying  terraform apply -var="region=westeurope" -var="env=prod"
+how to pass variables in run time in terraform-------->terraform apply -var="region=westeurope" -var="env=prod"   terraform apply -var-file="dev.tfvars"
+lifecycle in terraform. where do you need create_before_destroy------->lifecycle has create_before_destroy, prevent_destroy, ignore_changes, precondition
+do you package your .net code as docker image?
+what is the build tool you are using in your project
+are you using docker swarm? how do you run your containers
+diff types of docker networks
+if we dont have technolgies in our project then how you will learn new ones
+what are the open source monitoring tools you have learned that are not there in your project
+how are you detecting the issues in prod using monitoring tools
+how do you differentiate between dev probelm or infra probelm------------>API,functionality, configuration, response time, app code issues means dev.use app insights for app related issues.use log analytics for infra related issue it is infra, cpu, memory, permission, service connection means infra issue
+apart from .net have you deployed any other code
+are you comfortable in writing jenkins groovy scripts
+what is difference between build pipeline and artifact----->build pipeline builds, packages, install, test the code. but artifact is like a zip file which has all the properties, packages, dependencies which are used to run your apps
+are there any cost constraints between build pipeline and artifacts--------->yes, in build we have agents(self/microsoft) and also artifacts ha storage which will be free for particular limit
+advantages and disadvantages of using yaml------->can write both ci/cd in single file. can define multiple task, easily readable. can get more syntax error, hard to debug
+what is diff between blue-green deployment and canary deployment
+what is the advantages and disadvantages of both deployments-------->blue-green zero downtime, instant rollback. canary cost-efficient as we dont need double infra, will get feedback quickly
+have you deployed dotnet framworks on docker contianers
+how do you ensure code quality in your pipeline--------->we use microsoft defender for cloud to do all the security checks. iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
+how do you ensure the app is available to customers--------->vmss, availablity zone, autoscaling, deployment strategies(blue-green), continous monitoring, disaster recovery methods.
