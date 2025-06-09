@@ -1315,25 +1315,40 @@ what kind of issues you faced in build and pipeline and how you resolved them
 any deployment startegy you used
 how do you achieved zero down time using blue-green deployment strategy
 how do you maintain branching strategy
-how do you setup pre-deployment approvals in yaml pipeline
+how do you setup pre-deployment approvals in yaml pipeline-------------->create environment in ado and add approvals from the environment. then use environment:prod in yaml pipeline under jobs. 
 write a pipeline for .net application
-how do you use artifact in release stage that are generated in build pipeline. write the code for that using yaml
-how do you setup pr build before deployment in yaml file. run build pipeline before merging
-when i want to run the code on every monday then how do you do it.
-considerations you take care when deploying to production release
+how do you use artifact in release stage that are generated in build pipeline. write the code for that using yaml------------->use publish in build stage. use download: current in release stage. and also give path to download the artifact
+how do you setup pr build before deployment in yaml file. run build pipeline before merging------------->create a pr build yaml file and under branch policies and build validation add these file under the settings and save the policy
+when i want to run the code on every monday then how do you do it.--------->use schedular trigger(cron job)
+schedules:
+- cron: "0 0 * * 1"  # Every Monday at 00:00 UTC
+  displayName: Weekly Monday Run
+┌───────────── minute (0 - 59)
+│ ┌───────────── hour (0 - 23)
+│ │ ┌───────────── day of month (1 - 31)
+│ │ │ ┌───────────── month (1 - 12)
+│ │ │ │ ┌───────────── day of week (0 - 6) (Sunday to Saturday, where 1 = Monday)
+│ │ │ │ │
+│ │ │ │ │
+0 0 * * 1
+considerations you take care when deploying to production release----------->Code Quality: Ensure all code has passed automated tests (unit, integration, end-to-end).
+Approvals: Use manual or automated approvals (e.g., from QA, product owners).
+Security Scans: Run static and dynamic security analysis (SAST/DAST).
+Dependency Checks: Verify third-party libraries are up-to-date and secure.
+take backup, infra health check, deployment strategy, rollback plan, monitoring the alerts
 how the application work. how the request reach to your web app. tell me the process
 types of load balancers
 how user request reaches to cosmos db from webapp
 diff between app gateway and traffic manager
-when we want tls handshake and ssl termination then what load balancer we use
+when we want tls handshake and ssl termination then what load balancer we use------------>if we need both then we should go for l7. it means azure front door or app gateway
 how traffic manager maps/distribute the traffic
 what are things you used in blob storage and what is the purpose of that
-what kind of data you stored in storage blob coming from webapp
-how do you scale your webapp. and where the scaling option is present
+what kind of data you stored in storage blob coming from webapp------------>pdf's, web server logs, performance metrics, csv files, db backups
+how do you scale your webapp. and where the scaling option is present----->in app service we have scaleup and out options. we use app service plan to do it
 if you want to change the pricing or scaling where do you change it------------------> we use app service plan
-can you use/create multiple webapps using single app service plan
+can you use/create multiple webapps using single app service plan--------->yes, it reduces the cost. but we can only use this when webapp has same performance and scaling needs
 what are the things yo have used using functional app
-how you are deploying fucntional app using yaml 
+how you are deploying fucntional app using yaml ----------->- task: AzureFunctionApp@
 what is ev2 and what it is doing
 any challenges you faced in your devops career and how you resolved it
 what is docker
