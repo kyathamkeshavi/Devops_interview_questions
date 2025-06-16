@@ -1354,5 +1354,40 @@ any challenges you faced in your devops career and how you resolved it
 what is docker
 difference between cmd and entrypoint
 how do you create docker image and image is build using set of instructions
+---------------------------------------------------------------------------------------------------------------------------------------
+QENTELLI:
 
+have you created pipeline from strach
+have exp on iac tools
+explain about the structure of your project
+what are azure services you are aware of
+do you have any idea on azure fucntions and types. explain about them
+expalin about durable fucntionapp
+explain diff between service bus queue and topics
+explain about the dead data queue in service bus
+why we use k8
+different types of pods in k8
+consider you vm and kv in diff network. how do you communicate with them
+what is private endpoint
+steps to configure private endpoint
+how many ways you can create a pipeline
+how you create the yaml file
+if we need approval in prod who will do that
+how can we implement approval from yaml file
+if we want to implement code in docker using yaml how to do it?
+how resources are connected from azure to ado
+how to secure pat in ado
+what is statefile in terraform
+someone already created the resource for which you are writing the code. now if you deploy the code what will happen
+if your statefile is balnk then how it will update the resource in azure
+what is app insight in azure
+once the app is deployed how you will make sure everything is correct
+how to identify an issue is with pipeline or version or dev issue
+while deploying pipeline, build is on 1 agent and release is on other folder. how to handle this
+what are the types of agents
+advantages and disadavantages of self hosted agent
+what is front door
+what is meant by layer 7 prtection
+structure of terraform in your project
+steps to create the module in terraform
 
