@@ -1359,16 +1359,27 @@ QENTELLI:
 
 have you created pipeline from strach
 have exp on iac tools
-explain about the structure of your project
+explain about the structure of your project--------->The repos were organized into:
+/src – Application source code (microservices or components)
+/infra – Infrastructure as Code (IaC) using ARM templates or Terraform
+/pipelines – YAML pipelines for CI/CD
+/scripts – Helper scripts (PowerShell, Bash, Python)
+/tests – Unit, integration, and functional tests
 what are azure services you are aware of
 do you have any idea on azure fucntions and types. explain about them
-expalin about durable fucntionapp
-explain diff between service bus queue and topics
-explain about the dead data queue in service bus
-why we use k8
-different types of pods in k8
-consider you vm and kv in diff network. how do you communicate with them
-what is private endpoint
+expalin about durable fucntionapp------------->Durable Functions is an extension of Azure Functions that enables you to write stateful workflows in a serverless environment. Unlike normal (stateless) Azure Functions, Durable Functions maintain state between executions. They're built on top of Azure Functions + Durable Task Framework and are especially useful for long-running, orchestrated, or chained tasks.
+explain diff between service bus queue and topics------------>queue(point-point): Only one consumer receives and processes each message.
+topis(multiple subscription):Multiple subscriptions can receive a copy of each message.
+queue:  [Sender] ──► [Queue] ──► [Receiver]
+topic:  [Sender] ──► [Topic]
+                   ├─► [Subscription A] ─► [Receiver A]
+                   ├─► [Subscription B] ─► [Receiver B]
+                   └─► [Subscription C] ─► [Receiver C]
+explain about the dead letter queue in service bus---------------->In Azure Service Bus, a Dead Letter Queue (DLQ) is a special sub-queue that holds messages that cannot be delivered or processed successfully. It helps you prevent message loss and troubleshoot issues.The Dead Letter Queue is used to store undeliverable or failed messages.
+why we use k8------------>Kubernetes is an open-source container orchestration platform. It automates the deployment, scaling, management, and networking of containerized applications. Automatically replaces or restarts failed containers. Distributes traffic across containers. Supports zero-downtime deployments.
+different types of pods in k8------------->Single Container Pod: Runs only one container inside the pod, Multi-Container Pod: A pod that runs multiple tightly coupled containers
+consider you vm and kv in diff network. how do you communicate with them-------------->VNet Peering
+what is private endpoint--------------->A Private Endpoint is a network interface that connects you privately and securely to an Azure service (like Key Vault, Storage Account, SQL DB, etc.) over the Azure backbone network, rather than the public internet.
 steps to configure private endpoint
 how many ways you can create a pipeline
 how you create the yaml file
@@ -1376,18 +1387,18 @@ if we need approval in prod who will do that
 how can we implement approval from yaml file
 if we want to implement code in docker using yaml how to do it?
 how resources are connected from azure to ado
-how to secure pat in ado
+how to secure pat in ado---------->Grant only the permissions necessary for the task, Always set the minimum expiration period required, Store securely using: Azure Key Vault, environment variable, Regularly delete and recreate PATs
 what is statefile in terraform
 someone already created the resource for which you are writing the code. now if you deploy the code what will happen
-if your statefile is balnk then how it will update the resource in azure
+if your statefile is blank then how it will update the resource in azure---------->If the resource exists but isn't in Terraform state, it will not recognize it.On terraform apply, it will try to create a new resource → ⚠️ Fails with name conflict
 what is app insight in azure
-once the app is deployed how you will make sure everything is correct
+once the app is deployed how you will make sure everything is correct------------->Application Health Check, Deployment Logs / Pipeline Output, Azure Monitoring Tools, Database and API Connectivity
 how to identify an issue is with pipeline or version or dev issue
-while deploying pipeline, build is on 1 agent and release is on other folder. how to handle this
+while deploying pipeline, build is on 1 agent and release is on other folder. how to handle this--------------->At the end of your Build pipeline, use the PublishBuildArtifacts task to upload output files (binaries, packages, etc.) to Azure DevOps. - task: PublishBuildArtifacts@1, Use the Artifacts in Release Pipeline. - task: DownloadPipelineArtifact@2
 what are the types of agents
 advantages and disadavantages of self hosted agent
 what is front door
-what is meant by layer 7 prtection
+what is meant by layer 7 protection---------------->Layer 7 Protection refers to security controls and filtering at the application layer (Layer 7) of the OSI model
 structure of terraform in your project
 steps to create the module in terraform
 
