@@ -1401,4 +1401,57 @@ what is front door
 what is meant by layer 7 protection---------------->Layer 7 Protection refers to security controls and filtering at the application layer (Layer 7) of the OSI model
 structure of terraform in your project
 steps to create the module in terraform
+---------------------------------------------------------------------------------------------------------------
+Tungsten:
+
+disadavantages of git
+workflow of git
+what is head in git
+how to checkout to older commits from current commit
+what is git lfs
+i have cloned git repo but it is not succesful but when i do git fetch it is succesful. what is the issue here
+what is git reflog
+what is git rebase different from merge
+when you want to go to other branch by leaving current job what option you do
+when you checkout from branch a to b and then to c, then can we apply stash on c? if not Y
+when we want other repo in our repo then how to do it
+where does reference of files is stored in git
+what is there inside .git folder
+how to cloned a repo in local. how to find that is pointing to which repo
+if you want to clone new repo what are the things that are asked from local
+where can we store our user information in windows
+in any systems how many levels of config files will be present
+in which file the entry will go when we add a user
+what is submodule concept
+if we delete the drive that has user authentication, then what will happen  if we try to clone again
+how do you merge the code in your project
+when we do git rebase will it delete the old branch
+if i want one specific commit from other branch what we have to do
+if i do cherrypick what happens to the commitid in your branch. is it same or diff
+how to check the same commit id is there in how many branches. how to track it
+you have mentioned pull and push config in your resume. walkme through that
+how did you create ci/cd pipeline
+if i want only 1 specific branch to use for 1 particular stage, then how to do it
+here you have written vulnerabilities are reduces how did you achieve it
+if i want a variable that is declared in 1 stage now i want to use it in another stage. how to do it
+how do you create agent pool
+i want to keep 1 pipeline to 1 agent. how to do it
+have you ever used demands in pool section?
+i want to run the stage only after the other stage is successful
+can we run a pipeline using tags
+what is ci and gated build
+how we get artifact from build to release stage
+have you written any custom task 
+what does | do in PowerShell
+i want a folder upto 2 levels and want to dsiplay only folder names. how to do it
+what does get-childitem do
+how do you update registery entry in powershell
+i want to push changes to private registery instead of public in docker. how to do it
+what is -it in docker run
+i want a physical file of a docker image. how to do it
+what is ENTRYPOINT
+what are tags in docker
+can we run linux in docker desktop
+what are 3 things that we have when we give permission to a person in linux
+
 
