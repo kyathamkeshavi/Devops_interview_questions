@@ -543,10 +543,9 @@ trigger:
   paths:
     include:
       - path/to/your/folder/  # Only trigger when files in this folder change
-i have 3 stages dev, test, prod. but i want to skip the test stage. how to do it-----------> we can use depends on section in prod. so that test will skip and after dev it will directly go to prod
+i have 3 stages dev, test, prod. but i want to skip the test stage. how to do it-----------> we can use depends on section in prod or we can use condition: false in the stage which we want to skip. so that test will skip and after dev it will directly go to prod
 how to configure self hosted agent in ado----->Go to Azure DevOps → Organization Settings → Agent Pools->add pool. Navigate to Project Settings → Agent Pools → Select your pool (SelfHostedPool).-->new agent(select linunx/win). run commands on system. check if the agent is online or not. we need personal access token
-i have main.tf, and if i do terraform apply, how it will interact with ado and azure----------->Authenticate with Azure (via az login or service principal).
-Read main.tf and apply changes.Store Updated State file in storage account(to keep track of managed resources).
+i have main.tf, and if i do terraform apply, how it will interact with ado and azure----------->Authenticate with Azure (via az login or service principal). Read main.tf and apply changes.Store Updated State file in storage account(to keep track of managed resources).
 i want to use 1 rg for multiple subscription. how to give this in main.tf in terraform----------> give diff sub in diff providers section. we cannot use 1 rg for diff sub
 provider "azurerm" {
   alias           = "sub1"
@@ -594,11 +593,11 @@ KANERIKA:
 tell me about yourself
 can you tell me the pipeline you have configured
 brief me about the steps in ci/cd pipeline in your project
-tell me how will you integrate git with azure. how the pipeline os triggered
+tell me how will you integrate git with azure. how the pipeline is triggered--------->install git in your local machine. go to azure devops 
 do you have any experience in ansible
 how will you store the secrets in ansible------------->Ansible Vault is a tool built into Ansible for encrypting sensitive data such as passwords or keys.ansible-vault create secrets.yml
 what is dynamic inventory in ansible--------->A Dynamic Inventory in Ansible allows you to automatically pull information about the hosts from external sources, such as cloud providers, databases, or APIs, rather than manually defining all the hosts in an inventory.ini file. This is particularly useful in environments where hosts change frequently, such as cloud-based infrastructures (AWS, Azure, Google Cloud), where new instances may be created or terminated on-demand.
-do you have exp in k8
+do you have exp in k8------->yes
 can you tell me in docker commands. cmd and entrypoint which is overwritten------------>both can be overwrtitten. ENTRYPOINT is not overwritten unless explicitly replaced by using the --entrypoint flag when running the container. CMD can be overwritten when you pass new arguments at runtime.
 give the docker command to overwrite the entrypoint----------------->docker run --entrypoint cat myimage /etc/os-release
 can you tell me how you interact with the container. tell me the command to go inside the container----------------->docker exec -it is generally the preferred method to enter a container because it opens an interactive shell session without affecting the main process.
@@ -715,7 +714,7 @@ where do u store state file and why?--------->azure storage account
 i created manualy resource. can i again do it in terraform?----------->terraform import
 i want 3vms at a time. how can we do that in terraform--------->count
 how to do code reusability-------------->modules
-you have an app which is in vm. what steps are there to expose it on abc.com. what type of config you do
+you have an app which is in vm. what steps are there to expose it on abc.com. what type of config you do--------->check if vm is reachable. the add firewall for inbound and outbound traffic, open http and https ports, the use public ip to make it available over internet. the add that public ip to vm and configure a dns name
 what is load balancer--------->
 Load Balancer type				    Layer		Use Case
 -------------------------------------------------------------------------------
@@ -776,11 +775,11 @@ Example Services	      VMs, SQL databases with availability groups.	            
 components in availability set and zone
 pre requisite to host webapp----------->host service(vm/app service), subscription, rg, storage, code, vnet,nsg, application gateway or front door, pipeline, monitoring and security
 why we use RBAC---------->used in Azure to manage user permissions securely and efficiently. It ensures that users have only the permissions they need—nothing more.
-in vm if we want to use kv then what permissions we have to give---------->use msi in vm, and go to kv and use this msi and give permission
+in vm if we want to use kv then what permissions we have to give---------->use msi in vm, and go to kv and use this msi and give permission. kv reader, kv secret user, kv secret officer are some of the permissions we give on msi
 why we use service principal-------------->A Service Principal (SP) is used in Azure to allow applications, scripts, or automation tools to authenticate and access Azure resources securely without using user credentials
 have you setup any point to point VPNs
 why we use NSG------------>An Azure Network Security Group (NSG) is used to control inbound and outbound traffic to Azure resources (like Virtual Machines, Subnets, or Load Balancers). It acts as a firewall that allows or denies traffic based on rules.
-i want to use 1vnet to communicate with other vnet. how to do it----------->1️⃣ VNet Peering (Best for low latency, high-speed communication)
+i want to use 1vnet to communicate with other vnet. how to do it----------->1️⃣ VNet Peering (Best for low latency, high-speed communication). go to vnet-->settings-->peering-->add-->name of peering, sec vnet, allow vnet access-->create. once done check using ping <ip> or curl command
 2️⃣ VNet-to-VNet VPN (IPsec Tunnel) (Best for cross-region or different subscriptions)
 what are the things we use in arm template to deploy the resources
 what are the components in arm template
@@ -899,9 +898,9 @@ i want to deploy 10 resources with diff configuration at diff locations, how to 
 why we use output file in terraform-------->we use output files (or just outputs) to expose useful information about the infrastructure we've provisioned.
 what is diff between variable and tfvar file--------->variable define the inputs, their types, defaults, and descriptions while tfvar file actually give values to the variables you declared earlier
 how do you secure state file--------->store it in remote account. give limited acces to remote state file using rbac and iam control
-when there is a conflict in terraform how do you handle it---------->use blob lease lock
+when there is a conflict in terraform how do you handle it---------->use terraform plan to check the conflicts and use import command
 there is a manual edition in cloud. how do you handle it------->use terraform refresh 
-when we do terraform refresh where the file will be chnaged is it state file? if it is state file then how the main.tf is changed------->Check the updated values in terraform show or the terraform.tfstate file. Manually copy important values into your main.tf
+when we do terraform refresh where the file will be chnaged is it state file? if it is state file then how the main.tf is changed------->Check the updated values in terraform show, plan or the terraform.tfstate file. Manually copy important values into your main.tf or do import or apply
 give me the structure of ci/cd pipeline
 what jobs are executed in build
 what are agent pools-------------->An agent pool is a collection of agents used in Azure DevOps and Azure Container Registry to run tasks and pipelines.
@@ -1130,7 +1129,7 @@ when do we use load balancer. is it required? can we replace it with application
 how to restrict ip for a vm. if we have 100vm then how to do it--------->Place VMs in a subnet and apply NSG at the subnet level or If you need different rules for groups of VMs, define ASGs and use them in NSG rules. also instaed of givinf seperate ip adddress give range of ip's. we can also use azure firewall
 have you worked on multi stage build
 how to optimize the docker image
-how to maintain security in docker
+how to maintain security in docker----------->I secure Docker by using minimal trusted images, running containers as non-root users, scanning images for vulnerabilities, restricting container permissions, managing secrets securely, and keeping the host and Docker engine updated. I also avoid exposing unnecessary ports and enforce proper access control.
 where do you store docker images---------->ACR
 diff between docker run and docker start------------>Creates and starts a brand-new container from an image. docker start, Starts an existing, stopped container
 how do you debug the code. build fails
@@ -1307,6 +1306,12 @@ what is the advantages and disadvantages of both deployments-------->blue-green 
 have you deployed dotnet framworks on docker contianers
 how do you ensure code quality in your pipeline--------->we use microsoft defender for cloud to do all the security checks. iac scanning for validating iac against security policy. secret scanning to check the secrets are being exposed. dependency scanning i.e., synk. Identifies vulnerabilities in dependencies and suggests fixes
 how do you ensure the app is available to customers--------->vmss, availablity zone, autoscaling, deployment strategies(blue-green), continous monitoring, disaster recovery methods.
+can you block access to your vm within a subnet--------> yes we can do that using an inbound rule in network settings in vm
+difference between nsg and asg--------->asg is used along with nsg if we want a group of ip address to access other subnet
+are nsg stateful or stateless-------->they are stateful as we are not giving any outbound rules in networking. if user access any request the nsg sends the response back. this state is called stateful
+diff between firewall and nsg--------->firewall is used to block and unblock inbound and outbound traffic within vnet. it works at layer 7. applies between vnets, whereas nsg is used to used to allow or block inbound traffic within the subnet . applies within subnets and nic's. it works at layer 4
+how azure resources communicate with each other--------->msi or service principal
+what is difference between msi and service principal--------->for service principal we have to rotate the access keys but for msi azure will take care of it
 ---------------------------------------------------------------------------------------------------------
 WAFERWIRE:
 
@@ -1381,81 +1386,179 @@ different types of pods in k8------------->Single Container Pod: Runs only one c
 consider you vm and kv in diff network. how do you communicate with them-------------->VNet Peering
 what is private endpoint--------------->A Private Endpoint is a network interface that connects you privately and securely to an Azure service (like Key Vault, Storage Account, SQL DB, etc.) over the Azure backbone network, rather than the public internet.
 steps to configure private endpoint
-how many ways you can create a pipeline
+how many ways you can create a pipeline--------->classic and yaml
 how you create the yaml file
-if we need approval in prod who will do that
+if we need approval in prod who will do that--------->we have environment variables where we give the managers to give the approval
 how can we implement approval from yaml file
-if we want to implement code in docker using yaml how to do it?
-how resources are connected from azure to ado
+if we want to implement code in docker using yaml how to do it?------->write the docker-compose.yml file and do docker-compose up. this will run your application
+how resources are connected from azure to ado--------->using service connection
 how to secure pat in ado---------->Grant only the permissions necessary for the task, Always set the minimum expiration period required, Store securely using: Azure Key Vault, environment variable, Regularly delete and recreate PATs
-what is statefile in terraform
-someone already created the resource for which you are writing the code. now if you deploy the code what will happen
-if your statefile is blank then how it will update the resource in azure---------->If the resource exists but isn't in Terraform state, it will not recognize it.On terraform apply, it will try to create a new resource → ⚠️ Fails with name conflict
-what is app insight in azure
+what is statefile in terraform----------->In Terraform, a state file is what Terraform uses to keep track of all the infrastructure it has created. State file = current snapshot of your infrastructure
+someone already created the resource for which you are writing the code. now if you deploy the code what will happen-------->it will not deploy the code. it says resource alreday exists and fails. if a resource already exists but is not in Terraform state, Terraform will try to recreate it and fail. To fix this, we import the resource into Terraform state.
+if your statefile is blank then how it will update the resource in azure---------->no it will not update. If the resource exists but isn't in Terraform state, it will not recognize it.On terraform apply, it will try to create a new resource → ⚠️ Fails with name conflict
+what is app insight in azure----------> it is an monitoring tool in azure where we can track the live logs of the application
 once the app is deployed how you will make sure everything is correct------------->Application Health Check, Deployment Logs / Pipeline Output, Azure Monitoring Tools, Database and API Connectivity
-how to identify an issue is with pipeline or version or dev issue
+how to identify an issue is with pipeline or version or dev issue------->if it runs fine locally then its a pipeline issue if not its a dev issue. check the pipeline logs for error message and try to rectify it
 while deploying pipeline, build is on 1 agent and release is on other folder. how to handle this--------------->At the end of your Build pipeline, use the PublishBuildArtifacts task to upload output files (binaries, packages, etc.) to Azure DevOps. - task: PublishBuildArtifacts@1, Use the Artifacts in Release Pipeline. - task: DownloadPipelineArtifact@2
-what are the types of agents
-advantages and disadavantages of self hosted agent
-what is front door
+what are the types of agents------->self hosted and microsoft hosted agents
+advantages and disadavantages of self hosted agent----------->we have to pay for self hosted. there is no time limit for self hosted. it is secured
+what is front door---------->Azure Front Door is a global entry point for your web applications that improves speed, security, and availability.
 what is meant by layer 7 protection---------------->Layer 7 Protection refers to security controls and filtering at the application layer (Layer 7) of the OSI model
 structure of terraform in your project
 steps to create the module in terraform
+How do you scale an application in Kubernetes?
+How do you secure container images in Kubernetes?
 ---------------------------------------------------------------------------------------------------------------
 Tungsten:
 
-disadavantages of git------------------->inefficiency in handling large file. for this we use git lfs
-workflow of git
-what is head in git---------------->its like a tip which is pointing to the current commit of your checked out branch
-how to checkout to older commits from current commit-------------->git checkout <id>
-what is git lfs--------->used to store the large binary files
-i have cloned git repo but it is not succesful but when i do git fetch it is succesful. what is the issue here------------->path is too long. insufficient disk space. network issue, user doesnt have write permission
-what is git reflog------------->like a reference logs which keeps the track of modifications done on working directory
-what is git rebase different from merge--------------------->rebase rewrites the commit history but merge only updates the current branch
-when you want to go to other branch by leaving current job what option you do----------->git stash
-when you checkout from branch a to b and then to c, then can we apply stash on c? if not Y------------> we can apply stash changes on diff branch
-when we want other repo in our repo then how to do it------------->use git submodule. git submodule add <repousl> <pathofsubmodule>
-where does reference of files is stored in git--------------->it is stored in .git/refs folder
-what is there inside .git folder-------->.git contains metadata of the files. it has sub folders like head, refs, logs
-how to cloned a repo in local. how to find that is pointing to which repo------------->git remote -v
-if you want to clone new repo what are the things that are asked from local------------>authentication
-where can we store our user information in windows------------>stored in c/users, or environment variables
-in any systems how many levels of config files will be present
-in which file the entry will go when we add a user
-what is submodule concept------------>when we want to combine 2 repos then we use submodule concept
-if we delete the drive that has user authentication, then what will happen  if we try to clone again------------>no login is possible
-how do you merge the code in your project
-when we do git rebase will it delete the old branch------------>it doesnt delete the old branch. but it rewrites the commits of the current branch by creating new commits
-if i want one specific commit from other branch what we have to do----------->git cherry pick
-if i do cherrypick what happens to the commitid in your branch. is it same or diff--------------->it is different
-how to check the same commit id is there in how many branches. how to track it
+disadavantages of git-------->Every developer has a full copy of the repository, including history. This can consume significant disk space, Git works best with text files (code). It’s not efficient for large binary files like videos, images, or backups, if your repo has large files or long history, operations like cloning or fetching can become slow
+workflow of git--------->staging area, local repo, remote repo
+what is head in git------>HEAD = reference to the latest commit you are currently working on
+how to checkout to older commits from current commit----------->git checkout <commit>
+what is git lfs---------->Git LFS (Large File Storage) is an extension of Git designed to handle large files efficiently. Git LFS replaces large files with small pointer files in your repository, Actual large files are stored separately (on a remote server),Git only tracks lightweight references, So your repo stays fast and small.
+i have cloned git repo but it is not succesful but when i do git fetch it is succesful. what is the issue here-------->Disk space issue:
+Clone needs full working copy, Fetch only downloads metadata. Permission issue: You can fetch repo metadata, But cannot checkout files locally. network interruption, corrupt working directory
+what is git reflog------------>Reflog = history of your actions (HEAD changes), not just commits
+what is git rebase different from merge----------> Merge = combine histories, Rebase = rewrite history
+when you want to go to other branch by leaving current job what option you do----------->stash the changes or commit the changes and go to new branch
+when you checkout from branch a to b and then to c, then can we apply stash on c? if not Y----------->yes, you can apply a stash on branch c
+when we want other repo in our repo then how to do it---------->Keeps the other repo as a separate project inside your repo. git submodule add <repo-url> folder-name
+where does reference of files is stored in git------------->In Git, references to files are not stored directly as files → they are stored inside Git objects in the .git directory
+what is there inside .git folder------------>The .git folder is the heart of your Git repository. It contains all the metadata and history that Git needs to track your project. If this folder is deleted, your project files may still exist, but it is no longer a Git repository.
+how to cloned a repo in local. how to find that is pointing to which repo--------->git remote -v
+if you want to clone new repo what are the things that are asked from local-------->git should be installed, repo url, permissions needed, internet, disk space, username and password.
+where can we store our user information in windows---------->C:\Users\<YourUsername>\.gitconfig
+in any systems how many levels of config files will be present---------->system level, global level and local level
+in which file the entry will go when we add a user----------> if you use git config global it will be stored in global level. if you dont specify anything it will be stored in local level.
+what is submodule concept---------> it is storing one repo inside the other repo in git
+if we delete the drive that has user authentication, then what will happen  if we try to clone again---------->If the drive containing credentials is deleted, Git will not be able to authenticate. For HTTPS, it will prompt again for credentials; for SSH, cloning will fail until keys are reconfigured.
+how do you merge the code in your project---------> git merge <branchname>
+when we do git rebase will it delete the old branch---------> it rewrites the old branch with the new branch
+if i want one specific commit from other branch what we have to do--------> do cherry-pick
+if i do cherrypick what happens to the commitid in your branch. is it same or diff--------->Cherry-pick creates a new commit, so the commit ID will be different even though the changes are the same
+how to check the same commit id is there in how many branches. how to track it------------>We can use git branch --contains <commit-id> to find all branches that include a commit. It works because branches are pointers and Git checks if the commit is in their history.
 you have mentioned pull and push config in your resume. walkme through that
 how did you create ci/cd pipeline
-if i want only 1 specific branch to use for 1 particular stage, then how to do it------------>condition: eq(variables['Build.SourceBranchName'], 'dev-branch')
-here you have written vulnerabilities are reduces how did you achieve it------------>tell them about scanning and code quality
-if i want a variable that is declared in 1 stage now i want to use it in another stage. how to do it
+if i want only 1 specific branch to use for 1 particular stage, then how to do it--------->we use condition in the stage
+here you have written vulnerabilities are reduces how did you achieve it
+if i want a variable that is declared in 1 stage now i want to use it in another stage. how to do it--------->declare them as global variables and use it. To pass variables between stages in Azure DevOps, we use output variables with isOutput=true and access them using stageDependencies syntax in the next stage.
 how do you create agent pool
-i want to keep 1 pipeline to 1 agent. how to do it--------->use demands under pool to run pipeline on specific pool within the agent
-have you ever used demands in pool section?
-i want to run the stage only after the other stage is successful----------->use depends on condition
-can we run a pipeline using tags----------->yes under trigger use tags and after that use include
-trigger:
+i want to keep 1 pipeline to 1 agent. how to do it---------->pool:
+  name: pipeline1-pool
+have you ever used demands in pool section?--------->Yes, demands are used in the pool section to ensure a pipeline runs only on agents that meet specific conditions like OS, tools, or custom capabilities.
+pool:
+  name: Default
+  demands:
+    - Agent.OS -equals Windows_NT
+👉 This ensures:
+Only Windows agents will run this pipeline
+i want to run the stage only after the other stage is successful--------->add dependson step on the stage
+dependsOn: Build → Deploy waits for Build
+condition: succeeded() → Runs only if Build is successful
+can we run a pipeline using tags------->trigger:
   tags:
     include:
-      - '*'
-what is ci and gated build
-how we get artifact from build to release stage----------->use downloadpublish artifact task in release stage
+      - v*
+👉 This means:
+Pipeline runs when you push tags like:
+v1.0
+v2.1
+what is ci and gated build--------->Gated build = Validate code BEFORE it is merged into main branch,CI = Automatically build and test code whenever changes are pushed
+how we get artifact from build to release stage--------->    - task: DownloadBuildArtifacts@0
+      inputs:
+        artifactName: 'drop'
+        downloadPath: '$(Pipeline.Workspace)'
 have you written any custom task 
-what does | do in PowerShell----------->command1 | command2 -->it means it takes op of command 1 and send it as an iput to command 2
-i want a folder upto 2 levels and want to dsiplay only folder names. how to do it----------->get-childitem -path <path> -directory -recurse -depth 2 | select-object fullname
-what does get-childitem do----------->retrives the items from the location
-how do you update registery entry in powershell---------->set-itemproperty
-i want to push changes to private registery instead of public in docker. how to do it
-what is -it in docker run------------>runs in interactive mode
-i want a physical file of a docker image. how to do it------------>use docker save <filename> <imagename>:<tags>
-what is ENTRYPOINT
-what are tags in docker---------->its like a label where we can easily understand the specific version
-can we run linux in docker desktop------------>yes
-what are 3 things that we have when we give permission to a person in linux-------->owner, group, others
+what does | do in PowerShell-------->👉 It passes the output of one command as input to another command
+Get-Process | Sort-Object CPU
+👉 Meaning:
+Get-Process → gets all processes
+| → sends that output
+Sort-Object CPU → sorts by CPU usage
+i want a folder upto 2 levels and want to dsiplay only folder names. how to do it------------->We can use Get-ChildItem -Directory -Recurse -Depth 2 and select Name to list only folders up to two levels.
+what does get-childitem do-------->Get-ChildItem = shows files and directories inside a path
+how do you update registery entry in powershell---------->We update registry entries in PowerShell using Set-ItemProperty for existing values or New-ItemProperty with -Force to create or update entries.
+i want to push changes to private registery instead of public in docker. how to do it-------->docker tag myapp:latest <registry-url>/myapp:latest
+what is -it in docker run--------->it acts as an interactive mode
+i want a physical file of a docker image. how to do it----------->We can create a physical file of a Docker image using docker save, which exports the image as a tar file, and restore it using docker load
+what is ENTRYPOINT--------->ENTRYPOINT defines the main command that always runs when a container starts, while CMD provides default arguments to that command.
+what are tags in docker------------>Tags in Docker are version identifiers for images, used to manage and differentiate multiple versions of the same image.
+can we run linux in docker desktop-------->docker run -it ubuntu bash
+what are 3 things that we have when we give permission to a person in linux--------->read, write, execute.
+-------------------------------------------------------------------------------------------------
+XTGlobal:
+
+day to dat activities
+what kind of issues you faced in git
+someone mistakenly pushed the chnages to master what will you do. is it ok to push code directly to master---------->t’s not recommended to push directly to master because it bypasses code review and CI validation. If someone does it, I first check impact and revert the commit if needed. Then I enforce branch protection policies like mandatory PRs, approvals, and build validation to prevent it in the future.”
+code is not reflecting after deployment. how will you troubleshoot-------->f code is not reflecting after deployment, I troubleshoot layer by layer—starting from verifying the CI build and image in ACR, then checking the deployed image in Kubernetes, rollout status, and pod logs. I also validate configuration, environment, and caching issues before concluding the root cause
+write ci/cd pipeline and explain
+why we use usedotnet@1 in ci pipeline----------->UseDotNet@1 is a task in Azure DevOps used to install and configure a specific .NET SDK/runtime version on the build agent.
+how are using security or scaning for your pipeline
+explain the ci/cd pipeline in your project
+all the manifest files we have to keep in ci pipeline only?------------>“Manifests should be stored in Git as the source of truth. CI pipelines can update or package them, but they shouldn’t be the only place where manifests exist.
+sometimes the pipeline itself will not run. what will be the issue----->agent is offline, yaml syntax is incorrrect, pipeline is disabled, branch given in pipeline is not present, pipeline is dependent on other pipeline, manual running 
+issues faced through pipeline or ci/cd---------->service connection not working, resources already exists, permission and authentication issues, resource quota issue, incorrect file path, yaml syntax issues, secrets being exposed, dependencies not installed, approval delays, pipeline not triggered from the mentioned branch, missing variables.
+if we miss the dependency like build fails saying an error unable to find the dependency. how will you resolve it and where will you check and troubleshoot the issue------->check if we have given restore command before build, check .csproj file for dependecies
+you said some authentication issue. where will you check in azure--------->check if the secrets are expired, check if service principal has required access
+if docker build fails how will you troubleshoot-------->check the docker syntax. we have to give acrpush role
+app is not starting but you see deployment is succesful. how will you resolve it--------->troubleshoot at the pod, container, and configuration levels to identify runtime issues, missing env variables, image not pulled correclt, schema name is not correct
+what status we have for pod--------->Kubernetes pods have phases like Pending, Running, Succeeded, Failed, and Unknown. In real scenarios, we also see states like CrashLoopBackOff and ImagePullBackOff, which help in troubleshooting issues
+what is oom in pod--------->it means pod is killed due to memory issue
+write the manifest file------->
+apiVersion: <api-version>
+kind: deployment/service/pod/namespace
+metadata:
+  name: <resource-name>
+  labels:
+    key: value
+spec:----------->desired state of pod
+      containers:
+      - name: my-container
+        image: myregistry/myapp:1.0
+        ports:
+        - containerPort: 80
+why we are using kind in manifest file-------->to check the type of resource
+commands you know in k8
+how to create namespace------->kubectl create namespace my-namespace
+how to go inside container from pod------>kubectl exec -it <pod-name> -- /bin/sh
+explain the architecture of k8
+what are the things that are there in etcd--------->👉 etcd is the key-value database used by Kubernetes to store all cluster data.etcd stores the entire state of the Kubernetes cluster, including configuration, metadata, and current status of resources, node info, config data, secrets
+if etcd goes down then what will happen will the application runs? what will happen to master node------->Cluster cannot function properly, Restore from backup required
+did you hear about pv and pvc---------->persistant volme. it is a storage of k8. pvc means request by user to give the storage
+what is hpa and Vpa----->horizontal pod scaling which increase or decrease pod. vpa increase the cpu, memory
+how do you deploy without downtime---------->rolling update as strategy, blue-green deployment, canary deployment
+how do you manage config maps in cluster----------->We manage ConfigMaps in Kubernetes by storing configuration as key-value pairs, applying them via YAML or CI/CD pipelines, and mounting or injecting them into pods as environment variables or volumes.
+how do you secure config maps---------->ConfigMaps are secured using RBAC to control who can read or modify them, namespace isolation to separate environments, and by ensuring sensitive data is stored in Secrets instead. In production, changes are managed through CI/CD or GitOps tools with audit logging for traceability
+how do you manage infra using terraform
+why we use both tf vars and variable file---------->“We use variables.tf to define variable declarations and terraform.tfvars to assign values to those variables. This separation makes Terraform code reusable and environment-specific
+where do you store terraform state file
+someone deleted terraform state file how do you retrive it
+how do you manage env in terraform
+can you write docker file
+what is cmd
+what is difference between add and copy
+why we use inspect in docker--------->to get detailed info of container 
+how to optimize docker image
+how do you reduce cloud cost----------->I reduce cloud cost by right-sizing resources, auto-scaling workloads, shutting down unused resources, optimizing storage and compute usage, and continuously monitoring cost through cloud tools.
+-------------------------------------------------------------------------------------------------------------------------------------
+capgemini L1:
+
+explain ci/cd pipeline
+how you pull the code and build and create the artifacts
+are you pushing images or artifact
+how do you tagging in your pipeline---------->I use tagging in pipelines to mark builds with environment and version information so they are easily traceable and deployable. This includes build tags in Azure DevOps, Docker image tags, and optionally Git tags for release tracking
+branching strategy in azure
+how will you manage user permissions------------>I manage user permissions by using role-based access control (RBAC), assigning least-privilege roles, and controlling access at subscription, resource, and namespace levels to ensure security and governance.
+did you face any prod deployment issues
+why we use curl command---------->We use curl to make HTTP requests from the command line to test APIs, fetch data, or interact with web services without using a browser.
+why we use wget--------->wget (Web Get) is a command-line tool used to download files from the internet using HTTP, HTTPS, or FTP protocols
+did you face merge conflicts
+daily bases developer issue----------->On a daily basis, developer issues usually include build failures, dependency problems, environment mismatches, API or configuration issues, and deployment failures in CI/CD pipelines. I typically troubleshoot them using logs, pipeline stages, and environment checks.
+how to migrate sql to bitbuket. what is the process------->first cretae with same config, take backup and do restore, after that check if everything is working fine , delete old sql. do the monitoring of deployed things
+did you use code analysis tool
+pods will be automatically created right then why we need strategy in manifets file----------->Yes, pods are automatically created by deployment, replicaset,stateful but k8 does NOT decide how updates happen unless you define a strategy. Pods are automatically created by controllers like Deployment, but deployment strategy defines how updates are rolled out. It ensures zero downtime, controlled scaling, and safe application upgrades in production.
+how many datacenter you have
+
 
 
