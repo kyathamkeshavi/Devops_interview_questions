@@ -1559,6 +1559,20 @@ how to migrate sql to bitbuket. what is the process------->first cretae with sam
 did you use code analysis tool
 pods will be automatically created right then why we need strategy in manifets file----------->Yes, pods are automatically created by deployment, replicaset,stateful but k8 does NOT decide how updates happen unless you define a strategy. Pods are automatically created by controllers like Deployment, but deployment strategy defines how updates are rolled out. It ensures zero downtime, controlled scaling, and safe application upgrades in production.
 how many datacenter you have
+-----------------------------------------------------------------------------------------------------------------------------------
+HEXAWARE:
+
+what kind of work your support project do
+what is replica set
+what are taints and tolerance in k8
+how do you troubleshoot not running pod
+what is the folder structure of terraform
+why you are using ci cd pipelines separately
+what is config file in k8
+if we are not storing non sensitive info in config then where we are storing
+where are you storing your artifacts
+
+
 
 
 
