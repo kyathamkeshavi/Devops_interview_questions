@@ -1289,7 +1289,7 @@ diff ways to pass variables in terraform--------->use variables.tf files, use de
 how to pass variables in run time in terraform-------->terraform apply -var="region=westeurope" -var="env=prod"   terraform apply -var-file="dev.tfvars"
 lifecycle in terraform. where do you need create_before_destroy------->lifecycle has create_before_destroy, prevent_destroy, ignore_changes, precondition
 do you package your .net code as docker image?
-what is the build tool you are using in your project
+what is the build tool you are using in your project------->.net cli
 are you using docker swarm? how do you run your containers
 diff types of docker networks
 if we dont have technolgies in our project then how you will learn new ones
@@ -1315,13 +1315,13 @@ what is difference between msi and service principal--------->for service princi
 ---------------------------------------------------------------------------------------------------------
 WAFERWIRE:
 
-how do you manage secrets and cert in your project
-what kind of issues you faced in build and pipeline and how you resolved them
-any deployment startegy you used
-how do you achieved zero down time using blue-green deployment strategy
+how do you manage secrets and cert in your project------------->we store it in keyvault and fetch them from pipeline.
+what kind of issues you faced in build and pipeline and how you resolved them------------>dependencies not getting installed, pipeline is not triggered dues to mismatch of branch, yaml syntax, required permissions to run pipeline, service connection is not created, misconfiguration, variable values not given, resource already exists
+any deployment startegy you used------------>blue-green deployment
+how do you achieved zero down time using blue-green deployment strategy---------->In blue-green deployment, we maintain two identical environments—Blue (current production) and Green (new version). We deploy the new version to Green, test it, and then switch traffic from Blue to Green instantly
 how do you maintain branching strategy
 how do you setup pre-deployment approvals in yaml pipeline-------------->create environment in ado and add approvals from the environment. then use environment:prod in yaml pipeline under jobs. 
-write a pipeline for .net application
+write a pipeline for .net application--------->usedontnet@1 for installing dependecies, dotnetcorecli@1 along with commands restore to download dependecnies and build to build the code.
 how do you use artifact in release stage that are generated in build pipeline. write the code for that using yaml------------->use publish in build stage. use download: current in release stage. and also give path to download the artifact
 how do you setup pr build before deployment in yaml file. run build pipeline before merging------------->create a pr build yaml file and under branch policies and build validation add these file under the settings and save the policy
 when i want to run the code on every monday then how do you do it.--------->use schedular trigger(cron job)
@@ -1343,14 +1343,14 @@ Dependency Checks: Verify third-party libraries are up-to-date and secure.
 take backup, infra health check, deployment strategy, rollback plan, monitoring the alerts
 how the application work. how the request reach to your web app. tell me the process
 types of load balancers
-how user request reaches to cosmos db from webapp
+how user request reaches to cosmos db from webapp---------->User request goes to the web app backend, which uses the Cosmos DB SDK to query Azure Cosmos DB. The request is routed internally to the correct partition and region, and the response is returned back through the backend to the UI.
 diff between app gateway and traffic manager
 when we want tls handshake and ssl termination then what load balancer we use------------>if we need both then we should go for l7. it means azure front door or app gateway
-how traffic manager maps/distribute the traffic
-what are things you used in blob storage and what is the purpose of that
+how traffic manager maps/distribute the traffic------------>azure Traffic Manager routes user traffic to the best available endpoint (like web apps or services) using DNS-based routing policies, It does NOT directly handle traffic, it only returns the correct IP/DNS response.
+what are things you used in blob storage and what is the purpose of that------------>Azure Blob Storage is used to store unstructured data like files, images, videos, logs, backups, and application data at scale
 what kind of data you stored in storage blob coming from webapp------------>pdf's, web server logs, performance metrics, csv files, db backups
 how do you scale your webapp. and where the scaling option is present----->in app service we have scaleup and out options. we use app service plan to do it
-if you want to change the pricing or scaling where do you change it------------------> we use app service plan
+if you want to change the pricing or scaling where do you change it ------------------> we use app service plan
 can you use/create multiple webapps using single app service plan--------->yes, it reduces the cost. but we can only use this when webapp has same performance and scaling needs
 what are the things yo have used using functional app
 how you are deploying fucntional app using yaml ----------->- task: AzureFunctionApp@
@@ -1406,8 +1406,8 @@ what is front door---------->Azure Front Door is a global entry point for your w
 what is meant by layer 7 protection---------------->Layer 7 Protection refers to security controls and filtering at the application layer (Layer 7) of the OSI model
 structure of terraform in your project
 steps to create the module in terraform
-How do you scale an application in Kubernetes?
-How do you secure container images in Kubernetes?
+How do you scale an application in Kubernetes?-------->by hpa, vpa and manual. kubectl autoscale deployment my-app --cpu-percent=70 --min=2 --max=10
+How do you secure container images in Kubernetes?--------->avoid running cont as root, keep images updated, give limited access to people, scaning the images.
 ---------------------------------------------------------------------------------------------------------------
 Tungsten:
 
@@ -1576,3 +1576,207 @@ where are you storing your artifacts
 
 
 
+
+what does | do in PowerShell-------->👉 It passes the output of one command as input to another command
+Get-Process | Sort-Object CPU
+👉 Meaning:
+Get-Process → gets all processes
+| → sends that output
+Sort-Object CPU → sorts by CPU usage
+i want a folder upto 2 levels and want to dsiplay only folder names. how to do it------------->We can use Get-ChildItem -Directory -Recurse -Depth 2 and select Name to list only folders up to two levels.
+what does get-childitem do-------->Get-ChildItem = shows files and directories inside a path
+how do you update registery entry in powershell---------->We update registry entries in PowerShell using Set-ItemProperty for existing values or New-ItemProperty with -Force to create or update entries.
+i want to push changes to private registery instead of public in docker. how to do it-------->docker tag myapp:latest <registry-url>/myapp:latest
+what is -it in docker run--------->it acts as an interactive mode
+i want a physical file of a docker image. how to do it----------->We can create a physical file of a Docker image using docker save, which exports the image as a tar file, and restore it using docker load
+what is ENTRYPOINT--------->ENTRYPOINT defines the main command that always runs when a container starts, while CMD provides default arguments to that command.
+what are tags in docker------------>Tags in Docker are version identifiers for images, used to manage and differentiate multiple versions of the same image.
+can we run linux in docker desktop-------->docker run -it ubuntu bash
+what are 3 things that we have when we give permission to a person in linux--------->read, write, execute.
+-------------------------------------------------------------------------------------------------
+XTGlobal:
+
+day to dat activities
+what kind of issues you faced in git
+someone mistakenly pushed the chnages to master what will you do. is it ok to push code directly to master---------->t’s not recommended to push directly to master because it bypasses code review and CI validation. If someone does it, I first check impact and revert the commit if needed. Then I enforce branch protection policies like mandatory PRs, approvals, and build validation to prevent it in the future.”
+code is not reflecting after deployment. how will you troubleshoot-------->f code is not reflecting after deployment, I troubleshoot layer by layer—starting from verifying the CI build and image in ACR, then checking the deployed image in Kubernetes, rollout status, and pod logs. I also validate configuration, environment, and caching issues before concluding the root cause
+write ci/cd pipeline and explain
+why we use usedotnet@1 in ci pipeline----------->UseDotNet@1 is a task in Azure DevOps used to install and configure a specific .NET SDK/runtime version on the build agent.
+how are using security or scaning for your pipeline
+explain the ci/cd pipeline in your project
+all the manifest files we have to keep in ci pipeline only?------------>“Manifests should be stored in Git as the source of truth. CI pipelines can update or package them, but they shouldn’t be the only place where manifests exist.
+sometimes the pipeline itself will not run. what will be the issue----->agent is offline, yaml syntax is incorrrect, pipeline is disabled, branch given in pipeline is not present, pipeline is dependent on other pipeline, manual running 
+issues faced through pipeline or ci/cd---------->service connection not working, resources already exists, permission and authentication issues, resource quota issue, incorrect file path, yaml syntax issues, secrets being exposed, dependencies not installed, approval delays, pipeline not triggered from the mentioned branch, missing variables.
+if we miss the dependency like build fails saying an error unable to find the dependency. how will you resolve it and where will you check and troubleshoot the issue------->check if we have given restore command before build, check .csproj file for dependecies
+you said some authentication issue. where will you check in azure--------->check if the secrets are expired, check if service principal has required access
+if docker build fails how will you troubleshoot-------->check the docker syntax. we have to give acrpush role, identify the breaking command in dockerfile
+app is not starting but you see deployment is succesful. how will you resolve it--------->troubleshoot at the pod, container, and configuration levels to identify runtime issues, missing env variables, image not pulled correclt, schema name is not correct
+what status we have for pod--------->Kubernetes pods have phases like Pending, Running, Succeeded, Failed, and Unknown. In real scenarios, we also see states like CrashLoopBackOff and ImagePullBackOff, which help in troubleshooting issues
+what is oom in pod--------->it means pod is killed due to memory issue (out of memory)
+write the manifest file------->
+apiVersion: <api-version>
+kind: deployment/service/pod/namespace
+metadata:
+  name: <resource-name>
+  labels:
+    key: value
+spec:----------->desired state of pod
+      containers:
+      - name: my-container
+        image: myregistry/myapp:1.0
+        ports:
+        - containerPort: 80
+why we are using kind in manifest file-------->to check the type of resource. kind can be deployment, job, replicaset, service
+commands you know in k8
+how to create namespace------->kubectl create namespace my-namespace
+how to go inside container from pod------>kubectl exec -it <pod-name> -- /bin/sh
+explain the architecture of k8
+what are the things that are there in etcd--------->👉 etcd is the key-value database used by Kubernetes to store all cluster data.etcd stores the entire state of the Kubernetes cluster, including configuration, metadata, and current status of resources, node info, config data, secrets
+if etcd goes down then what will happen will the application runs? what will happen to master node------->Cluster cannot function properly, Restore from backup required, api server stops functioning properly, we cannot deploy new changes, schedular stops scheduling.
+did you hear about pv and pvc---------->persistant volme. it is a storage of k8. pvc means request by user to give the storage. pv is data storage with blocks in it. so if pvc asks afor 8 gb ram then pv with 8gb block is allocated
+what is hpa and Vpa----->horizontal pod scaling which increase or decrease pod. vpa increase the cpu, memory
+how do you deploy without downtime---------->rolling update as strategy, blue-green deployment, canary deployment
+how do you manage config maps in cluster----------->We manage ConfigMaps in Kubernetes by storing configuration as key-value pairs, applying them via YAML or CI/CD pipelines, and mounting or injecting them into pods as environment variables or volumes.
+how do you secure config maps---------->ConfigMaps are secured using RBAC to control who can read or modify them, namespace isolation to separate environments, and by ensuring sensitive data is stored in Secrets instead. In production, changes are managed through CI/CD or GitOps tools with audit logging for traceability
+how do you manage infra using terraform
+why we use both tf vars and variable file---------->“We use variables.tf to define variable declarations and terraform.tfvars to assign values to those variables. This separation makes Terraform code reusable and environment-specific
+where do you store terraform state file
+someone deleted terraform state file how do you retrive it-------->as we are storing it in storage account it maintains the backup. so we can restore it from there. or we can do import command
+how do you manage env in terraform--------->use workspace
+can you write docker file
+what is cmd---------->when we want to run few commands at container runtime then we use this
+what is difference between add and copy---------->by add we can download from internet and copy it to dest. but with copy we only copy the files from src to dest
+why we use inspect in docker--------->to get detailed info of container 
+how to optimize docker image----------->use multi container app, download image from official dockerhub, install only dependecies that are needed.
+how do you reduce cloud cost----------->I reduce cloud cost by right-sizing resources, auto-scaling workloads, shutting down unused resources, optimizing storage and compute usage, and continuously monitoring cost through cloud tools.
+-------------------------------------------------------------------------------------------------------------------------------------
+capgemini L1:
+
+explain ci/cd pipeline
+how you pull the code and build and create the artifacts
+are you pushing images or artifact------------>we are pusing images to acr and artifacts to azure artifacts
+how do you tagging in your pipeline---------->I use tagging in pipelines to mark builds with environment and version information so they are easily traceable and deployable. This includes build tags in Azure DevOps, Docker image tags, and optionally Git tags for release tracking
+branching strategy in azure
+how will you manage user permissions------------>I manage user permissions by using role-based access control (RBAC), assigning least-privilege roles, and controlling access at subscription, resource, and namespace levels to ensure security and governance.
+did you face any prod deployment issues----------> yes, updated code is not available in k8 eventhough the pipeline is succesfull, config mismatch from pipeline. artifacts are not pushed to acr due to insuffcicient permissions
+why we use curl command---------->We use curl to make HTTP requests from the command line to test APIs, fetch data, or interact with web services without using a browser.
+why we use wget--------->wget (Web Get) is a command-line tool used to download files from the internet using HTTP, HTTPS, or FTP protocols
+did you face merge conflicts
+daily bases developer issue----------->On a daily basis, developer issues usually include build failures, dependency problems, environment mismatches, API or configuration issues, and deployment failures in CI/CD pipelines. I typically troubleshoot them using logs, pipeline stages, and environment checks, unit/integration test fails, long running test files, misconfiguration, env specific issues.
+how to migrate sql to bitbuket. what is the process------->first cretae with same config, take backup and do restore, after that check if everything is working fine , delete old sql. do the monitoring of deployed things
+did you use code analysis tool--------->yes
+pods will be automatically created right then why we need strategy in manifets file----------->Yes, pods are automatically created by deployment, replicaset,stateful but k8 does NOT decide how updates happen unless you define a strategy. Pods are automatically created by controllers like Deployment, but deployment strategy defines how updates are rolled out. It ensures zero downtime, controlled scaling, and safe application upgrades in production.
+how many datacenter you have
+---------------------------------------------------------------------------------------------------------------------------------
+HEXAWARE:
+
+what kind of work your support project do
+what is replica set------------->replicating the pods. so that is 1 pod goes down the other will be available and the application will be always available
+what are taints and tolerance in k8----------->taint is when we dont want to run pods on particular node we use taint. but by using tolerance we bypass that rule. pods can be run on the tainted nodes
+what is afinity and anti affinity-------------->affinity means running pods together on same node, anti affinity means running pods on different nodes. by this app is always available as the pods are there in diff nodes
+what is node seletor: telling the pods to run on particular node
+how do you troubleshoot not running pod------------->describe the pod. check the logs, check if we use any tainted, anti-affinity or node selector for that node
+why is pod is in pending state----------->when pod doesnt have a node to run then it is in pending state
+what is the folder structure of terraform
+why you are using ci cd pipelines separately-------->we can reuse the same artifacts for diff environments
+what is configmap file in k8---------> when we want to store non sensitive information like configuration then we use configmap file
+if we are not storing non sensitive info in config then where we are storing------------>secrets
+where are you storing your artifacts------->azure artifacts
+--------------------------------------------------------------------------------------------------------------------
+HCL:
+
+what are networks topoligies
+why we need both tfvars and tf files in terraform
+what is locals in terraform
+types of storage account
+if we want to make our aks private what are the steps
+how to conect 3-4 vm at a time
+waht is provider in terraform
+how do we resize our vm. if we have to upgrade os disk then do we need downtime
+what type of provider we use for azure in terraform
+why we use backend in terraform
+-------------------------------------------------------------------------------------------------------------------
+ALITHYA:
+
+steps of ci/cd pipeline
+issues faced in prod and how did you resolve it
+how do you integrate version control with pipelines
+explain your terraform structure
+if updated code is not working then what will you do
+what is rolling update and other deployments
+how ai is changing and what are the things you are using in your project
+---------------------------------------------------------------------------------------------------------------------
+Nous Infosolutions:
+
+---------------------------------------------------------------------------------------------------------------------
+QUESTION FROM KYNDRYL, QUENTELLI, NATIONSBENEFIT:
+different ways to create a connection between 2 vnet or more--------->VNet Peering, we can also use VPN Gateway or ExpressRoute for communication between two VNets, especially if they are in different regions or subscriptions. Another option is using VNet-to-VNet VPN connection
+Let's say I have a file in storage account, okay, storage account blob. Now, I want to give access of this file to the person outside of the organization for the next two hours--------->We can provide access using a SAS token (Shared Access Signature). We generate a SAS URL for that specific blob/file with limited permissions and set the expiry time to 2 hours. After 2 hours, the link will automatically expire
+How do you ensure high availability for my application if you deploy it--------->To ensure high availability, I would deploy the application on multiple VMs and place them behind an Azure Load Balancer or Application Gateway. I would use an Availability Set or Availability Zones so that if one VM or one zone fails, the application is still accessible from the other VM. Also, I would configure health probes and autoscaling if required
+what is availablity set and zone---------> Availability Set → Protects against hardware or maintenance failures by distributing VMs across fault domains and update domains.vms are placed with same datacenter. Availability Zones → Places VMs in different physical datacenters within a region for higher availability.
+difference between load balancer and app gateway------->Azure Load Balancer → works at Layer 4 (TCP/UDP) and Azure Application Gateway → works at Layer 7 (HTTP/HTTPS), supports URL routing, SSL termination, and WAF.For web applications, Application Gateway is generally preferred for high availability.
+Any other standard features that Application Gateway has apart than the load balancers?--------->Azure Application Gateway provides: Web Application Firewall (WAF) for security, Autoscaling, Health probes for backend monitoring, URL-based routing
+so I'm a layman, I'm coming to and I'm asking you to deploy my application.I don't have Azure subscription, nothing. It's a new requirement and you need to set up the infrastructure just for this requirement. So what are your steps and how do you move forward?-------------->azure landing zone.
+“First, I will gather the requirements like:
+type of application (web app, API, microservices, etc.)
+Expected users/traffic
+Security requirements
+Budget and availability requirements
+Database and storage needs
+Talk something about Azure Landing Zone.------------>Azure Landing Zone is a pre-designed cloud environment setup in Azure that helps organizations deploy workloads securely and in a standardized way. The main purpose of Azure Landing Zone is to follow best practices and make the environment scalable, secure, and easy to manage for future applications and teams.
+It provides a foundation for:
+Networking
+Identity and access management
+Security and governance
+Monitoring
+Resource organization
+Policy management
+what is dynamic block and local in terraform-------------->locals allow you to define reusable variables or expressions within your Terraform configuration.
+I mean AKS services in your environment? Okay, so which networking plugin are you using?------------>For networking, we mainly use Azure CNI plugin. With Azure CNI, pods get IP addresses from the VNet subnet itself, so they can directly communicate with other Azure resources. It provides better integration with enterprise networks and is commonly used in production environments. t is the networking framework Kubernetes uses to assign IP addresses to pods and enable communication between pods and external resources. Container Network Interface
+what is init container in k8-------->An Init Container is a special container in Kubernetes that runs before the main application container starts.
+It is mainly used for initialization tasks like: Checking database connectivity, Waiting for dependent services, Downloading configuration files, Setting permissions or environment preparation
+what is the difference between deployment and statefulset-------->
+Deployment:
+Pods are identical
+Pod names are random
+No stable storage
+Used for web apps, APIs
+
+StatefulSet:
+Each pod gets a fixed name and identity
+Supports persistent storage
+Pods are created in order
+Used for databases like MySQL, MongoDB, Cassandra”
+what are terraform fucntions--------> Terraform functions are built-in utilities used to process data and compute values in code. Common examples include length, lookup, merge, upper, file, and jsonencode
+i want to execute 2 jobs paralelly. how do you achieve it in ci/cd pipelines-----------> To execute two jobs in parallel in a CI/CD pipeline, I define both jobs in the same stage and do not set any dependency between them. Since neither job depends on the other, the pipeline scheduler runs them simultaneously, subject to available parallel job capacity.
+how jobs are executed in pipelines. is it sequentialy or not-----------> By default, jobs in a pipeline run in parallel if they are in the same stage and there is no dependency between them. If we use dependsOn, then they run sequentially based on the defined order. Stages usually run one after another, but jobs within the same stage run in parallel by default unless we explicitly define dependencies using dependsOn
+what is a 3-tier application------------>Flow: User → Frontend(react,angular) → Backend/API(.net core, java spring boot) → Database(cosmosdb, sql)
+how many maximum pods can the deployment can have?------------->“In Kubernetes, a Deployment itself does not have a fixed maximum pod limit.
+what is the smallest unit in k8--------->pod
+how do you auto-scale your application in k8---------> we use HPA. we give kind: HorizontalPodAutoscaler and give all the config in spec block
+application is full and the three replicas are not sufficient. Now, how do you scale up-------->Horizontal Scaling,  kubectl scale deployment app-name --replicas=6
+Or automatically using HPA based on CPU/memory usage
+let's say, okay, if you are using an AKS cluster, you know, our front-end tier needs to be accessed by the internet or the public outside the AKS, right? So how do you expose a front-end application to the outside world---------->To expose the frontend application to the outside world in AKS, we usually use: Service type LoadBalancer or Ingress Controller. Flow will be: Internet → Ingress/Application Gateway → Service → Pods
+deamonset in k8--------->A DaemonSet in Kubernetes ensures that a pod runs on all worker nodes or on selected nodes in the cluster, it is used for log collection agents, security agents, monitoring agents.
+availability of the virtual machine.----------> Availability Set, Availability Zones, Load Balancer, VM Scale Set, autoscaling, monitoring
+How do I say? Backup and monitoring of the infra in Azure virtual machines.----------->Backup and monitoring of Azure Virtual Machines are handled using Azure Backup for data protection and Azure Monitor with Log Analytics for performance monitoring, alerts, and health tracking.
+In the apps project, I have around 50 or 70 pipelines that I have to create now for some new requirement, okay? And in all the 50 pipelines, I have a requirement to perform three or four tasks in the same sequence. And these three or four tasks are needed to be added on the all 50 pipelines. So how do I simplify my efforts and achieve this?------------>“You can simplify this by using reusable YAML templates in Azure DevOps. Instead of adding the same 3–4 tasks manually in all 50 pipelines, I would create a common template file containing those tasks and store it in a central repository. Then, all pipelines can call that template using the template keyword. So whenever there is a change, I only update the template once, and the change automatically reflects across all 50 pipelines. This reduces duplication, improves maintainability, and saves a lot of effort.
+What is the disaster recovery and how do you deal with it?------------>Disaster Recovery is the process of recovering applications, data, and infrastructure during failures like region outages, VM crashes, or data center failures, Taking regular backups using Azure Backup. Replicating VMs and data to another region using Azure Site Recovery. Using Availability Zones or secondary regions for high availability. Storing application code and infrastructure as code in repositories for quick redeployment.
+what will you do if pods are struck in pending state--------------> If pods are stuck in the Pending state, I would first run kubectl describe pod <pod-name> to identify the scheduling issue. Then I would check whether the cluster has sufficient CPU and memory resources, verify node readiness, and confirm that the required node selectors, taints, and tolerations are configured correctly. I would also check Persistent Volume Claims to ensure storage is successfully bound, and verify that the requested image can be pulled. After resolving the underlying issue, I would monitor the pod until it is scheduled and reaches the Running state.
+what steps should you take if a deployment keeps crashing after updates?--------------> If a deployment keeps crashing after an update, I would first check the pod or application logs to identify the exact error. Then I’d verify the recent changes in the deployment, such as image version, environment variables, configurations, or dependencies. I’d check resource usage like CPU and memory, validate health probes, and confirm database or external service connectivity. If needed, I would roll back to the previous stable version to restore service quickly, fix the issue in a lower environment, retest, and then redeploy with proper monitoring.
+What tools or configurations did you use to set up those CPU or memory thresholds in AKS?-------------> In AKS, I used Horizontal Pod Autoscaler (HPA) to configure CPU and memory thresholds, Metrics were collected using Metrics Server, Monitoring and alerting were done using Azure Monitor and Prometheus/Grafana.
+Can you walk me through a specific incident where you had to troubleshoot a failed deployment in an Azure DevOps pipeline?------------>
+checked the Azure DevOps pipeline logs to identify the exact failed task. The build stage was successful, but the release stage failed during kubectl apply.
+Then I connected to the AKS cluster and checked the pod status using:
+kubectl get pods
+kubectl describe pod <pod-name>
+kubectl logs <pod-name>
+I found the pods were going into CrashLoopBackOff because one environment variable and a Key Vault secret reference were missing after a recent configuration update.
+To fix it:
+I validated the Kubernetes secret and Azure Key Vault access.
+Updated the variable group in Azure DevOps.
+Re-ran the pipeline after confirming the service connection permissions.
+How to ensure that the newly created secret would not expire again in future deployments------------->To make sure the newly created secret would not expire again in future deployments, I implemented secret rotation monitoring and added expiry validation in the pipeline. Integrated the secrets with Azure Key Vault, instead of hardcoding them, Enabled alerting for secret expiration using Azure Monitor
+what are azure runbooks---------->Azure Runbooks are automation scripts in Azure Automation used to execute repetitive operational tasks such as starting and stopping VMs, restarting services, secret rotation, and automated remediation based on Azure Monitor alerts. 
+what is dynamic block and local in terraform---------------->locals are used to define reusable values within Terraform, while dynamic blocks are used to generate repeated nested blocks based on input data. locals avoids duplication of values, while dynamic bloks are used with for each or list
+what are keyvault objects----------->Azure Key Vault stores three main object types: Secrets, Keys, and Certificates. Secrets store sensitive values, Keys are used for cryptographic operations, and Certificates are used to manage SSL/TLS certificates.
